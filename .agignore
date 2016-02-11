@@ -1,0 +1,12 @@
+node_modules
+bower_components
+dist
+target
+*.pdf
+*.prc
+*.mobi
+*.mbp
+*.epub
+
+
+
