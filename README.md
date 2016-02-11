@@ -1,4 +1,6 @@
-Dotfile configuration setup.
+### dot-config
+
+Simple dotfile setup with no install script or symlinks required.
 
 To create:
 
