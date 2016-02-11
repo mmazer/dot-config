@@ -1,0 +1,11 @@
+#!/bin/sh
+
+if [ "$1" = "" ]; then
+    NATIVE_PATH="."
+else
+    NATIVE_PATH="$1"
+fi
+
+WIN_PATH=`cygpath -w -a "${NATIVE_PATH}"`
+cmd /C start "" "$WIN_PATH"
+

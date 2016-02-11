@@ -1,0 +1,13 @@
+#!/bin/sh
+if [ $# -eq 0 ] ; then
+echo "usage: zero <file>"
+exit
+fi
+
+if test ! -f $1
+then
+echo "file not found: $1"
+exit
+fi
+cat /dev/null > $1
+

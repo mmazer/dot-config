@@ -1,0 +1,3 @@
+#!/bin/sh
+qlmanage -d 0 -p "$@" >& /dev/null &
+

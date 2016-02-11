@@ -1,0 +1,11 @@
+#!/bin/sh
+# Use SNMP get retrieve WAN IP for Airport Base Station
+# http://hints.macworld.com/article.php?story=20091222232613368
+COMMUNITY='public'
+ROUTER=`netstat -nr|awk '/^default/ {print $2}'`
+# get next hop from IP route table for default route
+# iso.3.6.1.2.1.4.21.1.7 = ipRouteNextHop
+gw=`snmpwalk -Os -c $COMMUNITY -v 1 $ROUTER iso.3.6.1.2.1.4.21.1.7.0.0.0.0|awk '{print $4}'`
+ip=`snmpwalk -Os -c $COMMUNITY -v 1 $ROUTER iso.3.6.1.2.1.4.21.1.7.$gw|awk '{print $4}'`
+echo $ip
+

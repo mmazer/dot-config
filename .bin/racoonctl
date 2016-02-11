@@ -1,0 +1,21 @@
+#!/bin/sh
+
+case $1 in
+'start')
+	 sudo launchctl start com.apple.racoon
+	;;
+
+'stop')
+     sudo launchctl stop com.apple.racoon
+	;;
+
+'restart')
+    sudo launchctl stop com.apple.racoon
+    sudo launchctl start com.apple.racoon
+    
+	;;
+
+*)
+	echo "usage: racoonctl {start|stop|restart}"
+	;;
+esac

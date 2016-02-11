@@ -1,0 +1,62 @@
+#!/usr/bin/perl
+use POSIX qw/strftime/; 
+
+# Training zones
+@zones=('Endurance', 'Tempo','Threshold','V02 Max','Anaerobic Capacity','Sweet Spot');
+@ranges = (
+['0.56','0.75'], 
+['0.76', '0.90'],
+['0.91','1.05'],
+['1.06','1.2'],
+['1.21','1.5'],
+['0.88','0.94']
+);
+
+if( @ARGV != 1) {
+print "usage: pzone <threshold>\n";
+exit 1;
+}
+$FTP=$ARGV[0];
+if( $FTP !~ /^\d+$/ ) {
+print "invalid threshold value: $FTP\n";
+exit 1;
+}
+
+$date=strftime('%Y%m%d', localtime);
+$name="N6-Training Zones ${FTP}w-$date";
+$outfile="$name.md";
+
+open F, "> $outfile" or die "can't open $outfile : $!";
+
+# print note header
+print F "Meta: $date-N6-Training Zones ${FTP}w\n";
+print F "Tags: #training #meta\n\n";
+
+print F "### Training Zones\n";
+print F "Functional Threshold Power: $FTP\n\n";
+for $i (0 .. $#zones) 
+{
+print F "**$zones[$i]** ".perc($ranges[$i][0])."-".perc($ranges[$i][1])."% -> ". calc($FTP, $ranges[$i][0])."-". calc($FTP, $ranges[$i][1])." watts\n\n";
+}
+
+print F "\n";
+print F "### General Ranges\n";
+for($r=55; $r<200; $r+=5) {
+print F " - $r% -> ".calc($FTP, $r/100.0)." watts\n";
+}
+
+close F;
+
+sub calc {
+my ($threshold, $percent) = @_;
+my $watts;
+$watts= $threshold * $percent;
+return int($watts + 0.5);
+}
+
+sub perc {
+my ($decimal) = @_;
+my $percent;
+$percent = $decimal * 100;
+return $percent;
+}

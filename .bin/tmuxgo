@@ -1,0 +1,21 @@
+#!/bin/bash
+
+SESSION=$USER
+echo "checking for existing session $SESSION"
+tmux has-session -t $SESSION &> /dev/null; status=$?
+if [ "$status" -eq 0 ]; then
+    echo "found existing session ${SESSION} ($status), attaching..."
+    sleep 1
+    tmux -2 attach -t $SESSION
+    exit 0
+fi
+echo "creating new session $SESSION"
+tmux -2 new -s $SESSION -n editor -d
+tmux send-keys -t $SESSION 'vim' C-m
+tmux new-window -n project -t $SESSION
+tmux new-window -n shell -t $SESSION
+tmux select-window -t $SESSION:1
+tmux -2 attach -t $SESSION
+
+
+

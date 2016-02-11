@@ -1,0 +1,80 @@
+#!/bin/bash
+# Based on Logger-TXT by Grant Lucas
+# https://github.com/grantlucas/Logger-TXT
+
+usage () {
+    sed -e 's/^//' <<End
+Usage: log [-t type] [-p project] text
+End
+    exit 1
+}
+
+uppercase () {
+    echo `echo "$1" | tr "[:lower:]" "[:upper:]"`
+}
+
+checklog () {
+if [ ! -f "$1" ]; then
+    echo "creating log file: $1"
+    touch "$1"
+    if [ $? -ne 0 ]; then
+        echo "error creating daily log file $1: $?"
+        exit 1
+    fi
+    chmod 644 "$1"
+fi
+}
+
+dir=`dirname $0`
+type=''
+project='-'
+category=''
+today=`date "+%Y-%m-%d"`
+now=`date "+%H:%M"`
+timestamp="$today $now"
+logdir=~/.logs
+logfile='log.txt'
+
+#set the log path to the environment variable if it is set
+if [ ! -z $TXTLOGDIR ]; then
+    logdir=$TXTLOGDIR
+fi
+
+if [ ! -e "$logdir" ]; then
+    echo "log directory not found: $logdir"
+    exit 1
+fi
+
+if [ $# -eq 0 ] ; then
+    usage
+fi
+
+while getopts dp:rt: o
+do case "$o" in
+    d) logfile="daily-$today.txt";;
+    p) project=`uppercase "$OPTARG"`;;
+    t) type=`uppercase "$OPTARG"`;;
+    *) usage;;
+    esac
+done
+
+logpath=$logdir/$logfile
+
+shift $(($OPTIND - 1))
+entry=$1
+if [ ! -z "$entry" ] ; then
+    checklog $logpath
+
+    if [ ! -z "$type" ] ; then
+        category+="[$type]"
+    fi
+
+    if [ ! -z "$project" ] ; then
+        category+=" ($project)"
+    fi
+
+    line="$timestamp $category $*"
+    echo $line >> $logpath
+    echo $line
+fi
+

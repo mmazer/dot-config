@@ -1,0 +1,14 @@
+#!/bin/sh
+# Colours:
+# 30 Black
+# 31 Red
+# 32 Green
+# 33 Yellow
+# 34 Blue
+# 35 Magenta
+# 36 Cyan
+# 37 White
+hd=`cal | head -1`
+bd=`cal | tail -7`
+td=`date "+%e"`
+echo "$hd"; echo "${bd/${td}/\033[1;31m${td}\033[0m}"
