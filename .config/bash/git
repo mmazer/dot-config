@@ -1,0 +1,2 @@
+[ -f ~/.config/git/git-completion.bash ] && source ~/.config/git/git-completion.bash
+[ -f ~/.config/git/git-prompt.sh ] && source ~/.config/git/git-prompt.sh

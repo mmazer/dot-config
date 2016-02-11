@@ -1,0 +1,70 @@
+### Functions
+function cdla { cd "$1"; ls -la; }
+function cdls { cd "$1" ; ls ; }
+
+# Rename a file to all lowecase
+function lcase {
+    if [ $# -eq 0 ] ; then
+        echo "lcase <filename>"
+    else
+        if [ -e $1 ] ; then
+            nf=$( echo $1 | tr A-Z a-z)
+            mv "$1" "$nf" 
+            echo "lcase: $1 --> $nf"
+        else
+           echo "file not found: $1"
+        fi
+   fi
+}
+
+# mkdir, cd into it
+function mkcd () {
+    mkdir -p "$*"
+    cd "$*"
+}
+
+# Sets variable _month to number of specified month
+function setmonth {
+case $1 in
+"jan") _month=1 ;;
+"feb") _month=2 ;;
+"mar") _month=3 ;;
+"apr") _month=4 ;;
+"may") _month=5 ;;
+"jun") _month=6 ;;
+"jul") _month=7 ;;
+"aug") _month=8 ;;
+"sep") _month=9 ;;
+"oct") _month=10 ;;
+"nov") _month=11 ;;
+"dec") _month=12 ;;
+*) echo "invalid month: $1"
+esac
+}
+
+#A function to pipe any command to less:
+function so {
+eval "$@" |less -I~
+}
+
+# Pipe any command to mvim buffer
+function pv {
+    eval "$@" | nvim - & 
+}
+
+function trash {
+    if [ $# -eq 1 ] ; then
+        if [ -f "$1" ] ; then
+            mv -v "$1" ~/.trash
+       else
+            echo "file not found: $1"
+       fi
+    else
+       echo "trash <file>"
+    fi
+}
+
+# Quick command line calculator
+function qc {
+    echo "$1" | bc
+}
