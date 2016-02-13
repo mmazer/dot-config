@@ -1,0 +1,13 @@
+.DS_Store
+*.sublime-project
+*.sublime-workspace
+*.taskpaper
+project.local
+scratch
+*.pyc
+node_modules
+.idea
+.projections.json
+tags
+.local/
+.ropeproject

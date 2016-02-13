@@ -1,0 +1,23 @@
+[user]
+    name = Marc Mazer
+
+[github]
+    user = mmazer
+
+[core]
+    excludesfile = ~/.dotfiles/git/gitignore_global
+
+[diff]
+    tool = Kaleidoscope
+[difftool "Kaleidoscope"]
+  cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[merge]
+    tool = Kaleidoscope
+[mergetool "Kaleidoscope"]
+  cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+  trustExitCode = true
+
+[include]
+    path = ~/.dotfiles/git/aliases
+    path = ~/.localrc/gitconfig
+
