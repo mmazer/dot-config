@@ -1,5 +1,5 @@
 # See https://github.com/junegunn/fzf/wiki/examples
-#
+
 # fe [FUZZY PATTERN] - Open the selected file with the default editor
 #   - Bypass fuzzy finder if there's only one match (--select-1)
 #   - Exit if there's no match (--exit-0)
@@ -24,23 +24,23 @@ fo() {
   fi
 }
 
-# fc - cd to selected directory
-fc() {
+# fcd - cd to selected directory
+fcd() {
   local dir
   dir=$(find ${1:-*} -path '*/\.*' -prune \
                   -o -type d -print 2> /dev/null | fzf +m) &&
   cd "$dir"
 }
 
-# fcs - including hidden directories
-fca() {
-  local dir
-  dir=$(find ${1:-.} -type d \( -path ./.git \) -prune -o -print 2> /dev/null | fzf +m) && cd "$dir"
-}
-
 # repeat command history
 fh() {
   eval $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
+}
+
+
+fun() {
+  f=$(declare -F | awk '{print $3 }' | fzf)
+  so declare -f $f
 }
 
 # fshow - git commit browser
@@ -62,6 +62,15 @@ fcs() {
   commits=$(git log --color=always --pretty=oneline --abbrev-commit --reverse) &&
   commit=$(echo "$commits" | fzf --tac +s +m -e --ansi --reverse) &&
   echo -n $(echo "$commit" | sed "s/ .*//")
+}
+
+# fcc - copy git commit SHA to clipboard
+fcc() {
+  local commits commit
+  commits=$(git log --color=always --pretty=oneline --abbrev-commit --reverse) &&
+  commit=$(echo "$commits" | fzf --tac +s +m -e --ansi --reverse | sed "s/ .*//")
+  echo -n $commit | pbcopy 
+  echo "commit SHA $commit copied to clipboard"
 }
 
 # fstash - easier way to deal with stashes
