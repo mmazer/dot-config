@@ -1,0 +1,46 @@
+[alias]
+    ap = add -p
+    alias = config --get-regexp '^alias.*'
+    all = add --all
+    all-deleted = log --diff-filter=D --summary
+    als-config = config user.email "marc.mazer@mtsallstream.com"
+    amend = commit --amend
+    br = branch
+    ci = commit
+    co = checkout
+    changed = show --pretty="format:" --name-only
+    deleted = ls-files -d
+    develop = checkout develop
+    dfiles = diff --name-status
+    diffpush = log origin/master..HEAD
+    discard = checkout --
+    email = config user.email
+    graph = log --pretty=format:'%h %s' --graph
+    hist = log --color --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    ignore = !git update-index --assume-unchanged
+    in = log --pretty=oneline --abbrev-commit --graph ..@{u}
+    ksdiff =difftool -y -t Kaleidoscope
+    ksmerge =mergetool -y -t Kaleidoscope
+    unignore = !git update-index --no-assume-unchanged
+    ignored = !git ls-files -v | grep ^[a-z]
+    last = log --pretty=format:'%ci %h %s (%an)' -8 HEAD
+    ls = !git ls-files
+    ltag = !git log `git describe --tags --abbrev=0`..HEAD --oneline
+    master = checkout master
+    noff = merge --no-ff
+    out = log --pretty=oneline --abbrev-commit --graph @{u}..
+    pd = push origin develop
+    pm = push origin master
+    remotes = remote -v
+    staged = diff --name-only --cached
+    st = status -sb
+    stashes= stash list
+    subadd = submodule add
+    subup = !git pull --recurse-submodules && git submodule update --recursive
+    sw = checkout
+    this = init
+    unstage = reset HEAD --
+    ups = branch -u
+    vimdiff=difftool -y -t vimdiff
+    whelp = help --web
+    whoami=!git config user.name && git config user.email
