@@ -6,6 +6,7 @@ source ~/.config/bash/colours
 source ~/.config/bash/bashmarks
 source ~/.config/bash/git
 source ~/.config/bash/prompt
+source ~/config/bash/fzf
 
 # only run if in interactive shell
 [[ $- == *i* ]] && source ~/.config/bash/ssh-agent
