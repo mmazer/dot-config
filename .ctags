@@ -67,5 +67,5 @@
 --langmap=markdown:.md
 --regex-markdown=/^(#+)[ \t]+([^#]*)/\1 \2/h,header,Markdown Headers/
 
---languages=js,css,XML,less,Vim,Java,Python,Ruby,php,Taskpaper,wsdl,markdown,cucumber
+--languages=sh,js,css,XML,less,Vim,Java,Python,Ruby,php,Taskpaper,wsdl,markdown,cucumber
 
