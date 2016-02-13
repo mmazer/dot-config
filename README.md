@@ -4,13 +4,15 @@ Simple dotfile setup with no install script or symlinks required.
 
 To create:
 
-    git init --bare $HOME/.cfg
-    alias cfg='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
-    cfg config status.showUntrackedFiles no
+    git init --bare $HOME
+    git config status.showUntrackedFiles no
 
-To clone:
+To clone into existing home directory:
 
-    git clone --separate-git-dir=~/.cfg <path> ~
+    git clone --bare git@github.com:mmazer/dot-config.git ~/.git
+    git config status.showUntrackedFiles no
+    git config core.bare false
+    git checkout -- .
 
 ### References
 
