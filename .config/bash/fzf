@@ -11,6 +11,14 @@ fe() {
   unset IFS
 }
 
+# ge - fuzzy find git files and open in editor
+ge() {
+  local git-files file
+  git-files=$(git ls-files) &&
+  file=$(echo "$git-files" | fzf +s) &&
+  [[ -n "$file" ]] && ${EDITOR:-vim} "${file}"
+}
+
 # Modified version where you can press
 #   - CTRL-O to open with `open` command,
 #   - CTRL-E or Enter key to open with the $EDITOR
