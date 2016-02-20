@@ -13,9 +13,9 @@ fe() {
 
 # ge - fuzzy find git files and open in editor
 ge() {
-  local git-files file
-  git-files=$(git ls-files) &&
-  file=$(echo "$git-files" | fzf +s) &&
+  local files file
+  files=$(git ls-files) &&
+  file=$(echo "$files" | fzf +s) &&
   [[ -n "$file" ]] && ${EDITOR:-vim} "${file}"
 }
 
