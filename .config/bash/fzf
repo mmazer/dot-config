@@ -45,10 +45,24 @@ fh() {
   eval $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
 }
 
+# fhe - repeat history edit
+fhe() {
+  local cmd
+  cmd=$( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | awk '{print $1}')
+  fc $cmd 
+}
 
 fun() {
   f=$(declare -F | awk '{print $3 }' | fzf)
   so declare -f $f
+}
+
+# fbr - checkout git branch
+fbr() {
+  local branches branch
+  branches=$(git branch -vv) &&
+  branch=$(echo "$branches" | fzf +m) &&
+  git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
 }
 
 # fshow - git commit browser
@@ -81,13 +95,6 @@ fcc() {
   echo "commit SHA $commit copied to clipboard"
 }
 
-# fb - change to bookmarked directory
-fb() {
-    local bookmark
-    bookmark=$(marks | fzf | awk '{print $1}') && 
-    cd "$bookmark"
-}
-
 # fstash - easier way to deal with stashes
 # type fstash to get a list of your stashes
 # enter shows you the contents of the stash
@@ -115,4 +122,11 @@ fstash() {
       git stash show -p $sha
     fi
   done
+}
+
+# fb - change to bookmarked directory
+fb() {
+    local bookmark
+    bookmark=$(marks | fzf | awk '{print $1}') && 
+    cd "$bookmark"
 }
