@@ -2,6 +2,10 @@
 --exclude=dist
 --exclude=lib
 --exclude=node_modules
+--exclude=bower_components
+--exclude=vendor
+--exclude=tmp
+--exclude=.idea
 --exclude=project
 --exclude=target
 --exclude=test
@@ -10,12 +14,16 @@
 
 --langdef=js
 --langmap=js:.js
+--languages=-javascript
+--languages=+js
 --regex-js=/([A-Za-z0-9._$]+)[ \t]*[:=][ \t]*\{/\1/o,objects/
 --regex-js=/([A-Za-z0-9._$()]+)[ \t]*[:=][ \t]*function[ \t]*\(/\1/f,functions/
---regex-js=/function[ \t]+([A-Za-z0-9._$]+)[ \t]*([^)])/\1/f,functions/
+--regex-js=/function[ \t]+([A-Za-z0-9._$]+)[ \t]+\(/\1/f,functions/
+--regex-js=/[ \t]*([A-Za-z$_][A-Za-z0-9_$]+)+\([^)]*\)[ \t]*\{/\1/f,function/
 
 --langdef=css
 --langmap=css:.css
+--languages=+css
 --regex-css=/^[ \t]*(([]=".#[>A-Za-z0-9_-]+[ \t\n,]+)+)\{/\1/s,Selector/
 --regex-css=/^[ \t]*(@media.*)\{/\1/m,Media/
 --langdef=less
@@ -25,6 +33,7 @@
 
 --langdef=Scala
 --langmap=Scala:.scala
+--languages=+Scala
 --regex-Scala=/^[ \t]*(((implicit|private|public)?[ \t]*)*(\[[a-zA-Z0-9_]*\])?[ \t]*)*class[ \t]*([a-zA-Z0-9_]+)/\5/c,classes/
 --regex-Scala=/^[ \t]*(((implicit|private|public)?[ \t]*)*(\[[a-zA-Z0-9_]*\])?[ \t]*)*object[ \t]*([a-zA-Z0-9_]+)/\5/o,objects/
 --regex-Scala=/^[ \t]*trait[ \t]*([a-zA-Z0-9_]+)/\1/t,traits/
@@ -45,27 +54,19 @@
 --regex-groovy=/^[ \t]*[abstract ( \t)]*[(private|public) ( \t)]*class[ \t]+([A-Za-z0-9_]+)[ \t]*/\1/c,class,classes/
 --regex-groovy=/^[ \t]*[abstract ( \t)]*[(private|public) ( \t)]*enum[ \t]+([A-Za-z0-9_]+)[ \t]*/\1/c,class,classes/
 
---langdef=XML
---langmap=XML:.xml
---regex-XML=/id="([a-zA-Z0-9_]+)"/\1/d,definition/
-
---langdef=wsdl
---langmap=wsdl:.wsdl
---regex-wsdl=/<*:element[ \t]* name="([a-zA-Z0-9_]+)"/\1/e,element/
---regex-wsdl=/<*:message[ \t]* name="([a-zA-Z0-9_]+)"/\1/m,message/
---regex-wsdl=/<*:operation[ \t]* name="([a-zA-Z0-9_]+)"/\1/o,operation/
-
 --langdef=Taskpaper
 --langmap=Taskpaper:.taskpaper
+--languages=+Taskpaper
 --regex-Taskpaper=/^([a-zA-Z0-9][a-zA-Z0-9_ ]+)\:/\1/p,project/
 
 --langdef=cucumber
 --langmap=cucumber:.feature
+--languages=+cucumber
 --regex-cucumber=/^[ \t]*Scenario( Outline)?:(.*)/\2/s,scenario/
 
 --langdef=markdown
 --langmap=markdown:.md
+--languages=+markdown
 --regex-markdown=/^(#+)[ \t]+([^#]*)/\1 \2/h,header,Markdown Headers/
 
---languages=sh,js,css,XML,less,Vim,Java,Python,Ruby,php,Taskpaper,wsdl,markdown,cucumber
 
