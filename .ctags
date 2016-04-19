@@ -68,4 +68,5 @@
 --languages=+markdown
 --regex-markdown=/^(#+)[ \t]+([^#]*)/\1 \2/h,header,Markdown Headers/
 
+--regex-make=/^([^# \t]*):/\1/t,target/
 
