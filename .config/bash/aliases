@@ -50,3 +50,8 @@ alias ssh-hosts='grep -w Host ~/.ssh/config'
 alias th='history | tail -12'
 alias vi='vim -u ~/.vim/minimal.vim'
 alias wf='tail -f'
+# calendars
+alias mc='cal -m $(date "+%m")'
+alias mon='cal -m'
+alias yc='cal $(date "+%Y")'
+
