@@ -77,6 +77,14 @@ fshow() {
 FZF-EOF"
 }
 
+# fst - git stashes
+fst() {
+  local stashes stash
+  stashes=$(git stash list) &&
+  stash=$(echo "$stashes" | fzf +m) &&
+  git show $(echo $stash | awk -F":" '{print $1}')
+}
+
 # fcs - get git commit sha
 # example usage: git rebase -i `fcs`
 fcs() {
