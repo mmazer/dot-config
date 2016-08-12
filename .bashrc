@@ -11,6 +11,6 @@ source ~/.config/bash/fzf
 # only run if in interactive shell
 [[ $- == *i* ]] && source ~/.config/bash/ssh-agent
 
-[ -f ~/.local/share/etc/bashrc ] &&  source ~/.local/share/etc/bashrc
+[ -f ~/.config/local/bashrc ] &&  source ~/.config/local/bashrc
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
