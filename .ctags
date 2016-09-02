@@ -70,3 +70,8 @@
 
 --regex-make=/^([^# \t]*):/\1/t,target/
 
+--langdef=ini
+--langmap=ini:.ini
+--languages=+ini
+--regex-ini=/^\[([,&0-9A-Za-z_:\/ ]+)\]/\1/s,section/
+
