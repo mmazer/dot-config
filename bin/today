@@ -1,5 +1,5 @@
 #!/bin/sh
-DIR=${HOME}/00INFOBASE/09LOGS
+DIR=${LOGDIR:-$HOME/00INFOBASE/09LOGS}
 DATE=`date "+%Y-%m-%d"`
 TIME=`date "+%H:%M"`
 NAME="daily-journal.txt"
