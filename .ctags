@@ -7,7 +7,6 @@
 --exclude=.idea
 --exclude=project
 --exclude=target
---exclude=test
 --tag-relative=yes
 --recurse=yes
 
