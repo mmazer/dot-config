@@ -38,6 +38,7 @@
     subadd = submodule add
     subup = !git pull --recurse-submodules && git submodule update --recursive
     sw = checkout
+    tags=log --oneline --decorate --tags --no-walk
     this = init
     unstage = reset HEAD --
     ups = branch -u
