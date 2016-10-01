@@ -1,6 +1,5 @@
 --exclude=.git
 --exclude=dist
---exclude=lib
 --exclude=node_modules
 --exclude=bower_components
 --exclude=tmp
