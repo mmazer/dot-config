@@ -1,0 +1,51 @@
+#!/usr/bin/perl
+use POSIX qw/strftime/; 
+
+# Training zones
+@zones=('Endurance', 'Tempo','Threshold','V02 Max','Anaerobic Capacity','Sweet Spot');
+@ranges = (
+['0.56','0.75'], 
+['0.76', '0.90'],
+['0.91','1.05'],
+['1.06','1.2'],
+['1.21','1.5'],
+['0.88','0.93']
+);
+
+if( @ARGV != 1) {
+print "usage: tz <threshold>\n";
+exit 1;
+}
+$FTP=$ARGV[0];
+if( $FTP !~ /^\d+$/ ) {
+print "invalid threshold value: $FTP\n";
+exit 1;
+}
+
+print "FTP: $FTP\n\n";
+$ZONE_NUM=1;
+for $i (0 .. $#zones) 
+{
+print "$ZONE_NUM. $zones[$i]: ".perc($ranges[$i][0])."-".perc($ranges[$i][1])."% ". calc($FTP, $ranges[$i][0])."-". calc($FTP, $ranges[$i][1])."w\n";
+$ZONE_NUM += 1;
+}
+
+print "\n";
+print "General Ranges:\n";
+for($r=55; $r<200; $r+=5) {
+print " - $r% ".calc($FTP, $r/100.0)."w\n";
+}
+
+sub calc {
+my ($threshold, $percent) = @_;
+my $watts;
+$watts= $threshold * $percent;
+return int($watts + 0.5);
+}
+
+sub perc {
+my ($decimal) = @_;
+my $percent;
+$percent = $decimal * 100;
+return $percent;
+}
