@@ -1,4 +1,8 @@
-# Reset
+# 256 color fg control sequence: \e[38;5
+# 256 color bg control sequence: \e48;5
+#
+# See http://misc.flogisoft.com/bash/tip_colors_and_formatting
+#
 Color_Off="\e[0m"      # Text Reset  
 
 # Regular Colors
@@ -7,9 +11,13 @@ Red="\e[0;31m"          # Red
 Green='\e[0;32m'        # Green
 Yellow='\e[0;33m'       # Yellow
 Blue='\e[0;34m'         # Blue
+LightBlue='\e[0;94m'         # Light Blue
 Purple='\e[0;35m'       # Purple
 Cyan='\e[0;36m'         # Cyan
 White='\e[0;37m'        # White  
+
+# Custom colors
+C5f8787='\e[38;5;66m'
 
 # Bold
 BBlack='\e[1;30m'       # Black
