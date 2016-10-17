@@ -5,7 +5,7 @@
 project.local
 scratch
 *.pyc
-node_modules
+node_modules/*
 .idea
 .projections.json
 tags
