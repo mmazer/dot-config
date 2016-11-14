@@ -76,3 +76,7 @@
 --langdef=scm
 --langmap=scm:.ss.scm
 --regex-scm=/^[[:space:]]*(\(|[[])define[^[:space:]]*[[:space:]]+(\(|[[])?([^][[:space:]()]+)/\3/d,definition/i
+
+--langdef=yaml 
+--langmap=yaml:.yml
+--regex-yaml=/^[ ]*([a-zA-Z0-9_-]+):$/\1/k,key/
