@@ -12,7 +12,7 @@ To clone into existing home directory:
     git clone --bare git@github.com:mmazer/dot-config.git ~/.git
     git config status.showUntrackedFiles no
     git config core.bare false
-    git checkout -- .
+    git checkout --
 
 ### References
 
