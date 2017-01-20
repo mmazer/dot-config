@@ -36,6 +36,7 @@
     st = status -sb
     stashes= stash list
     subadd = submodule add
+    submodules=submodule status --recursive
     subup = !git pull --recurse-submodules && git submodule update --recursive
     sw = checkout
     tags=log --oneline --decorate --tags --no-walk

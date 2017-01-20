@@ -1,9 +1,8 @@
-[user]
-    name = Marc Mazer
+[core]
+    excludesfile = ~/.config/git/ignore
 
-[github]
-    user = mmazer
-
-[url "https://github.com/"]
-  insteadOf = "gh:"
+[include]
+    path = ~/.config/git/default
+    path = ~/.config/git/aliases
+    path = ~/.local/share/git/config
 
