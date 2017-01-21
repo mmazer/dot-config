@@ -9,7 +9,7 @@ To checkout:
  3. `cfg checkout`
  4. `cfg config --local status.showUntrackedFiles no`
 
-If on initial checkout, Git reports an error related to overwriting files , you
+If on initial checkout, Git reports an error related to overwriting files, you
 can backup the existing files:
 
     mkdir -p .cfg-backup && \
@@ -36,4 +36,5 @@ Local nvim setings are under `~/.local/share/nvim/site/plugin`.
 ### References
 
 <https://news.ycombinator.com/item?id=11070797>
+
 <https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/>
