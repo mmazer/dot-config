@@ -7,5 +7,6 @@ ROUTER=`netstat -nr|awk '/^default/ {print $2}'`
 # iso.3.6.1.2.1.4.21.1.7 = ipRouteNextHop
 gw=`snmpwalk -Os -c $COMMUNITY -v 1 $ROUTER iso.3.6.1.2.1.4.21.1.7.0.0.0.0|awk '{print $4}'`
 ip=`snmpwalk -Os -c $COMMUNITY -v 1 $ROUTER iso.3.6.1.2.1.4.21.1.7.$gw|awk '{print $4}'`
-echo $ip
+echo "GW IP: $gw"
+echo "WAN IP: $ip"
 
