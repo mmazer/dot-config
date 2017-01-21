@@ -47,9 +47,9 @@ function so {
 eval "$@" |less -I~
 }
 
-# Pipe any command to mvim buffer
-function pv {
-    eval "$@" | nvim - & 
+# Pipe any command to nvim buffer
+function nview {
+    eval "$@" | nvim -
 }
 
 function trash {
