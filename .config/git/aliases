@@ -29,8 +29,8 @@
     master = checkout master
     noff = merge --no-ff
     out = log --pretty=oneline --abbrev-commit --graph @{u}..
-    pd = push origin develop
-    pm = push origin master
+    pod = push origin develop
+    pom = push origin master
     remotes = remote -v
     staged = diff --name-only --cached
     st = status -sb
