@@ -40,6 +40,7 @@ alias marks='bookmarksshow'
 alias mkdir='mkdir -p'
 alias mkexe='chmod 755'
 alias mkrd='chmod 644'
+alias netl='netstat -naf inet | grep LISTEN'
 alias pg='$PAGER'
 alias pp='python -m json.tool'
 alias py='python'
@@ -56,7 +57,15 @@ alias ssh-hosts='grep -w Host ~/.ssh/config'
 alias th='history | tail -12'
 alias vi='vim -u ~/.vim/minimal.vim'
 alias vdiff='nvim -d'
+
+# vagrant
+alias vssh='vagrant ssh'
+alias vsync='vagrant rsync'
+alias vscp='vagrant scp'
+alias vstat='vagrant status'
+
 alias wf='tail -f'
+alias wh=which
 # calendars
 alias mc='cal -m $(date "+%m")'
 alias mon='cal -m'
