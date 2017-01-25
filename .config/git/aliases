@@ -6,6 +6,7 @@
     als-config = config user.email "marc.mazer@mtsallstream.com"
     amend = commit --amend
     br = branch
+    branches = branch -vv
     ci = commit
     co = checkout
     changed = show --pretty="format:" --name-only
