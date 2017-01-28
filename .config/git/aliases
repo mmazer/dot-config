@@ -9,6 +9,7 @@
     branches = branch -vv
     ci = commit
     co = checkout
+    cv = commit -v
     changed = show --pretty="format:" --name-only
     deleted = ls-files -d
     develop = checkout develop
@@ -24,7 +25,7 @@
     ksmerge =mergetool -y -t Kaleidoscope
     unignore = !git update-index --no-assume-unchanged
     ignored = !git ls-files -v | grep ^[a-z]
-    last = log --pretty=format:'%ci %h %s (%an)' -8 HEAD
+    last = log --pretty=format:'%ci %h %s (%an)' -8 
     ls = !git ls-files
     ltag = !git log `git describe --tags --abbrev=0`..HEAD --oneline
     master = checkout master
@@ -34,8 +35,9 @@
     pom = push origin master
     remotes = remote -v
     staged = diff --name-only --cached
-    st = status -sb
+    stat = status -sb
     stashes= stash list
+    sub = submodule
     subadd = submodule add
     submodules=submodule status --recursive
     subup = !git pull --recurse-submodules && git submodule update --recursive
