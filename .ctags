@@ -79,4 +79,4 @@
 
 --langdef=yaml 
 --langmap=yaml:.yml
---regex-yaml=/^[ ]*([a-zA-Z0-9_-]+):$/\1/k,key/
+--regex-yaml=/^([a-zA-Z0-9_-]+):/\1/k,key/
