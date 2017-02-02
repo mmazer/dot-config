@@ -58,11 +58,25 @@ alias th='history | tail -12'
 alias vi='vim -u ~/.vim/minimal.vim'
 alias vdiff='nvim -d'
 
+# docker
+alias dc='docker-compose'
+alias dm='docker-machine'
+alias docker-clean='docker rmi -f $(docker images -q)'
+alias docker-env='eval $(docker-machine env default)'
+alias docker-unset='unset ${!DOCKER_*}'
+alias docker-exec='docker exec -it'
+alias docker-stop='docker stop $(docker ps -a -q)'
+alias docker-kill='docker kill $(docker ps -q)'
+alias docker-rm='docker rm $(docker ps -a -q)'
+alias docker-pause='docker pause $(docker ps -q)'
+
+alias docker-ps='docker ps -a'
 # vagrant
 alias vssh='vagrant ssh'
 alias vsync='vagrant rsync'
 alias vscp='vagrant scp'
 alias vstat='vagrant status'
+alias vup='vagrant up'
 
 alias wf='tail -f'
 alias wh=which
