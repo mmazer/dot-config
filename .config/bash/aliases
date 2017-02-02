@@ -69,8 +69,8 @@ alias docker-stop='docker stop $(docker ps -a -q)'
 alias docker-kill='docker kill $(docker ps -q)'
 alias docker-rm='docker rm $(docker ps -a -q)'
 alias docker-pause='docker pause $(docker ps -q)'
-
 alias docker-ps='docker ps -a'
+
 # vagrant
 alias vssh='vagrant ssh'
 alias vsync='vagrant rsync'
@@ -78,8 +78,10 @@ alias vscp='vagrant scp'
 alias vstat='vagrant status'
 alias vup='vagrant up'
 
-alias wf='tail -f'
-alias wh=which
+# aws
+alias s3='aws s3 --profile s3'
+alias s3api='aws s3api --profile s3'
+
 # calendars
 alias mc='cal -m $(date "+%m")'
 alias mon='cal -m'
