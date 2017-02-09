@@ -3,6 +3,7 @@
 *.sublime-workspace
 *.taskpaper
 project.local
+Makefile.local
 scratch
 *.pyc
 node_modules/*
