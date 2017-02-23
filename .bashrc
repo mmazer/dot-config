@@ -9,5 +9,3 @@ source ~/.config/bash/prompt
 source ~/.config/bash/fzf
 
 [ -f ~/.local/share/etc/bashrc ] &&  source ~/.local/share/etc/bashrc
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
