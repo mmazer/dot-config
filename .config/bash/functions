@@ -68,3 +68,12 @@ function trash {
 function qc {
     echo "$1" | bc
 }
+
+function gto {
+    while [[ ! -f .top && ! -f .git ]]; do
+        cd ..
+        if [  "$(pwd)" = "/" ]; then
+            break
+        fi
+    done
+}
