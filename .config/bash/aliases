@@ -7,7 +7,7 @@ alias cpdir='cp -R'
 alias ddir='rm -rf'
 alias del='rm -f'
 alias dused='df -kHal'
-alias ed=$EDITOR
+alias e=$EDITOR
 alias findcvs='find . -type d -name CVS && find . -name .cvsignore'
 alias findsvn='find . -type d -name .svn'
 alias focus='if [ -f ~/.focus ]; then cat ~/.focus; else echo "No focus?"; fi'
@@ -55,7 +55,7 @@ alias term='echo $TERM'
 alias path='echo $PATH'
 alias ssh-hosts='grep -w Host ~/.ssh/config'
 alias th='history | tail -12'
-alias vi='vim -u ~/.vim/minimal.vim'
+alias vim=nvim
 alias vdiff='nvim -d'
 
 # docker
@@ -72,6 +72,7 @@ alias docker-pause='docker pause $(docker ps -q)'
 alias docker-ps='docker ps -a'
 
 # vagrant
+alias vgr=vagrant
 alias vssh='vagrant ssh'
 alias vsync='vagrant rsync'
 alias vscp='vagrant scp'

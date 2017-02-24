@@ -39,7 +39,7 @@ fo() {
 # fcd - cd to selected directory
 fcd() {
   local dir
-  dir=$(find ${1:-*} -path '*/\.*' -prune \
+  dir=$(find ${1:-.} -path '*/\.*' -prune \
                   -o -type d -print 2> /dev/null | fzf +m) &&
   cd "$dir"
 }
@@ -110,6 +110,6 @@ fcc() {
 # fb - change to bookmarked directory
 fb() {
     local bookmark
-    bookmark=$(marks | fzf | awk '{print $1}') && 
-    cd "$bookmark"
+    bookmark=$(marks | awk '{print $2}' | fzf) && 
+    go "$bookmark"
 }
