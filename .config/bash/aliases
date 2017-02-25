@@ -41,6 +41,7 @@ alias mkdir='mkdir -p'
 alias mkexe='chmod 755'
 alias mkrd='chmod 644'
 alias netl='netstat -naf inet | grep LISTEN'
+alias nv=nvim
 alias pg='$PAGER'
 alias pp='python -m json.tool'
 alias py='python'
@@ -72,7 +73,7 @@ alias docker-pause='docker pause $(docker ps -q)'
 alias docker-ps='docker ps -a'
 
 # vagrant
-alias vgr=vagrant
+alias vg=vagrant
 alias vssh='vagrant ssh'
 alias vsync='vagrant rsync'
 alias vscp='vagrant scp'
