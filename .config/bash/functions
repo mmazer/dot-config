@@ -70,10 +70,12 @@ function qc {
 }
 
 function gto {
-    while [[ ! -f .top && ! -f .git ]]; do
+    CWD=$(pwd)
+    while [[ ! -f ".top"  && ! -d ".git" ]]; do
         cd ..
         if [  "$(pwd)" = "/" ]; then
             break
         fi
     done
+    export OLDPWD="$CWD"
 }
