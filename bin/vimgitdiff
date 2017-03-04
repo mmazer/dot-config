@@ -1,2 +1,0 @@
-#!/bin/sh
-/usr/local/bin/vim -dO "$2" "$5"
