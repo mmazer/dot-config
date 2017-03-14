@@ -42,9 +42,14 @@ case $1 in
 esac
 }
 
-#A function to pipe any command to less:
-function so {
+# View ouptput of any command in less
+function vo {
 eval "$@" |less -I~
+}
+
+# Copy command output to clipboard
+function copy {
+eval "$@" | pbcopy
 }
 
 # Pipe any command to nvim buffer
