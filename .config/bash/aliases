@@ -4,6 +4,8 @@ alias cfg='git --git-dir=$HOME/.cfg --work-tree=$HOME'
 alias cls='clear'
 alias clh='history -cw'
 alias cpdir='cp -R'
+# copy last command to clipboard
+alias cplast='fc -ln -1 | awk '\''{$1=$1}1'\'' ORS='\'''\'' | pbcopy'
 alias ddir='rm -rf'
 alias del='rm -f'
 alias dused='df -kHal'
