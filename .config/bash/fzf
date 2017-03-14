@@ -1,45 +1,26 @@
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
-[ -f ~/.fzf.bash  ] && source ~/.fzf.bash
-bind -x '"\C-p": vim $(fzf);'
 
-# See https://github.com/junegunn/fzf/wiki/examples
+[ -f $HOME/.fzf.bash  ] && source $HOME/.fzf.bash
 
-# fe [FUZZY PATTERN] - Open the selected file with the default editor
-#   - Bypass fuzzy finder if there's only one match (--select-1)
-#   - Exit if there's no match (--exit-0)
-fe() {
-  IFS='
-'
-  local declare files=($(fzf-tmux --query="$1" --select-1 --exit-0))
-  [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
-  unset IFS
-}
+bind -x '"\C-p": nvim $(fzf);'
 
-# ge - fuzzy find git files and open in editor
-ge() {
-  local files file
-  files=$(git ls-files) &&
-  file=$(echo "$files" | fzf +s) &&
-  [[ -n "$file" ]] && ${EDITOR:-vim} "${file}"
-}
-
-# Modified version where you can press
+# File browser:
 #   - CTRL-O to open with `open` command,
 #   - CTRL-E or Enter key to open with the $EDITOR
-fo() {
+fb() {
   local out file key
   out=$(fzf-tmux --query="$1" --exit-0 --expect=ctrl-o,ctrl-e)
   key=$(head -1 <<< "$out")
   file=$(head -2 <<< "$out" | tail -1)
   if [ -n "$file" ]; then
-    [ "$key" = ctrl-o ] && open "$file" || ${EDITOR:-vim} "$file"
+    [ "$key" = ctrl-o ] && open "$file" || ${EDITOR:-nvim} "$file"
   fi
 }
 
 # fcd - cd to selected directory
 fcd() {
   local dir
-  dir=$(ls -1| fzf +m ) && 
+  dir=$(ls -1F| grep /$ | fzf +m ) && 
   cd "$dir"
 }
 
@@ -55,21 +36,30 @@ fhe() {
   fc $cmd 
 }
 
+# browse shell functions (bash)
 fun() {
   f=$(declare -F | awk '{print $3 }' | fzf)
   so declare -f $f
 }
 
-# fbr - checkout git branch
-fbr() {
+# ge - fuzzy find git files and open in editor
+ged() {
+  local files file
+  files=$(git ls-files) &&
+  file=$(echo "$files" | fzf +s) &&
+  [[ -n "$file" ]] && ${EDITOR:-nvim} "${file}"
+}
+
+# checkout git branch
+gbr() {
   local branches branch
   branches=$(git branch -vv) &&
   branch=$(echo "$branches" | fzf +m) &&
   git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
 }
 
-# fshow - git commit browser
-fshow() {
+# git commit browser
+gcb() {
   git log --graph --color=always \
       --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
   fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
@@ -81,33 +71,24 @@ FZF-EOF"
 }
 
 # fst - git stashes
-fst() {
+gst() {
   local stashes stash
   stashes=$(git stash list) &&
   stash=$(echo "$stashes" | fzf +m) &&
   git show $(echo $stash | awk -F":" '{print $1}')
 }
 
-# fcs - get git commit sha
-# example usage: git rebase -i `fcs`
-fcs() {
+# get git commit sha
+# example usage: git rebase -i `gsha`
+gsha() {
   local commits commit
   commits=$(git log --color=always --pretty=oneline --abbrev-commit --reverse) &&
   commit=$(echo "$commits" | fzf --tac +s +m -e --ansi --reverse) &&
-  echo -n $(echo "$commit" | sed "s/ .*//")
+  echo -n "$commit" | sed "s/ .*//"
 }
 
-# fcc - copy git commit SHA to clipboard
-fcc() {
-  local commits commit
-  commits=$(git log --color=always --pretty=oneline --abbrev-commit --reverse) &&
-  commit=$(echo "$commits" | fzf --tac +s +m -e --ansi --reverse | sed "s/ .*//")
-  echo -n $commit | pbcopy 
-  echo "commit SHA $commit copied to clipboard"
-}
-
-# fb - change to bookmarked directory
-fb() {
+# change to bookmarked directory
+cdb() {
     local bookmark
     bookmark=$(marks | awk '{print $2}' | fzf) && 
     go "$bookmark"
