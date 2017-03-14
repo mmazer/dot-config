@@ -32,7 +32,7 @@ category=''
 today=`date "+%Y-%m-%d"`
 now=`date "+%H:%M"`
 timestamp="$today $now"
-logdir=~/.logs
+logdir=~/.local/share/data
 logfile='log.txt'
 
 #set the log path to the environment variable if it is set
