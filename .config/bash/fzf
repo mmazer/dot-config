@@ -112,3 +112,16 @@ fb() {
     bookmark=$(marks | awk '{print $2}' | fzf) && 
     go "$bookmark"
 }
+
+# fcmd - search and run saved cmds
+fcmd() {
+    args=$@
+    cmds="${args:-$HOME/.cmds}"
+    eval $(cat ${cmds} | fzf | sed "s/;;.*//")
+}
+
+cpcmd() {
+    args=$@
+    cmds="${args:-$HOME/.cmds}"
+    echo -n $(cat ${cmds} | fzf | sed 's/;;.*//') | pbcopy
+}
