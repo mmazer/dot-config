@@ -39,7 +39,7 @@ fhe() {
 # browse shell functions (bash)
 fun() {
   f=$(declare -F | awk '{print $3 }' | fzf)
-  so declare -f $f
+  vo declare -f $f
 }
 
 # ge - fuzzy find git files and open in editor
