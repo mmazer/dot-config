@@ -2,12 +2,10 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 
 [ -f $HOME/.fzf.bash  ] && source $HOME/.fzf.bash
 
-bind -x '"\C-p": nvim $(fzf);'
-
 # File browser:
 #   - CTRL-O to open with `open` command,
 #   - CTRL-E or Enter key to open with the $EDITOR
-fb() {
+ctrlp() {
   local out file key
   out=$(fzf-tmux --query="$1" --exit-0 --expect=ctrl-o,ctrl-e)
   key=$(head -1 <<< "$out")
@@ -16,6 +14,8 @@ fb() {
     [ "$key" = ctrl-o ] && open "$file" || ${EDITOR:-nvim} "$file"
   fi
 }
+
+bind -x '"\C-p": ctrlp;'
 
 # fcd - cd to selected directory
 fcd() {
