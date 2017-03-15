@@ -111,6 +111,6 @@ fob() {
     local bookmarks url
     args=$@
     bookmarks="${args:-$XDG_DATA_HOME/fzf/fzf_bookmarks}"
-    url=$(cat ${bookmarks} | fzf | awk '{printf $1}')
+    url=$(cat ${bookmarks} | fzf | awk 'BEGIN { FS = "|" } ; { printf $2 }')
     [[ -n "$url" ]] && open "$url"
 }
