@@ -32,7 +32,7 @@ category=''
 today=`date "+%Y-%m-%d"`
 now=`date "+%H:%M"`
 timestamp="$today $now"
-logdir=~/.local/share/data
+logdir=$XDG_DATA_HOME/log/
 logfile='log.txt'
 
 #set the log path to the environment variable if it is set
