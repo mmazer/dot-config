@@ -10,5 +10,5 @@ source ~/.config/bash/fzf
 source ~/.config/bash/rvm
 source ~/.config/bash/ssh-agent
 
-[ -f ~/.local/share/etc/bashrc ] &&  source ~/.local/share/etc/bashrc
+[ -f ~/.local/share/bash/bashrc ] &&  source ~/.local/share/bash/bashrc
 

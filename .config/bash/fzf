@@ -110,7 +110,7 @@ cpcmd() {
 fob() {
     local bookmarks url
     args=$@
-    bookmarks="${args:-$XDG_DATA_HOME/fzf_bookmarks}"
+    bookmarks="${args:-$XDG_DATA_HOME/fzf/fzf_bookmarks}"
     url=$(cat ${bookmarks} | fzf | awk '{printf $1}')
     [[ -n "$url" ]] && open "$url"
 }

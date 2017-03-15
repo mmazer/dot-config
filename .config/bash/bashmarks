@@ -21,7 +21,7 @@
 #
 # Your bookmarks are stored in the ~/.bookmarks file
 
-bookmarks_file=$XDG_DATA_HOME/bookmarks
+bookmarks_file=$XDG_DATA_HOME/bash/bookmarks
 
 # Create bookmarks_file it if it doesn't exist
 if [[ ! -f $bookmarks_file ]]; then
