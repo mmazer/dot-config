@@ -51,7 +51,7 @@ ged() {
 }
 
 # checkout git branch
-gbr() {
+gb() {
   local branches branch
   branches=$(git branch -vv) &&
   branch=$(echo "$branches" | fzf +m) &&
