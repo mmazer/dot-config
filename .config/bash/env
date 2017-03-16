@@ -1,5 +1,5 @@
 export PATH=~/bin:~/.local/bin:/usr/local/bin:/usr/local/sbin:$PATH
-export EDITOR='nvim -u ~/.config/nvim/minimal.vim --noplugin'
+export EDITOR='nvim'
 
 # PAGER
 if test -n "$(command -v less)" ; then
