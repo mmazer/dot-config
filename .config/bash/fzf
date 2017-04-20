@@ -17,8 +17,8 @@ ctrlp() {
 
 bind -x '"\C-p": ctrlp;'
 
-# fcd - cd to selected directory
-fcd() {
+# fdir - cd to selected directory
+fdir() {
   local dir
   dir=$(ls -1F| grep /$ | fzf +m ) && 
   cd "$dir"
@@ -88,7 +88,7 @@ gsha() {
 }
 
 # change to bookmarked directory
-cdb() {
+fb() {
     local bookmark
     bookmark=$(marks | awk '{print $2}' | fzf) && 
     go "$bookmark"
