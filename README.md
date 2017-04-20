@@ -22,10 +22,10 @@ Local or site specific settings are placed in `~/.local/share/etc/bashrc`
 
 To run `ssh-agent`, add the following to the local settings:
 
-```
-# only run if in interactive shell
-[[ $- == *i* ]] && source ~/.config/bash/ssh-agent
-```
+
+    # only run if in interactive shell
+    [[ $- == *i* ]] && source ~/.config/bash/ssh-agent
+
 
 #### Git
 
