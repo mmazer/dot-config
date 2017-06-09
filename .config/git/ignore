@@ -19,4 +19,5 @@ tags
 .nfs.*
 *.patch
 .netrwbook
-
+.nvimrc
+.gitmessage
