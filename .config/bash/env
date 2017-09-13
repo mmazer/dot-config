@@ -1,5 +1,5 @@
 export PATH=~/bin:~/.local/bin:/usr/local/bin:/usr/local/sbin:$PATH
-export EDITOR='nvim'
+export EDITOR='vim'
 
 # PAGER
 if test -n "$(command -v less)" ; then
@@ -13,7 +13,10 @@ export PAGER MANPAGER
 
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_DATA_HOME=$HOME/.local/share
-export XDG_CACHE_=$HOME/.cache
+export XDG_CACHE_HOME=$HOME/.cache
+
+# use XDG directories for vim
+export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
 
 # Misc
 export SDIRS=$XDG_DATA_HOME/bashmarks
