@@ -88,10 +88,10 @@ gsha() {
 }
 
 # change to bookmarked directory
-fb() {
+cdb() {
     local bookmark
-    bookmark=$(marks | awk '{print $2}' | fzf) && 
-    go "$bookmark"
+    bookmark=$(cat $XDG_DATA_HOME/bash/bookmarks | awk '{ printf "%s\n", $2}' FS=\| | fzf) && 
+    bookmarkjump "$bookmark"
 }
 
 # fcmd - search and run saved cmds
@@ -107,7 +107,7 @@ cpcmd() {
     echo -n $(cat ${cmds} | fzf | sed 's/;;.*//') | pbcopy
 }
 
-fob() {
+gob() {
     local bookmarks url
     args=$@
     bookmarks="${args:-$XDG_DATA_HOME/fzf/fzf_bookmarks}"
