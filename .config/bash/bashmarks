@@ -81,7 +81,7 @@ bookmarkdelete (){
 
 # Show a list of the bookmarks
 bookmarksshow (){
-  cat $bookmarks_file | awk '{ printf "%-40s%-40s%s\n",$1,$2,$3}' FS=\|
+  cat $bookmarks_file | awk '{ printf "%-80s%-40s%s\n",$1,$2,$3}' FS=\|
 }
 
 bookmarkjump(){
