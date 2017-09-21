@@ -5,7 +5,6 @@ alias cls='clear'
 alias ch='history -cw'
 alias cpdir='cp -R'
 alias cplast='fc -ln -1 | awk '\''{$1=$1}1'\'' ORS='\'''\'' | pbcopy'
-alias ddir='rm -rf'
 alias del='rm -f'
 alias dused='df -kHal'
 alias ed=$EDITOR
@@ -44,6 +43,7 @@ alias py3='python3'
 alias rebash='source ~/.bashrc'
 alias real='source ~/.config/bash/aliases'
 alias rm='rm -i'
+alias rmdir='rm -rf'
 alias term='echo $TERM'
 alias path='echo $PATH'
 alias ssh-hosts='grep -w Host ~/.ssh/config'
@@ -71,6 +71,10 @@ alias vsync='vagrant rsync'
 alias vscp='vagrant scp'
 alias vstat='vagrant status'
 alias vup='vagrant up'
+
+# infobase
+alias note='$EDITOR $XDG_DATA_HOME/infobase/note.txt'
+alias todo='$EDITOR ${MY_TODO:-$XDG_DATA_HOME/infobase/todo.txt}'
 
 # aws
 alias s3='aws s3 --profile s3'
