@@ -1,4 +1,4 @@
-export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+export FZF_DEFAULT_COMMAND='rg --no-messages --files --hidden --follow --glob "!.git/*"'
 
 [ -f $HOME/.fzf.bash  ] && source $HOME/.fzf.bash
 
