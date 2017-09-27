@@ -2,6 +2,8 @@
 # Based on Logger-TXT by Grant Lucas
 # https://github.com/grantlucas/Logger-TXT
 
+logdir=$XDG_DATA_HOME/infobase/
+
 usage () {
     sed -e 's/^//' <<End
 Usage: log [-t type] [-p project] text
@@ -32,7 +34,6 @@ category=''
 today=`date "+%Y-%m-%d"`
 now=`date "+%H:%M"`
 timestamp="$today $now"
-logdir=$XDG_DATA_HOME/log/
 logfile='log.txt'
 
 #set the log path to the environment variable if it is set
