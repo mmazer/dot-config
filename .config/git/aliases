@@ -21,8 +21,6 @@
     hist = log --color --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
     ignore = !git update-index --assume-unchanged
     in = log --pretty=oneline --abbrev-commit --graph ..@{u}
-    ksdiff =difftool -y -t Kaleidoscope
-    ksmerge =mergetool -y -t Kaleidoscope
     unignore = !git update-index --no-assume-unchanged
     ignored = !git ls-files -v | grep ^[a-z]
     last = log --pretty=format:'%ci %h %s (%an)' -8 
@@ -31,17 +29,14 @@
     master = checkout master
     noff = merge --no-ff
     out = log --pretty=oneline --abbrev-commit --graph @{u}..
-    pod = push origin develop
-    pom = push origin master
     remotes = remote -v
+    sha = rev-parse HEAD
     staged = diff --name-only --cached
     stat = status -sb
     stashes= stash list
     sub = submodule
-    subadd = submodule add
     submodules=submodule status --recursive
     subup = !git pull --recurse-submodules && git submodule update --recursive
-    sw = checkout
     tags=log --oneline --decorate --tags --no-walk
     this = init
     unstage = reset HEAD --
