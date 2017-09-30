@@ -15,7 +15,7 @@ ctrlp() {
   fi
 }
 
-bind -x '"\C-p": ctrlp;'
+bind -x '"\C-f": ctrlp;'
 
 # fdir - cd to selected directory
 fdir() {
