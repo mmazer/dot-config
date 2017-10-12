@@ -3,7 +3,6 @@
     alias = config --get-regexp '^alias.*'
     all = add --all
     all-deleted = log --diff-filter=D --summary
-    als-config = config user.email "marc.mazer@mtsallstream.com"
     amend = commit --amend
     br = branch
     branches = branch -vv
@@ -12,7 +11,7 @@
     cv = commit -v
     changed = show --pretty="format:" --name-only
     deleted = ls-files -d
-    develop = checkout develop
+    dev = checkout develop
     dfiles = diff --name-status
     diffpush = log origin/master..HEAD
     discard = checkout --
@@ -26,8 +25,10 @@
     last = log --pretty=format:'%ci %h %s (%an)' -8 
     ls = !git ls-files
     ltag = !git log `git describe --tags --abbrev=0`..HEAD --oneline
-    master = checkout master
+    ma = checkout master
     noff = merge --no-ff
+    pl = pull origin
+    ps = push origin
     out = log --pretty=oneline --abbrev-commit --graph @{u}..
     remotes = remote -v
     sha = rev-parse HEAD
@@ -35,7 +36,7 @@
     stat = status -sb
     stashes= stash list
     sub = submodule
-    submodules=submodule status --recursive
+    subs=submodule status --recursive
     subup = !git pull --recurse-submodules && git submodule update --recursive
     tags=log --oneline --decorate --tags --no-walk
     this = init
