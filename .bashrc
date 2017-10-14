@@ -1,4 +1,5 @@
 source ~/.config/bash/env
+source ~/.config/bash/direnv
 source ~/.config/bash/aliases
 source ~/.config/bash/profile
 source ~/.config/bash/functions
