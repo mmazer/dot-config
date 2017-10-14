@@ -2,7 +2,6 @@
 *.sublime-project
 *.sublime-workspace
 *.taskpaper
-project.local
 Makefile.local
 scratch
 *.pyc
@@ -21,3 +20,6 @@ tags
 .netrwbook
 .nvimrc
 .gitmessage
+NOTES.txt
+TODO
+.envrc
