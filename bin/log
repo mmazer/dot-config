@@ -2,7 +2,7 @@
 # Based on Logger-TXT by Grant Lucas
 # https://github.com/grantlucas/Logger-TXT
 
-logdir=$XDG_DATA_HOME/infobase/
+logdir=$XDG_DATA_HOME/logs
 
 usage () {
     sed -e 's/^//' <<End
