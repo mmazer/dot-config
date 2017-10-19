@@ -1,0 +1,14 @@
+theme() {
+    export TERM_BG=$1
+    case $1 in
+        light)
+            export TERM_THEME=easy
+            ;;
+        dark)
+            export TERM_THEME=spaceterm
+            ;;
+        *)
+        ;;
+    esac
+}
+
