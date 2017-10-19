@@ -43,7 +43,7 @@ esac
 }
 
 # View ouptput of any command in less
-function vo {
+function lview {
 eval "$@" |less -I~
 }
 
@@ -55,6 +55,10 @@ eval "$@" | pbcopy
 # Pipe any command to nvim buffer
 function nview {
     eval "$@" | nvim -
+}
+# Pipe any command to macvim buffer
+function macview {
+    eval "$@" | mvim -
 }
 
 function trash {
