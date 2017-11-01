@@ -12,3 +12,6 @@ theme() {
     esac
 }
 
+alias setdark='theme dark'
+alias setlight='theme light'
+
