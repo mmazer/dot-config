@@ -43,21 +43,21 @@ esac
 }
 
 # View ouptput of any command in less
-function lview {
-eval "$@" |less -I~
+function pg {
+    eval "$@" | less -I~
 }
 
 # Copy command output to clipboard
 function copy {
-eval "$@" | pbcopy
+    eval "$@" | pbcopy
 }
 
 # Pipe any command to nvim buffer
-function nview {
+function nv {
     eval "$@" | nvim -
 }
 # Pipe any command to macvim buffer
-function macview {
+function vv {
     eval "$@" | mvim -
 }
 
@@ -87,4 +87,17 @@ function gto {
         fi
     done
     export OLDPWD="$CWD"
+}
+
+function runc {
+    if [ $# -lt 2 ] ; then
+        echo "runc count command"
+    else
+        local count=$1
+        shift
+        while [ $count -gt 0 ]; do
+            eval "$@"
+            (( count-- ))
+        done
+    fi
 }
