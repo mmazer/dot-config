@@ -89,14 +89,18 @@ function gto {
     export OLDPWD="$CWD"
 }
 
-function runc {
+# Run command count times
+function rc {
     if [ $# -lt 2 ] ; then
-        echo "runc count command"
+        echo "rc count command"
     else
         local count=$1
+        local i=1
         shift
         while [ $count -gt 0 ]; do
+            echo "#$i: $@"
             eval "$@"
+            (( i++ ))
             (( count-- ))
         done
     fi
