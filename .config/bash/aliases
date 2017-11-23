@@ -18,6 +18,7 @@ alias gh='git hist'
 alias gr='cd `git rev-parse --git-dir`; cd ..'
 alias gs='git status'
 alias h='history'
+alias j=jump
 alias ls='ls -F'
 alias la='ls -aF'
 alias ldir='ls -d */'
@@ -45,24 +46,13 @@ alias real='source ~/.config/bash/aliases'
 alias rm='rm -i'
 alias rmdir='rm -rf'
 alias term='echo $TERM'
+alias tclear='tmux clear-history'
 alias path='echo $PATH'
 alias ssh-hosts='grep -w Host ~/.ssh/config'
 alias so=source
 alias th='history | tail -12'
 alias vdiff='vim -d'
-
-# docker
-alias dc='docker-compose'
-alias dm='docker-machine'
-alias docker-clean='docker rmi -f $(docker images -q)'
-alias docker-env='eval $(docker-machine env default)'
-alias docker-unset='unset ${!DOCKER_*}'
-alias docker-exec='docker exec -it'
-alias docker-stop='docker stop $(docker ps -a -q)'
-alias docker-kill='docker kill $(docker ps -q)'
-alias docker-rm='docker rm $(docker ps -a -q)'
-alias docker-pause='docker pause $(docker ps -q)'
-alias docker-ps='docker ps -a'
+alias vi=nvim
 
 # vagrant
 alias vg=vagrant
