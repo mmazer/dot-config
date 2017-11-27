@@ -25,9 +25,10 @@
     last = log --pretty=format:'%ci %h %s (%an)' -8 
     ls = !git ls-files
     ltag = !git log `git describe --tags --abbrev=0`..HEAD --oneline
-    ma = checkout master
+    master = checkout master
     noff = merge --no-ff
     pl = pull origin
+    pop = stash pop
     ps = push origin
     out = log --pretty=oneline --abbrev-commit --graph @{u}..
     remotes = remote -v
