@@ -1,1 +1,1 @@
-PROMPT_COMMAND='__git_ps1 "\[$Blue\][\t] \u@\h \w" "\nλ \[$Color_Off\]"'
+PROMPT_COMMAND='__git_ps1 "\[$Grey63\][\t] \u@\h \w" "\nλ \[$Color_Off\]"'

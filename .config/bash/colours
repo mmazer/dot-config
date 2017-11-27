@@ -22,6 +22,10 @@ White='\e[0;37m'        # White
 # <Esc>[38;5;NNNm
 C5f8787='\e[38;5;66m'
 DarkBlue='\e[38;5;18m'
+Grey37='\e[38;5;59m'
+Grey53='\e[38;5;102m'
+Grey63='\e[38;5;139m'
+Grey69='\e[38;5;145m'
 
 # Bold
 BBlack='\e[1;30m'       # Black
