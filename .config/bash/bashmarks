@@ -101,11 +101,9 @@ bookmarkjump(){
   fi
 }
 
-alias jump=bookmarkjump
-
-_go_complete(){
+_bookmarkjump_complete(){
   # Get a list of bookmark names, then grep for what was entered to narrow the list
   cat $bookmarks_file | cut -d\| -f2 | grep "$2.*"
 }
 
-complete -C _go_complete -o default go
+complete -C _bookmarkjump_complete -o default bookmarkjump
