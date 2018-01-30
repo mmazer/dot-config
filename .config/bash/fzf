@@ -90,9 +90,11 @@ gsha() {
 # change to bookmarked directory
 cdb() {
     local bookmark
-    bookmark=$(cat $XDG_DATA_HOME/bash/bookmarks | awk '{ printf "%s\n", $2}' FS=\| | fzf) && 
-    bookmarkjump "$bookmark"
+    bookmark=$(cat $XDG_DATA_HOME/bash/bookmarks | awk '{ printf "%s\n", $2}' FS=\| | fzf)
+    [[ -n "$bookmark" ]] && bookmarkjump "$bookmark" && pwd
 }
+
+bind -x '"\C-b": cdb;'
 
 # fcmd - search and run saved cmds
 fcmd() {
