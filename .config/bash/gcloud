@@ -1,0 +1,152 @@
+alias gce-machines='gcloud compute machine-types list'
+
+gcp() {
+    case $1 in
+        project)
+            gcp_project $2
+            ;;
+        projects)
+            gcloud projects list
+            ;;
+        keys)
+            shift
+            gcp_create_keys "$@"
+            ;;
+        *)
+            echo "gcp project"
+            ;;
+    esac
+}
+
+gcp_project() {
+    local project=$1
+    if [ -z "$project" ]; then
+        gcloud config get-value project
+    else
+        gcloud config set project "$project"
+    fi
+}
+
+gpc_create_keys() {
+    local email="$1"
+    local creds="./$1-credentials.json"
+    if [ -z "$email" ]; then
+        echo "service account email required"
+    else
+        gcloud iam service-accounts keys create $creds \
+            --iam-account $email
+        echo "credentials saved to $creds_file"
+    fi
+}
+
+gcr() {
+    case $1 in
+        ls)
+            gcr_list_images $2
+            ;;
+        tags)
+            gcr_list_tags $2
+            ;;
+        acct)
+            shift
+            gcr_acct "$@"
+            ;;
+        *)
+            echo "gcr ls|tags|acct <repository>"
+            ;;
+    esac
+}
+
+gcr_list_images() {
+    if [ -n "$1" ]; then
+        gcloud container images list --repository gcr.io/$1
+    else
+        echo "repository not specified"
+    fi
+}
+
+gcr_list_tags() {
+    if [ -n "$1" ]; then
+        gcloud container images list-tags gcr.io/$1
+    else
+        echo "project image not specified"
+    fi
+}
+
+glogs() {
+    case $1 in
+        ls)
+            glogs_list
+            ;;
+        *)
+            echo "glogs ls"
+            ;;
+    esac
+}
+
+glogs_list() {
+    gcloud beta logging logs list
+}
+
+gke() {
+    case $1 in
+        ls)
+            shift
+            gke_list $@
+            ;;
+        pools)
+            shift
+            gke_node_pools $@
+            ;;
+        use)
+            shift
+            gke_set_cluster $@
+            ;;
+        *)
+            echo "gke ls|pools|use"
+            ;;
+    esac
+}
+
+### GKE
+alias gke_pools='gcloud container node-pools'
+alias gke_clusters='gcloud container clusters'
+
+gke_list() {
+    local zone=$1
+    if [ -z "$zone" ]; then 
+        echo "error: no zone specified"
+    else
+        gcloud container clusters list --zone=$zone
+    fi
+}
+
+gke_node_pools() {
+    local zone=$1
+    local cluster=$2
+    if [ $# -ne 2 ]; then
+        echo "error: zone and cluster name not specified"
+    else
+        gcloud container node-pools list --zone $zone --cluster $cluster
+    fi
+}
+
+gke_set_cluster() {
+    local cluster=$1
+    if [ -z "$cluster" ]; then
+        echo "error: no cluster specified"
+    else
+        gcloud container clusters get-credentials $cluster
+    fi
+}
+
+gcr_acct() {
+    local acct_name=$1
+    local project=${2:-$(gcloud config get-value project)}
+    local creds_file="./$1-credentials.json"
+    if [ -z "$acct_name" ]; then
+        echo "service account name is required"
+    else
+        echo "creating GCR service account $acct_name in project $project (credentials: $creds_file"
+    fi
+}

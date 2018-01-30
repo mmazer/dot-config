@@ -1,0 +1,58 @@
+kpod(){
+    if [ -z "$1" ]; then
+        kubectl get pods
+    else
+       kubectl get pod/$1 -o yaml
+    fi
+}
+
+kdepl() {
+    if [ -z "$1" ]; then
+        kubectl get deployments
+    else
+        kubectl get deployment/$1 -o yaml
+    fi
+}
+
+kmap() {
+    if [ -z "$1" ]; then
+        kubectl get configmaps
+    else
+        kubectl get configmap/$1 -o yaml
+    fi
+}
+
+kshell() {
+    if [ $# -eq 0 ]; then
+        echo "kshell <pod> [container]"
+    else
+        local pod=$1
+        local container=""
+        if [ $# -eq 2 ];  then
+            container="-c $2"
+        fi
+        kubectl exec -it $pod $container bash
+    fi
+}
+
+kns(){
+    if [ -z "$1" ]; then
+        kubectl config view | grep namespace
+    else
+       kubectl config set-context $(kubectl config current-context) --namespace=$1
+    fi
+}
+
+kevents() {
+    if [ -z "$1" ]; then
+        kubectl get events
+    else
+       kubectl get events --namespace="$1"
+    fi
+
+}
+
+alias kb='kubectl'
+alias kdel='kubectl delete'
+alias kget='kubectl get'
+

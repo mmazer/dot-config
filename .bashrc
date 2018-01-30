@@ -12,5 +12,10 @@ source ~/.config/bash/fzf
 source ~/.config/bash/rvm
 source ~/.config/bash/ssh-agent
 
-[ -f ~/.local/share/bash/bashrc ] &&  source ~/.local/share/bash/bashrc
+[ -n $(command -v docker) ] && source ~/.config/bash/docker
 
+[ -n $(command -v kubectl) ] && source ~/.config/bash/kube
+
+[ -n $(command -v gcloud) ] && source ~/.config/bash/gcloud
+
+[ -f ~/.local/share/bash/bashrc ] &&  source ~/.local/share/bash/bashrc
