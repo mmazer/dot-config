@@ -53,6 +53,7 @@ alias so=source
 alias th='history | tail -12'
 alias vdiff='vim -d'
 alias vi=nvim
+alias utc='date -u'
 
 # vagrant
 alias vg=vagrant
@@ -62,12 +63,8 @@ alias vscp='vagrant scp'
 alias vstat='vagrant status'
 alias vup='vagrant up'
 
-# infobase
-alias note='$EDITOR $XDG_DATA_HOME/infobase/note.txt'
-alias todo='$EDITOR ${MY_TODO:-$XDG_DATA_HOME/infobase/todo.txt}'
-
 # aws
-alias s3='aws s3 --profile s3'
+alias s3='aws s3 --profile ${AWS_PROFILE:-s3}'
 alias s3api='aws s3api --profile s3'
 
 # calendars
