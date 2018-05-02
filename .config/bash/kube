@@ -55,4 +55,3 @@ kevents() {
 alias kb='kubectl'
 alias kdel='kubectl delete'
 alias kget='kubectl get'
-
