@@ -39,6 +39,7 @@ gcr_tags() {
 }
 
 alias gke='gcloud container'
+alias gke_creds='gcloud container clusters get-credentials'
 
 gke_clusters() {
     local zone=$1
