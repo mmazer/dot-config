@@ -39,7 +39,7 @@ fhe() {
 # browse shell functions (bash)
 fun() {
   f=$(declare -F | awk '{print $3 }' | fzf)
-  vo declare -f $f
+  declare -f $f | $PAGER
 }
 
 # ge - fuzzy find git files and open in editor
@@ -94,7 +94,7 @@ cdb() {
     [[ -n "$bookmark" ]] && bookmarkjump "$bookmark" && pwd
 }
 
-bind -x '"\C-b": cdb;'
+bind -x '"\C-j": cdb;'
 
 # fcmd - search and run saved cmds
 fcmd() {
@@ -116,3 +116,4 @@ gob() {
     url=$(cat ${bookmarks} | fzf | awk 'BEGIN { FS = "|" } ; { printf $2 }')
     [[ -n "$url" ]] && open "$url"
 }
+bind -x '"\C-b": gob;'
