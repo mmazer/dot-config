@@ -9,7 +9,6 @@ source ~/.config/bash/bashmarks
 source ~/.config/bash/git
 source ~/.config/bash/prompt
 source ~/.config/bash/fzf
-source ~/.config/bash/rvm
 source ~/.config/bash/ssh-agent
 
 [ -n $(command -v docker) ] && source ~/.config/bash/docker
