@@ -1,4 +1,4 @@
-kpod(){
+kp(){
     if [ -z "$1" ]; then
         kubectl get pods
     else
@@ -6,7 +6,7 @@ kpod(){
     fi
 }
 
-kdepl() {
+kd() {
     if [ -z "$1" ]; then
         kubectl get deployments
     else
@@ -14,7 +14,7 @@ kdepl() {
     fi
 }
 
-kmap() {
+km() {
     if [ -z "$1" ]; then
         kubectl get configmaps
     else
@@ -43,13 +43,24 @@ kns(){
     fi
 }
 
-kevents() {
+ke() {
     if [ -z "$1" ]; then
         kubectl get events
     else
        kubectl get events --namespace="$1"
     fi
 
+}
+
+# Get container image versions for a deployment
+ki() {
+    local deployment=$1
+    if [ -z "$deployment" ]; then
+        echo "ki <deployment>"
+    else
+        kubectl get deployment $deployment \
+            -o jsonpath='{.spec.template.spec.containers[*].image}' | awk -v OFS="\n" '{$1=$1}1'
+    fi
 }
 
 alias kb='kubectl'
