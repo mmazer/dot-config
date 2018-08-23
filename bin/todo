@@ -46,7 +46,7 @@ case $action in
     edit) $EDITOR "$TODO" ;;
     add) 
         shift $((OPTIND-1))
-        echo "$@" >> $TODO
+        echo "- $@" >> $TODO
         ;;
     list)
         cat $TODO
