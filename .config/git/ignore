@@ -6,7 +6,6 @@ Makefile.local
 scratch
 *.pyc
 node_modules/*
-env/*
 .idea
 .projections.json
 tags
@@ -21,5 +20,5 @@ tags
 .nvimrc
 .gitmessage
 NOTES.txt
-TODO
+TODO.txt
 .envrc
