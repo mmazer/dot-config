@@ -1,4 +1,4 @@
-export PATH=~/bin:~/.local/bin:/usr/local/bin:/usr/local/sbin:$PATH
+export PATH=~/bin:~/.local/bin:~/go/bin:/usr/local/bin:/usr/local/sbin:$PATH
 export EDITOR='nvim'
 
 # PAGER
