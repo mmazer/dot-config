@@ -3,3 +3,7 @@
 
 [ -f /usr/local/etc/bash_completion.d/git-prompt.sh ] && \
     source /usr/local/etc/bash_completion.d/git-prompt.sh
+
+gith() {
+    open ${GITHUB_DOMAIN:-https://github.com}/$1
+}
