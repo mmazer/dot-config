@@ -1,7 +1,8 @@
+alias gc='gcloud'
 alias gce='gcloud compute'
 alias gce-machines='gcloud compute machine-types list'
 
-gcp_project() {
+gp() {
     local project=$1
     if [ -z "$project" ]; then
         gcloud config get-value project
@@ -10,19 +11,7 @@ gcp_project() {
     fi
 }
 
-gcp_create_keys() {
-    local email="$1"
-    local creds="./$1-credentials.json"
-    if [ -z "$email" ]; then
-        echo "service account email required"
-    else
-        gcloud iam service-accounts keys create $creds \
-            --iam-account $email
-        echo "credentials saved to $creds_file"
-    fi
-}
-
-gcr_images() {
+gi() {
     if [ -n "$1" ]; then
         gcloud container images list --repository gcr.io/$1
     else
@@ -30,7 +19,7 @@ gcr_images() {
     fi
 }
 
-gcr_tags() {
+gtags() {
     if [ -n "$1" ]; then
         gcloud container images list-tags gcr.io/$1
     else
@@ -41,7 +30,7 @@ gcr_tags() {
 alias gke='gcloud container'
 alias gke_creds='gcloud container clusters get-credentials'
 
-gke_clusters() {
+kcl() {
     local zone=$1
     if [ -z "$zone" ]; then 
         echo "error: no zone specified"
@@ -50,7 +39,7 @@ gke_clusters() {
     fi
 }
 
-gke_pools() {
+kpool() {
     local zone=$1
     local cluster=$2
     if [ $# -ne 2 ]; then
@@ -60,11 +49,29 @@ gke_pools() {
     fi
 }
 
-gke_set_cluster() {
+kluster() {
     local cluster=$1
     if [ -z "$cluster" ]; then
         echo "error: no cluster specified"
     else
         gcloud container clusters get-credentials $cluster
+    fi
+}
+
+gcf() {
+    local active
+    local selected
+    active="$(gcloud config configurations list --format='csv[no-heading](name)' \
+                                            --filter='is_active=True')"
+    if [ -z "$active" ]; then
+      active="default"
+    fi
+    echo "Active configuration: $active"
+
+    selected=$(gcloud config configurations list --format='csv[no-heading](name)' --filter="name!=$active" | xargs -n1 \
+      | fzf -0 -1 --tac -q "${1:-""}" --preview "gcloud config configurations describe {}" )
+
+    if [ -n "$selected" ]; then
+        gcloud config configurations activate "$selected"
     fi
 }
