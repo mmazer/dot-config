@@ -1,7 +1,9 @@
 # docker
 alias dc='docker-compose'
 alias dm='docker-machine'
+alias docker-alias='alias | grep docker'
 alias docker-clean='docker rmi -f $(docker images -q)'
+alias docker-df='docker system df'
 alias docker-env='eval $(docker-machine env default)'
 alias docker-unset='unset ${!DOCKER_*}'
 alias docker-exec='docker exec -it'
