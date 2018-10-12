@@ -100,13 +100,10 @@ bind -x '"\C-j": cdb;'
 fcmd() {
     args=$@
     cmds="${args:-$HOME/.cmds}"
-    eval $(cat ${cmds} | fzf | sed "s/;;.*//")
-}
-
-cpcmd() {
-    args=$@
-    cmds="${args:-$HOME/.cmds}"
-    echo -n $(cat ${cmds} | fzf | sed 's/;;.*//') | pbcopy
+    out=$(cat ${cmds} | fzf --expect=ctrl-y| sed -e "s/;;.*//" -e "s/[ ]*$//")
+    key=$(head -1 <<< "$out")
+    cmd=$(head -2 <<< "$out" | tail -1)
+    [ "$key" = ctrl-y ] && echo -n "$cmd" | pbcopy  || eval "$cmd"
 }
 
 gob() {
