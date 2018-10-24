@@ -1,6 +1,6 @@
 #!/bin/bash
 
-TODO=${MY_TODO:-$HOME/.todo}
+TODO=${MY_TODO:-$XDG_DATA_HOME/todo.txt}
 
 usage () {
     sed -e 's/^//' <<End
