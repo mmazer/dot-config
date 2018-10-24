@@ -1,13 +1,14 @@
 #!/bin/bash
 
-LOG=${MY_LOG:-$HOME/.log}
+LOG=${MY_LOG:-$XDG_DATA_HOME/log.txt}
 
 usage () {
     sed -e 's/^//' <<End
-Usage: log [-ehl] [-a text] [-f file]
+Usage: log [-ehl] [-a text] [-f file] [-g pattern]
 -a add log entry
 -e edit log using $EDITOR 
 -f use file for log
+-g grep for <pattern> in log
 -h show help
 End
     exit 1
@@ -28,11 +29,15 @@ fi
 datetime=`date "+%Y-%m-%d %H:%M"`
 action="list"
 logfile="$LOG"
-while getopts aef:h opt
+pattern=""
+while getopts aef:g:h opt
 do case "$opt" in
     a) action="add";;
     e) action="edit";;
     f) logfile="$OPTARG" ;;
+    g) 
+        action="grep"
+        pattern="$OPTARG" ;;
     h) action="help";;
     \?) usage;;
     esac
@@ -46,6 +51,10 @@ case $action in
     add) 
         shift $((OPTIND-1))
         echo "$datetime $@" >> $logfile
+        ;;
+    grep)
+        shift $((OPTIND-1))
+        grep $pattern $logfile
         ;;
     list)
         cat $logfile
