@@ -90,7 +90,7 @@ gsha() {
 # change to bookmarked directory
 cdb() {
     local bookmark
-    bookmark=$(cat $XDG_DATA_HOME/bash/bookmarks | awk '{ printf "%s\n", $2}' FS=\| | fzf)
+    bookmark=$(cat $XDG_DATA_HOME/bookmarks/dirs | awk '{ printf "%s\n", $2}' FS=\| | fzf)
     [[ -n "$bookmark" ]] && bookmarkjump "$bookmark" && pwd
 }
 
@@ -109,7 +109,7 @@ fcmd() {
 gob() {
     local bookmarks url
     args=$@
-    bookmarks="${args:-$XDG_DATA_HOME/fzf/fzf_bookmarks}"
+    bookmarks="${args:-$XDG_DATA_HOME/bookmarks/www}"
     url=$(cat ${bookmarks} | fzf | awk 'BEGIN { FS = "|" } ; { printf $2 }')
     [[ -n "$url" ]] && open "$url"
 }
