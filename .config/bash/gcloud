@@ -1,13 +1,23 @@
 alias gc='gcloud'
 alias gce='gcloud compute'
 alias gce-machines='gcloud compute machine-types list'
+alias gssh='gcloud compute ssh'
+alias clouds='open https://status.cloud.google.com/'
+
+export __GCE_PROJECT=$(gcloud config get-value project)
+export __OLD_PS1=$PS1
+export PS1="($__GCE_PROJECT) __$OLD_PS1"
 
 gp() {
     local project=$1
     if [ -z "$project" ]; then
         gcloud config get-value project
     else
+        echo "setting active GCP project to $project"
         gcloud config set project "$project"
+        gcloud container clusters get-credentials application-cluster
+        export __GCE_PROJECT=$(gcloud config get-value project)
+        export PS1="($__GCE_PROJECT) $__OLD_PS1"
     fi
 }
 
