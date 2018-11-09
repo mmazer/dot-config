@@ -51,6 +51,7 @@ alias tclear='tmux clear-history'
 alias path='echo $PATH'
 alias ssh-hosts='grep -w Host ~/.ssh/config'
 alias so=source
+alias someday='cat $XDG_DATA_HOME/someday.txt'
 alias th='history | tail -12'
 alias vdiff='vim -d'
 alias vi=nvim
