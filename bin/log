@@ -54,7 +54,7 @@ case $action in
         ;;
     grep)
         shift $((OPTIND-1))
-        grep $pattern $logfile
+        grep -i $pattern $logfile
         ;;
     list)
         cat $logfile
