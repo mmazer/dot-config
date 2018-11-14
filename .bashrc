@@ -17,4 +17,4 @@ source ~/.config/bash/ssh-agent
 
 [ -n $(command -v gcloud) ] && source ~/.config/bash/gcloud
 
-[ -f ~/.local/share/bash/bashrc ] &&  source ~/.local/share/bash/bashrc
+[ -f ~/.local/share/etc/bashrc ] &&  source ~/.local/share/etc/bashrc
