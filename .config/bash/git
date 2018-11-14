@@ -1,3 +1,13 @@
+alias ga='git add'
+alias gA='git commit --amend'
+alias gci='git commit'
+alias gco='git checkout'
+alias gcv='git commit --verbose'
+alias gd='git diff'
+alias gh='git hist'
+alias gr='cd `git rev-parse --git-dir`; cd ..'
+alias gs='git status'
+
 [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]  && \
     source /usr/local/etc/bash_completion.d/git-completion.bash
 

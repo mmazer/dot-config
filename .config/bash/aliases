@@ -9,15 +9,6 @@ alias curls='curl -s'
 alias del='rm -f'
 alias dused='df -kHal'
 alias ed=$EDITOR
-alias ga='git add'
-alias gA='git commit --amend'
-alias gci='git commit'
-alias gco='git checkout'
-alias gcv='git commit --verbose'
-alias gd='git diff'
-alias gh='git hist'
-alias gr='cd `git rev-parse --git-dir`; cd ..'
-alias gs='git status'
 alias h='history'
 alias j=bookmarkjump
 alias json='python -m json.tool'
@@ -40,8 +31,6 @@ alias mkexe='chmod 755'
 alias mkrd='chmod 644'
 alias netl='netstat -naf inet | grep LISTEN'
 alias pg='$PAGER'
-alias py='python'
-alias py3='python3'
 alias rebash='source ~/.bashrc'
 alias real='source ~/.config/bash/aliases'
 alias rm='rm -i'
@@ -56,14 +45,6 @@ alias th='history | tail -12'
 alias vdiff='vim -d'
 alias vi=nvim
 alias utc='date -u'
-
-# vagrant
-alias vg=vagrant
-alias vssh='vagrant ssh'
-alias vsync='vagrant rsync'
-alias vscp='vagrant scp'
-alias vstat='vagrant status'
-alias vup='vagrant up'
 
 # aws
 alias s3='aws s3 --profile ${AWS_PROFILE:-s3}'
