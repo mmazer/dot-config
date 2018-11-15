@@ -17,11 +17,7 @@ End
 check_log () {
 if [ ! -f "$1" ]; then
     echo "creating log file: $1"
-    touch "$1"
-    if [ $? -ne 0 ]; then
-        echo "error creating log file $1: $?"
-        exit 1
-    fi
+    touch "$1" || { echo "error creating log file $1"; exit 1; }
     chmod 644 "$1"
 fi
 }
