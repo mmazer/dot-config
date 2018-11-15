@@ -3,6 +3,7 @@ source ~/.config/bash/direnv
 source ~/.config/bash/aliases
 source ~/.config/bash/profile
 source ~/.config/bash/functions
+source ~/.config/bash/cache
 source ~/.config/bash/colours
 source ~/.config/bash/theme
 source ~/.config/bash/bashmarks
