@@ -1,23 +1,39 @@
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/usr/local/google-cloud-sdk/path.bash.inc' ]; then source '/usr/local/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/usr/local/google-cloud-sdk/completion.bash.inc' ]; then source '/usr/local/google-cloud-sdk/completion.bash.inc'; fi
+
+if [ -x "$(command -v gcloud)" ]; then
 alias gc='gcloud'
 alias gce='gcloud compute'
 alias gce-machines='gcloud compute machine-types list'
+alias gke='gcloud container'
+alias gke_creds='gcloud container clusters get-credentials'
 alias gssh='gcloud compute ssh'
+alias gsu=gsutil
+alias gsl='gsutil ls'
 alias clouds='open https://status.cloud.google.com/'
 
-export __GCE_PROJECT=$(gcloud config get-value project)
+putc gcp/project $(gcloud config get-value project)
+
+__gcp_prompt() {
+    echo $(getc gcp/project)
+}
+
 export __OLD_PS1=$PS1
-export PS1="($__GCE_PROJECT) __$OLD_PS1"
+export PS1="_gcp_prompt __$OLD_PS1"
 
 gp() {
     local project=$1
     if [ -z "$project" ]; then
-        gcloud config get-value project
+        putc gcp/project $(gcloud config get-value project)
+        getc gcp/project
     else
         echo "setting active GCP project to $project"
         gcloud config set project "$project"
         gcloud container clusters get-credentials application-cluster
-        export __GCE_PROJECT=$(gcloud config get-value project)
-        export PS1="($__GCE_PROJECT) $__OLD_PS1"
+        putc gcp/project $(gcloud config get-value project)
     fi
 }
 
@@ -37,12 +53,10 @@ gtags() {
     fi
 }
 
-alias gke='gcloud container'
-alias gke_creds='gcloud container clusters get-credentials'
 
-kcl() {
+klusters() {
     local zone=$1
-    if [ -z "$zone" ]; then 
+    if [ -z "$zone" ]; then
         echo "error: no zone specified"
     else
         gcloud container clusters list --zone=$zone
@@ -59,29 +73,4 @@ kpool() {
     fi
 }
 
-kluster() {
-    local cluster=$1
-    if [ -z "$cluster" ]; then
-        echo "error: no cluster specified"
-    else
-        gcloud container clusters get-credentials $cluster
-    fi
-}
-
-gcf() {
-    local active
-    local selected
-    active="$(gcloud config configurations list --format='csv[no-heading](name)' \
-                                            --filter='is_active=True')"
-    if [ -z "$active" ]; then
-      active="default"
-    fi
-    echo "Active configuration: $active"
-
-    selected=$(gcloud config configurations list --format='csv[no-heading](name)' --filter="name!=$active" | xargs -n1 \
-      | fzf -0 -1 --tac -q "${1:-""}" --preview "gcloud config configurations describe {}" )
-
-    if [ -n "$selected" ]; then
-        gcloud config configurations activate "$selected"
-    fi
-}
+fi # gcloud command is available
