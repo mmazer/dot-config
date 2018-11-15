@@ -29,7 +29,6 @@ alias marks='bookmarksshow'
 alias mkdir='mkdir -p'
 alias mkexe='chmod 755'
 alias mkrd='chmod 644'
-alias netl='netstat -naf inet | grep LISTEN'
 alias pg='$PAGER'
 alias rebash='source ~/.bashrc'
 alias real='source ~/.config/bash/aliases'
@@ -38,20 +37,14 @@ alias rmdir='rm -rf'
 alias term='echo $TERM'
 alias tclear='tmux clear-history'
 alias path='echo $PATH'
-alias ssh-hosts='grep -w Host ~/.ssh/config'
 alias so=source
 alias someday='cat $XDG_DATA_HOME/someday.txt'
 alias th='history | tail -12'
 alias vdiff='vim -d'
-alias vi=nvim
 alias utc='date -u'
 
-# aws
-alias s3='aws s3 --profile ${AWS_PROFILE:-s3}'
-alias s3api='aws s3api --profile s3'
 
 # calendars
-alias mc='cal -m $(date "+%m")'
 alias mon='cal -m'
 alias yc='cal $(date "+%Y")'
 
