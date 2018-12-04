@@ -17,6 +17,11 @@ function lcase {
    fi
 }
 
+function len {
+    local s=${1:-$(</dev/stdin)}
+    echo ${#s}
+}
+
 # mkdir, cd into it
 function mkcd () {
     mkdir -p "$*"
