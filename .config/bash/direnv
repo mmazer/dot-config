@@ -1,0 +1,18 @@
+direnv() {
+    local envrc="$(pwd)/.envrc"
+    case $1 in
+        -l)
+            if [ -f "$envrc" ] && [ -O "$envrc" ]; then
+                cat "$envrc"
+            else
+                echo "no .envrc file found"
+            fi
+            ;;
+        *)
+        if [ -f "$envrc" ] && [ -O "$envrc" ]; then
+            export ENVRC="$envrc"
+            source "$envrc" && echo "sourced $envrc"
+        fi
+        ;;
+    esac
+}
