@@ -1,0 +1,86 @@
+#!/bin/bash
+script=$(basename $0)
+
+EXTERNAL_OUTPUT=${EXTNERAL_OUTPUT:-HDMI-2}
+INTERNAL_OUTPUT="eDP-1"
+
+profiles_dir=$XDG_DATA_HOME/display-profiles/
+cached_profile="$XDG_CACHE_HOME/display-profile"
+profile=$1
+
+# builtin profiles
+dual="--output $INTERNAL_OUTPUT --auto --output $EXTERNAL_OUTPUT --auto --left-of $INTERNAL_OUTPUT"
+laptop="--output $INTERNAL_OUTPUT --auto --output $EXTERNAL_OUTPUT --off"
+monitor="--output $INTERNAL_OUTPUT --off --output $EXTERNAL_OUTPUT --auto"
+
+usage () {
+    sed -e 's/^//' <<End
+Usage: $script [-al] [-p profile]
+-a set last active profile
+-c list connected outputs
+-l list display profiles
+-p set active profile
+-h show help
+End
+    exit 1
+}
+
+activate_profile() {
+    case $profile in
+        dual)
+            xrandr $dual
+            ;;
+        laptop)
+            xrandr $laptop
+            ;;
+        monitor)
+            xrandr $monitor
+            ;;
+        *)
+            if [ -f "$profiles_dir/$1" ]; then
+                settings=$(cat "$profiles_dir/$1")
+                xrandr $settings
+            else
+                echo "display profile not found: $profiles_dir/$1"
+                exit 1
+            fi
+            ;;
+    esac
+    echo "${profile}" > $cached_profile
+}
+
+list_profiles() {
+    echo "builtin profiles:"
+    for p in dual laptop monitor; do
+        eval settings=\$$p
+        echo "$p: $settings"
+    done
+    if [ ! -d $profiles_dir ]; then
+        echo "no custom profiles available in $profiles_dir"
+    fi
+}
+
+if [ ! -f "$cached_profile" ] ; then
+    profile="laptop"
+else
+   profile=$(cat $cached_profile)
+fi
+
+if [ $# -eq 0 ]; then
+   echo $profile
+   exit
+fi
+
+while getopts achlp: opt
+do case "$opt" in
+    a) activate_profile $profile;;
+    c) xrandr | grep "\bconnected\b" ;;
+    h) usage;;
+    l) list_profiles;;
+    p)
+        profile=$OPTARG
+        activate_profile $profile
+        ;;
+    \?) usage;;
+    esac
+done 
