@@ -62,7 +62,7 @@ ki() {
             -o jsonpath='{.spec.template.spec.containers[*].image}' | awk -v OFS="\n" '{$1=$1}1'
     fi
 }
-
+alias kube='kubectl'
 alias kb='kubectl'
 alias kdel='kubectl delete'
 alias kget='kubectl get'

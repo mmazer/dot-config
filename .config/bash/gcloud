@@ -21,9 +21,6 @@ __gcp_prompt() {
     echo $(getc gcp/project)
 }
 
-export __OLD_PS1=$PS1
-export PS1="_gcp_prompt __$OLD_PS1"
-
 gp() {
     local project=$1
     if [ -z "$project" ]; then
