@@ -2,6 +2,15 @@
 function cdla { cd "$1"; ls -la; }
 function cdls { cd "$1" ; ls ; }
 
+__open() {
+    local os=$(uname -s)
+    case $os in
+        Darwin) open "$1" ;;
+        Linux) xdg-open "$1";;
+        *) ;;
+    esac
+}
+
 # Rename a file to all lowecase
 function lcase {
     if [ $# -eq 0 ] ; then
@@ -109,4 +118,5 @@ function rc {
             (( count-- ))
         done
     fi
-}
+} 
+# vim ft=sh :

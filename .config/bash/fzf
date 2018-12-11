@@ -11,7 +11,7 @@ ctrlp() {
   key=$(head -1 <<< "$out")
   file=$(head -2 <<< "$out" | tail -1)
   if [ -n "$file" ]; then
-    [ "$key" = ctrl-o ] && open "$file" || ${EDITOR:-nvim} "$file"
+    [ "$key" = ctrl-o ] && __open "$file" || ${EDITOR:-nvim} "$file"
   fi
 }
 
@@ -111,6 +111,6 @@ gob() {
     args=$@
     bookmarks="${args:-$XDG_DATA_HOME/bookmarks/www}"
     url=$(cat ${bookmarks} | fzf | awk 'BEGIN { FS = "|" } ; { printf $2 }')
-    [[ -n "$url" ]] && open "$url"
+    [[ -n "$url" ]] && __open "$url"
 }
 bind -x '"\C-b": gob;'
