@@ -42,7 +42,7 @@ alias someday='cat $XDG_DATA_HOME/someday.txt'
 alias th='history | tail -12'
 alias vdiff='vim -d'
 alias utc='date -u'
-
+alias xdg='env | grep ^XDG'
 
 # calendars
 alias mon='cal -m'
