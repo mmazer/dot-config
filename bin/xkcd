@@ -1,9 +1,17 @@
 #!/usr/bin/env bash
 
 if [ ! -n "$(command -v jq)" ]; then
-    echo "jq command not found"
+    echo "jq command not found and is required"
     exit 1
 fi
+
+_open() {
+    case $(uname -s) in
+        Linux) xdg-open "$1" ;;
+        Darwin) open "$1";;
+        *) echo "don't know how to open $1" ;;
+    esac
+}
 
 usage () {
     sed -e 's/^//' <<End
@@ -48,6 +56,6 @@ echo $text
 echo $url
 
 if [ $info_only == "no" ]; then
-    open "$url"
+    _open "$url"
 fi
 
