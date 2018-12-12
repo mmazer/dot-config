@@ -16,10 +16,11 @@ monitor="--output $INTERNAL_OUTPUT --off --output $EXTERNAL_OUTPUT --auto"
 usage () {
     sed -e 's/^//' <<End
 Usage: $script [-al] [-p profile]
--a set last active profile
+-a show active profile
 -c list connected outputs
 -l list display profiles
 -p set active profile
+-r reload current profile
 -h show help
 End
     exit 1
@@ -59,7 +60,6 @@ list_profiles() {
         echo "no custom profiles available in $profiles_dir"
     fi
 }
-
 if [ ! -f "$cached_profile" ] ; then
     profile="laptop"
 else
@@ -67,20 +67,22 @@ else
 fi
 
 if [ $# -eq 0 ]; then
-   echo $profile
+   echo "current profile: $profile"
    exit
 fi
 
-while getopts achlp: opt
+while getopts achlrp: opt
 do case "$opt" in
-    a) activate_profile $profile;;
+    a) cat $cached_profile ;;
     c) xrandr | grep "\bconnected\b" ;;
     h) usage;;
-    l) list_profiles;;
+    l) list_profiles ;;
     p)
         profile=$OPTARG
         activate_profile $profile
         ;;
+    r) activate_profile $profile ;;
+    *) usage ;;
     \?) usage;;
     esac
 done 
