@@ -89,7 +89,7 @@ function trash {
 
 # Quick command line calculator
 function qc {
-    echo "$1" | bc
+    echo "scale=6; $1" | bc
 }
 
 function gto {

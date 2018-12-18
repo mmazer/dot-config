@@ -1,0 +1,60 @@
+__db_dir=$XDG_CACHE_HOME/kdb
+
+__check_dbdir() {
+    if [ ! -d $1 ]; then
+        mkdir -p $1 || { return $?; }
+    fi 
+
+    return 0
+}
+
+putk() {
+    if [ $# -eq 2 ]; then
+        path="$__db_dir/$1"
+        key=${path##*/}
+        __check_dbdir $path || { echo "error creating db $path: $?"; return 1; }
+        echo "$2" > "$path/__value"
+        return 0
+    else
+        echo "kput key value"
+        return 1
+    fi
+}
+
+getk() {
+    if [ $# -eq 1 ]; then
+        if [ ! -f "$__db_dir/$1/__value" ]; then
+            echo "key not found: $__db_dir/$1"
+            return 1
+        else
+            cat "$__db_dir/$1/__value"
+            return $?
+        fi
+    else
+        echo "kget key"
+        return 1
+    fi
+}
+
+popk() {
+    value=$(getc $1)
+    delc $1
+    echo $value
+}
+
+keys() {
+    find $__db_dir -name __value -print0 | xargs -0 -n1 dirname | sed -e "s#$__db_dir/##g"
+}
+
+delk() {
+    if [ $# -eq 1 ]; then
+        rm -rf "$__db_dir/$1"
+        return $?
+    else
+       echo "evict key"
+    fi
+}
+
+dbdir() {
+    echo $__db_dir
+}

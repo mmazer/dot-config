@@ -8,30 +8,31 @@ if [ -x "$(command -v gcloud)" ]; then
 alias gc='gcloud'
 alias gce='gcloud compute'
 alias gce-machines='gcloud compute machine-types list'
+alias gcr='gcloud compute regions'
 alias gke='gcloud container'
 alias gke_creds='gcloud container clusters get-credentials'
 alias gpi='gcloud compute project-info describe --project'
 alias gssh='gcloud compute ssh'
 alias gsu=gsutil
 alias gsl='gsutil ls'
-alias clouds='open https://status.cloud.google.com/'
+alias clouds='__open https://status.cloud.google.com/'
 
-putc gcp/project $(gcloud config get-value project)
+putk gcp/project $(gcloud config get-value project)
 
 __gcp_prompt() {
-    echo $(getc gcp/project)
+    echo $(getk gcp/project)
 }
 
 gp() {
     local project=$1
     if [ -z "$project" ]; then
-        putc gcp/project $(gcloud config get-value project)
-        getc gcp/project
+        putk gcp/project $(gcloud config get-value project)
+        getk gcp/project
     else
         echo "setting active GCP project to $project"
         gcloud config set project "$project"
-        gcloud container clusters get-credentials application-cluster
-        putc gcp/project $(gcloud config get-value project)
+        gcloud container clusters get-credentials application-cluster --zone=${GCE_ZONE}
+        putk gcp/project $(gcloud config get-value project)
     fi
 }
 
