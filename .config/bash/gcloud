@@ -31,8 +31,8 @@ gp() {
     else
         echo "setting active GCP project to $project"
         gcloud config set project "$project"
-        gcloud container clusters get-credentials application-cluster --zone=${GCE_ZONE}
         putk gcp/project $(gcloud config get-value project)
+        gcloud container clusters get-credentials application-cluster --zone=${GCE_ZONE}
     fi
 }
 
