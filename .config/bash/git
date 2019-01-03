@@ -8,11 +8,11 @@ alias gh='git hist'
 alias gr='cd `git rev-parse --git-dir`; cd ..'
 alias gs='git status'
 
-[ -f /usr/local/etc/bash_completion.d/git-completion.bash ]  && \
-    source /usr/local/etc/bash_completion.d/git-completion.bash
+[ -f $HOME/.local/share/bash_completion.d/git-completion.bash ]  && \
+    source $HOME/.local/share/bash_completion.d/git-completion.bash
 
-[ -f /usr/local/etc/bash_completion.d/git-prompt.sh ] && \
-    source /usr/local/etc/bash_completion.d/git-prompt.sh
+[ -f $HOME/.local/share/bash_completion.d/git-prompt.sh ] && \
+    source $HOME/.local/share/bash_completion.d/git-prompt.sh
 
 ghb() {
     open ${GITHUB_DOMAIN:-https://github.com}/$1
