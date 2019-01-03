@@ -87,19 +87,19 @@ gsha() {
   echo -n "$commit" | awk '{printf $1}'
 }
 
-# change to bookmarked directory
+# goto to bookmarked directory
 cdb() {
     local bookmark
     bookmark=$(cat $XDG_DATA_HOME/bookmarks/dirs | awk '{ printf "%s\n", $2}' FS=\| | fzf)
     [[ -n "$bookmark" ]] && bookmarkjump "$bookmark" && pwd
 }
 
-bind -x '"\C-j": cdb;'
+bind -x '"\C-g": cdb;'
 
 # fcmd - search and run saved cmds
 fcmd() {
     args=$@
-    cmds="${args:-$HOME/.cmds}"
+    cmds="${args:-$XDG_DATA_HOME/commands}"
     out=$(cat ${cmds} | fzf --expect=ctrl-y| sed -e "s/;;.*//" -e "s/[ ]*$//")
     key=$(head -1 <<< "$out")
     cmd=$(head -2 <<< "$out" | tail -1)
