@@ -26,7 +26,6 @@ font pango:DejaVu Sans Mono 12
 # use these keys for focus, movement, and resize directions when reaching for
 # the arrows is not convenient
 set $mod Mod1
-set $sup Mod4
 
 set $up k
 set $down j
@@ -204,3 +203,7 @@ bar {
 #######################################################################
 exec i3-config-wizard
 exec --no-startup-id nm-applet
+exec --no-startup-id feh --bg-scale /home/mmazer/Pictures/lowlight.png
+exec --no-startup-id i3-battery-popup
+exec --no-startup-id pnmixer
+exec --no-startup-id blueman-applet
