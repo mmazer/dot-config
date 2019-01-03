@@ -29,13 +29,13 @@ End
 activate_profile() {
     case $profile in
         dual)
-            xrandr $dual
+            xrandr ${!profile}
             ;;
         laptop)
-            xrandr $laptop
+            xrandr ${!profile}
             ;;
         monitor)
-            xrandr $monitor
+            xrandr ${!profile}
             ;;
         *)
             if [ -f "$profiles_dir/$1" ]; then
