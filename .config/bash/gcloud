@@ -7,7 +7,7 @@ if [ -f '/usr/local/google-cloud-sdk/completion.bash.inc' ]; then source '/usr/l
 if [ -x "$(command -v gcloud)" ]; then
 alias gc='gcloud'
 alias gce='gcloud compute'
-alias gce-machines='gcloud compute machine-types list'
+alias gce-machines='gcloud compute machine-types'
 alias gcr='gcloud compute regions'
 alias gke='gcloud container'
 alias gke_creds='gcloud container clusters get-credentials'
