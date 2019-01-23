@@ -15,5 +15,5 @@ alias gs='git status'
     source $HOME/.local/share/bash_completion.d/git-prompt.sh
 
 ghb() {
-    open ${GITHUB_DOMAIN:-https://github.com}/$1
+    __open ${GITHUB_DOMAIN:-https://github.com}/$1
 }
