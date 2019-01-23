@@ -1,7 +1,8 @@
 export PATH=~/bin:~/.local/bin:~/go/bin:/usr/local/bin:/usr/local/sbin:$PATH
-export EDITOR='nvim'
+export __VIM=nvim
+export EDITOR='$__VIM'
 # for use in bash vi mode - type `v` to edit current command
-export VISUAL='nvim'
+export VISUAL='$__VIM'
 
 # PAGER
 if test -n "$(command -v less)" ; then

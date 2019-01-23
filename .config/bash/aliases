@@ -40,7 +40,7 @@ alias path='echo $PATH'
 alias so=source
 alias someday='cat $XDG_DATA_HOME/someday.txt'
 alias th='history | tail -12'
-alias vdiff='vim -d'
+alias vdiff='$__VIM -d'
 alias utc='date -u'
 alias xdg='env | grep ^XDG'
 
