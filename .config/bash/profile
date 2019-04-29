@@ -1,5 +1,5 @@
 set bell-style none
-#set -o vi
+set -o vi
 
 shopt -s globstar >/dev/null 2>&1 || :
 
