@@ -53,6 +53,7 @@ ke() {
 }
 
 # Get container image versions for a deployment
+# Accepts and applies any provided kubectl options
 ki() {
     local deployment=$1
     if [ -z "$deployment" ]; then
@@ -62,6 +63,15 @@ ki() {
             -o jsonpath='{.spec.template.spec.containers[*].image}' | awk -v OFS="\n" '{$1=$1}1'
     fi
 }
+
+# get pod container images
+pi() {
+    local opts="$@"
+    kubectl get pods ${opts} \
+        -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.containers[*]}{.image}{", "}{end}{end}' | \
+        sort
+}
+
 alias kube='kubectl'
 alias kb='kubectl'
 alias kdel='kubectl delete'
