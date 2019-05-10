@@ -28,13 +28,7 @@ End
 
 activate_profile() {
     case $profile in
-        dual)
-            xrandr ${!profile}
-            ;;
-        laptop)
-            xrandr ${!profile}
-            ;;
-        monitor)
+        dual | laptop | monitor)
             xrandr ${!profile}
             ;;
         *)
@@ -60,6 +54,7 @@ list_profiles() {
         echo "no custom profiles available in $profiles_dir"
     fi
 }
+
 if [ ! -f "$cached_profile" ] ; then
     profile="laptop"
 else
