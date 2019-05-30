@@ -72,6 +72,14 @@ pi() {
         sort
 }
 
+redeploy() {
+    local deployment=$1
+    if [ -z "$deployment" ]; then
+        echo "redeploy <deployment>"
+    else
+        kubectl patch deployment ${deployment} -p "{\"spec\": {\"template\": {\"metadata\": { \"labels\": {  \"redeployed-at\": \"$(date +%s)\"}}}}}"
+    fi
+}
 alias kube='kubectl'
 alias kb='kubectl'
 alias kdel='kubectl delete'
