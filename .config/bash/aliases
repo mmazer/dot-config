@@ -37,6 +37,7 @@ alias rmdir='rm -rf'
 alias term='echo $TERM'
 alias tclear='tmux clear-history'
 alias path='echo $PATH'
+alias rand='echo $RANDOM'
 alias rehash='hash -r'
 alias so=source
 alias someday='cat $XDG_DATA_HOME/someday.txt'
