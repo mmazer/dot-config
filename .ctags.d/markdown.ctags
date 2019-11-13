@@ -1,4 +1,0 @@
---langdef=markdown
---langmap=markdown:.md,markdown:.txt
---languages=+markdown
---regex-markdown=/^(#+)[ \t]+([^#]*)/\1 \2/h,header,Markdown Headers/
