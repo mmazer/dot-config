@@ -23,15 +23,10 @@ km() {
 }
 
 kshell() {
-    if [ $# -eq 0 ]; then
-        echo "kshell <pod> [container]"
+    if [ $# -ne 2 ]; then
+        echo "kshell <image> <name>"
     else
-        local pod=$1
-        local container=""
-        if [ $# -eq 2 ];  then
-            container="-c $2"
-        fi
-        kubectl exec -it $pod $container bash
+        kubectl run -i --rm --tty $2 --image="$1"  --restart=Never -- bash
     fi
 }
 
