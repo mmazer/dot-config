@@ -11,6 +11,7 @@ source ~/.config/bash/git
 source ~/.config/bash/prompt
 source ~/.config/bash/fzf
 source ~/.config/bash/ssh-agent
+source ~/.config/bash/python
 
 [ -n $(command -v docker) ] && source ~/.config/bash/docker
 
