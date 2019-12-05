@@ -9,7 +9,7 @@ cached_profile="$XDG_CACHE_HOME/display-profile"
 profile=$1
 
 # builtin profiles
-dual="--output $INTERNAL_OUTPUT --auto --output $EXTERNAL_OUTPUT --auto --left-of $INTERNAL_OUTPUT"
+dual="--output $INTERNAL_OUTPUT --auto --output $EXTERNAL_OUTPUT --auto --right-of $INTERNAL_OUTPUT"
 laptop="--output $INTERNAL_OUTPUT --auto --output $EXTERNAL_OUTPUT --off"
 monitor="--output $INTERNAL_OUTPUT --off --output $EXTERNAL_OUTPUT --auto"
 
