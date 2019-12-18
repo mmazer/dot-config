@@ -9,6 +9,7 @@ alias curls='curl -s'
 alias del='rm -f'
 alias dused='df -kHal'
 alias ed=$EDITOR
+alias grenv='env | grep'
 alias h='history'
 alias j=bookmarkjump
 alias ls='ls -F'
