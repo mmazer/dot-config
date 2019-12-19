@@ -5,6 +5,8 @@ if [ -f '/usr/local/google-cloud-sdk/path.bash.inc' ]; then source '/usr/local/g
 if [ -f '/usr/local/google-cloud-sdk/completion.bash.inc' ]; then source '/usr/local/google-cloud-sdk/completion.bash.inc'; fi
 
 if [ -x "$(command -v gcloud)" ]; then
+# 'cause I can't type
+alias glcoud=gcloud
 alias gc='gcloud'
 alias gce='gcloud compute'
 alias gce-machines='gcloud compute machine-types'
@@ -15,6 +17,7 @@ alias gpi='gcloud compute project-info describe --project'
 alias gssh='gcloud compute ssh'
 alias gsu=gsutil
 alias gsl='gsutil ls'
+alias gsched='gcloud scheduler'
 alias clouds='__open https://status.cloud.google.com/'
 
 putk gcp/project $(gcloud config get-value project)
