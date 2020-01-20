@@ -61,11 +61,6 @@ else
    profile=$(cat $cached_profile)
 fi
 
-if [ $# -eq 0 ]; then
-   echo "current profile: $profile"
-   exit
-fi
-
 while getopts achlrp: opt
 do case "$opt" in
     a) cat $cached_profile ;;
@@ -77,7 +72,14 @@ do case "$opt" in
         activate_profile $profile
         ;;
     r) activate_profile $profile ;;
-    *) usage ;;
+    *) usage;; 
     \?) usage;;
     esac
 done 
+
+if [ $OPTIND -eq 1 ]; then
+    profile=$1
+    echo "activating display profile $profile"
+    activate_profile $profile
+    exit
+fi
