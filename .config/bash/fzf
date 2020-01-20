@@ -103,7 +103,7 @@ fcmd() {
     out=$(cat ${cmds} | fzf --expect=ctrl-y| sed -e "s/;;.*//" -e "s/[ ]*$//")
     key=$(head -1 <<< "$out")
     cmd=$(head -2 <<< "$out" | tail -1)
-    [ "$key" = ctrl-y ] && echo -n "$cmd" | xsel -ib  || eval "$cmd"
+    [ "$key" = ctrl-y ] && echo -n "$cmd" | xsel -ib  || echo "$cmd" && eval "$cmd"
 }
 
 gob() {
