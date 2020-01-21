@@ -30,6 +30,15 @@ kshell() {
     fi
 }
 
+ktools() { 
+    local name image
+    name=${USER}-toolbox
+    image=${TOOLBOX_DOCKER_IMAGE:-gcr.io/google-containers/toolbox}
+    echo "Running pod $name using image $image"
+    kubectl run -i --rm --tty "$name" --image="$image" --restart=Never -- bash
+}
+
+
 kns(){
     if [ -z "$1" ]; then
         kubectl config view | grep namespace
@@ -79,3 +88,4 @@ alias kube='kubectl'
 alias kb='kubectl'
 alias kdel='kubectl delete'
 alias kget='kubectl get'
+export TOOLBOX_DOCKER_IMAGE="gcr.io/google-containers/toolbox"
