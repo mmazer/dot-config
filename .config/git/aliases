@@ -16,6 +16,7 @@
     diffpush = log origin/master..HEAD
     discard = checkout --
     email = config user.email
+    ftags = fetch --tags
     graph = log --pretty=format:'%h %s' --graph
     hist = log --color --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
     ignore = !git update-index --assume-unchanged
