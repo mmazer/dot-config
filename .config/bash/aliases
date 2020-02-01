@@ -11,6 +11,9 @@ alias dused='df -kHal'
 alias ed=$EDITOR
 alias grenv='env | grep'
 alias h='history'
+if [ -f ${HOME}/.i3/config ]; then
+    alias i3cfg='$EDITOR ${HOME}/.i3/config'
+fi
 alias j=bookmarkjump
 alias ls='ls -F'
 alias la='ls -aF'
@@ -40,11 +43,10 @@ alias path='echo $PATH'
 alias rand='echo $RANDOM'
 alias rehash='hash -r'
 alias so=source
-alias someday='cat $XDG_DATA_HOME/someday.txt'
 alias th='history | tail -12'
 alias vdiff='$__VIM -d'
 alias utc='date -u'
-alias xdg='env | grep ^XDG'
+alias xdgenv='env | grep ^XDG'
 
 # calendars
 alias mon='cal -m'
