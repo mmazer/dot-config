@@ -46,4 +46,5 @@ fi
 
 unset env
 
+alias ssh-reload='. ${HOME}/.config/bash/ssh-agent'
 
