@@ -1,8 +1,11 @@
 #!/bin/bash
 
-if [ "$(command -v retext)" ]; then
-    exec retext "$@"
-else
-    echo "No suitable program found for Markdown preview"
+markdown=$1
+
+if [ ! -f "$markdown" ]; then
+    echo "markdown file not found: $markdown"
+    exit 1
 fi
+
+pandoc -f markdown -t html "$markdown" | w3m -T text/html
  
