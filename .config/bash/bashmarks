@@ -1,3 +1,4 @@
+# vim: ft=sh
 # Bashmarks is a simple set of bash functions that allows you to bookmark
 # folders in the command-line.
 #
@@ -31,6 +32,10 @@ fi
 bookmark (){
   bookmark_name=$1
 
+  if [[ -z $bookmark_name ]]; then
+      bookmark_name="$(basename $(pwd))"
+  fi 
+  
   if [[ -z $bookmark_name ]]; then
     echo 'Invalid name, please provide a name for your bookmark. For example:'
     echo '  bookmark foo'
