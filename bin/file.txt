@@ -20,6 +20,7 @@ if [ ! -f "$1" ]; then
 fi
 }
 
+datetime=$(date "+%Y-%m-%d %H:%M")
 action="list"
 textfile=""
 pattern=""
@@ -48,7 +49,7 @@ case $action in
     edit) $EDITOR "$textfile";;
     add) 
         shift $((OPTIND-1))
-        echo "$@" >> "$textfile"
+        echo "$datetime $*" >> "$textfile"
         ;;
     grep)
         shift $((OPTIND-1))
