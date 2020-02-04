@@ -1,0 +1,62 @@
+#!/bin/bash
+
+usage () {
+    sed -e 's/^//' <<End
+Usage: log [-ehl] [-a text] [-f file] [-g pattern]
+-a append text to file
+-e edit text file using $EDITOR 
+-f use file
+-g grep for <pattern> in text
+-h show help
+End
+    exit 1
+}
+
+check_textfile () {
+if [ ! -f "$1" ]; then
+    echo "creating text file: $1"
+    touch "$1" || { echo "error creating text file $1"; exit 1; }
+    chmod 644 "$1"
+fi
+}
+
+action="list"
+textfile=""
+pattern=""
+while getopts aef:g:h opt
+do case "$opt" in
+    a) action="add";;
+    e) action="edit";;
+    f) textfile="$OPTARG" ;;
+    g) 
+        action="grep"
+        pattern="$OPTARG" ;;
+    h) action="help";;
+    \?) usage;;
+    esac
+done
+
+if [ -z "$textfile" ]; then
+    echo "error: text file name required"
+    usage
+fi
+
+check_textfile "$textfile"
+
+case $action in
+    help) usage;;
+    edit) $EDITOR "$textfile";;
+    add) 
+        shift $((OPTIND-1))
+        echo "$@" >> "$textfile"
+        ;;
+    grep)
+        shift $((OPTIND-1))
+        grep -i "$pattern" "$textfile"
+        ;;
+    list)
+        cat "$textfile"
+        ;;
+    *)
+        ;;
+esac
