@@ -1,3 +1,4 @@
+# vim: ft=sh
 export FZF_DEFAULT_COMMAND='rg --no-messages --files --hidden --follow --glob "!.git/*"'
 
 [ -f $HOME/.fzf.bash  ] && source $HOME/.fzf.bash
@@ -26,7 +27,11 @@ fdir() {
 
 # repeat command history
 fh() {
-  eval $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
+    local out key cmd
+    out=$(history | fzf +s --tac --expect=ctrl-y | sed 's/ *[0-9]* *//')
+    key=$(head -1 <<< "$out")
+    cmd=$(head -2 <<< "$out" | tail -1)
+    if [ "$key" = ctrl-y ]; then echo -n "$cmd" | xsel -ib;  else echo "$cmd" && eval "$cmd"; fi
 }
 
 # fhe - repeat history edit
@@ -103,14 +108,18 @@ fcmd() {
     out=$(cat ${cmds} | fzf --expect=ctrl-y| sed -e "s/;;.*//" -e "s/[ ]*$//")
     key=$(head -1 <<< "$out")
     cmd=$(head -2 <<< "$out" | tail -1)
-    [ "$key" = ctrl-y ] && echo -n "$cmd" | xsel -ib  || echo "$cmd" && eval "$cmd"
+    if [ "$key" = "ctrl-y" ]; then echo -n "$cmd" | xsel -ib; else echo "$cmd" && eval "$cmd"; fi
 }
+
 
 gob() {
     local bookmarks url
     args=$@
     bookmarks="${args:-$XDG_DATA_HOME/bookmarks/www}"
     url=$(cat ${bookmarks} | fzf | awk 'BEGIN { FS = "|" } ; { printf $2 }')
-    [[ -n "$url" ]] && __open "$url"
+    if [ -n "$url" ]; then
+        echo "opening $url in browser"
+        __open "$url"
+    fi
 }
 bind -x '"\C-b": gob;'
