@@ -1,8 +1,4 @@
 export PATH=~/bin:~/.local/bin:~/go/bin:/usr/local/bin:/usr/local/sbin:$PATH
-export __VIM=nvim
-export EDITOR="$__VIM"
-# for use in bash vi mode - type `v` to edit current command
-export VISUAL="$__VIM"
 
 # PAGER
 if test -n "$(command -v less)" ; then
@@ -17,9 +13,6 @@ export PAGER MANPAGER
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_DATA_HOME=$HOME/.local/share
 export XDG_CACHE_HOME=$HOME/.cache
-
-# use XDG directories for vim
-export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
 
 # Misc
 export SDIRS=$XDG_DATA_HOME/bashmarks
