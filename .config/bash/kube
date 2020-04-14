@@ -34,8 +34,9 @@ ktools() {
     local name image
     name=${USER}-toolbox
     image=${TOOLBOX_DOCKER_IMAGE:-gcr.io/google-containers/toolbox}
-    echo "Running pod $name using image $image"
-    kubectl run -i --rm --tty "$name" --image="$image" --restart=Never -- bash
+    namespace=${K8_NAMESPACE:-default}
+    echo "Running pod $name using image $image in namespace $namespace"
+    kubectl run -i --rm --tty "$name" --image="$image" --restart=Never --namespace=${K8_NAMESPACE} -- bash
 }
 
 
