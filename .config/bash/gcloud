@@ -10,7 +10,6 @@ alias glcoud=gcloud
 alias gc='gcloud'
 alias gce='gcloud compute'
 alias gce-machines='gcloud compute machine-types'
-alias gcr='gcloud compute regions'
 alias gke='gcloud container'
 alias gke_creds='gcloud container clusters get-credentials'
 alias gpi='gcloud compute project-info describe --project'
@@ -39,7 +38,7 @@ gp() {
     fi
 }
 
-gi() {
+gcr() {
     if [ -n "$1" ]; then
         gcloud container images list --repository gcr.io/$1
     else
@@ -47,7 +46,7 @@ gi() {
     fi
 }
 
-gtags() {
+gcr-tags() {
     if [ -n "$1" ]; then
         gcloud container images list-tags gcr.io/$1
     else
