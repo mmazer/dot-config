@@ -67,7 +67,7 @@ popkv() {
 }
 
 keys() {
-    find $__db_dir -name __value -print0 | xargs -0 -n1 dirname | sed -e "s#$__db_dir/##g"
+    find $__db_dir -name __value -print0 | xargs -0 -n1 dirname | sed -e "s#$__db_dir/##g" | sort -
 }
 
 if [ $# -eq 0 ]; then
