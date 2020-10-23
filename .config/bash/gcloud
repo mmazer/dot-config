@@ -19,10 +19,10 @@ alias gsl='gsutil ls'
 alias gsched='gcloud scheduler'
 alias clouds='__open https://status.cloud.google.com/'
 
-putk gcp/project $(gcloud config get-value project)
+kdb -p gcp/project $(gcloud config get-value project)
 
 __gcp_prompt() {
-    echo $(getk gcp/project)
+    echo $(kdb -g gcp/project)
 }
 
 gp() {
