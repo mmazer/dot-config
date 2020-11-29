@@ -1,0 +1,98 @@
+#!/bin/bash
+
+__db_dir=${KDB_DIR:-$XDG_CACHE_HOME/kdb}
+
+usage () {
+    sed -e 's/^//' <<End
+Usage: kdb [-Dhl] [-p key value] [-P key] [-d key]
+-d delete key value pair
+-D show data directory
+-g get key value
+-p add key value pair
+-P pop key value
+-l list keys
+-h show help
+End
+    exit 1
+}
+
+check_dbdir() {
+    if [ ! -d $1 ]; then
+        mkdir -p $1 || { return $?; }
+    fi 
+
+    return 0
+}
+
+putkv() {
+    if [ $# -eq 2 ]; then
+        path="$__db_dir/$1"
+        key=${path##*/}
+        check_dbdir $path || { echo "error creating db $path: $?"; return 1; }
+        echo "$2" > "$path/__value"
+        return 0
+    else
+        echo "error: key and value are required"
+        return 1
+    fi
+}
+getkv() {
+    if [ $# -eq 1 ]; then
+        if [ ! -f "$__db_dir/$1/__value" ]; then
+            echo "key not found: $__db_dir/$1"
+            return 1
+        else
+            cat "$__db_dir/$1/__value"
+            return $?
+        fi
+    else
+        echo "error: a key is required to get a value"
+        return 1
+    fi
+}
+
+delkv() {
+    if [ $# -eq 1 ]; then
+        rm -rf "$__db_dir/$1"
+        return $?
+    else
+       echo "error: a key is required to delete a value"
+    fi
+}
+
+popkv() {
+    val=$(getkv $1)
+    delkv $1
+    echo $val
+}
+
+keys() {
+    find $__db_dir -name __value -print0 | xargs -0 -n1 dirname | sed -e "s#$__db_dir/##g" | sort -
+}
+
+if [ $# -eq 0 ]; then
+    usage
+    exit 1
+fi
+
+while getopts d:Dlg:p:P:h opt
+do case "$opt" in
+    d) 
+        key="$OPTARG"
+        delkv $key;;
+    D) echo $__db_dir;;
+    g) 
+        key="$OPTARG"
+        getkv $key;; 
+    p) 
+        key="$OPTARG"
+        shift $((OPTIND-1))
+        value=$1
+        putkv $key $value;;
+    P)  key="$OPTARG" 
+        popkv $key;;
+    l) keys;;
+    h) usage;;
+    \?) usage;;
+    esac
+done
