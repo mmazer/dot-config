@@ -1,3 +1,4 @@
+# vim: set ft=sh :
 alias bye=exit
 alias cd..='cd ..'
 alias cfg='git --git-dir=$HOME/.cfg --work-tree=$HOME'
@@ -8,7 +9,6 @@ alias cplast='fc -ln -1 | awk '\''{$1=$1}1'\'' ORS='\'''\'' | pbcopy'
 alias curls='curl -s'
 alias del='rm -f'
 alias dused='df -kHal'
-alias ed=$EDITOR
 alias grenv='env | grep'
 alias h='history'
 if [ -f ${HOME}/.i3/config ]; then
@@ -32,6 +32,7 @@ alias marks='bookmarksshow'
 alias mkdir='mkdir -p'
 alias mkexe='chmod 755'
 alias mkrd='chmod 644'
+alias nv=nvim
 alias pg='$PAGER'
 alias psgrep='ps auxw | grep'
 alias rebash='source ~/.bashrc'
