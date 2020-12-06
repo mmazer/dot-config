@@ -95,7 +95,7 @@ gsha() {
 # goto to bookmarked directory
 cdb() {
     local bookmark
-    bookmark=$(cat $XDG_DATA_HOME/bookmarks/dirs | awk '{ printf "%s\n", $2}' FS=\| | fzf)
+    bookmark=$(cat $XDG_DATA_HOME/bookmarks/bash | awk '{ printf "%s\n", $2}' FS=\| | fzf)
     [[ -n "$bookmark" ]] && bookmarkjump "$bookmark" && pwd
 }
 
