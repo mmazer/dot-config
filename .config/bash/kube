@@ -85,8 +85,29 @@ redeploy() {
         kubectl patch deployment ${deployment} -p "{\"spec\": {\"template\": {\"metadata\": { \"labels\": {  \"redeployed-at\": \"$(date +%s)\"}}}}}"
     fi
 }
+
+kns() {
+    if [ $# -eq 1 ]; then
+        kubectl config set-context --current --namespace=$1
+    else
+        kubectl config view --minify | grep namespace:
+    fi
+}
+
+kdnslogs() {
+    if [ $# -ne 1 ]; then
+        echo "usage: kdnslogs (kubedns|dnsmasq|sidecar)"
+    else
+        local container=$1
+        for p in $(kubectl get pods --namespace=kube-system -l k8s-app=kube-dns -o name); do 
+            kubectl logs --namespace=kube-system -c $container $p; 
+        done
+    fi
+}
+
 alias kube='kubectl'
 alias kb='kubectl'
 alias kdel='kubectl delete'
 alias kget='kubectl get'
+
 export TOOLBOX_DOCKER_IMAGE="gcr.io/google-containers/toolbox"

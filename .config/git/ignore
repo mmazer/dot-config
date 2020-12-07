@@ -23,3 +23,4 @@ NOTES.txt
 TODO.txt
 todo.txt
 .envrc
+vendor/bundle/*

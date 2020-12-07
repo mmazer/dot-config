@@ -2,10 +2,16 @@
 # https://faq.i3wm.org/question/239/how-do-i-suspendlockscreen-and-logout.1.html
 # vim: ft=sh :
 
-script=$(basename $0)
+script=$(basename "$0")
+lock_screen_image=$2
 
 lock() {
-    i3lock
+    if [ -z "${lock_screen_image}" ]; then
+        i3lock
+    else
+        i3lock -t -i "${lock_screen_image}"
+    fi
+
 }
 
 case "$1" in

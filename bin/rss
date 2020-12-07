@@ -1,0 +1,72 @@
+#!/bin/bash
+
+usage () {
+    sed -e 's/^//' <<End
+Usage: rss [-ld:e:h] [-p script-file] script-file
+Run shell scripts
+-d specify script directory
+-l list script
+-e edit script file
+-p print script file
+-h show help
+End
+    exit 1
+}
+
+quit () {
+    exit 0
+}
+
+list_scripts () {
+    find "$scripts_dir" -type f -printf "%P\n"| sort
+}
+
+print_script() {
+    cat "$scripts_dir/$1"
+}
+
+edit_script() {
+    ${EDITOR:-nvim} "$scripts_dir/$1"
+}
+
+run_script() {
+    script_file="${scripts_dir}/$1"
+    if [ ! -f "$script_file" ]; then
+        echo "script file not found $1"
+        exit 1
+    fi
+    . "$script_file"
+}
+
+scripts_dir="${SCRIPTS_DIR:-$HOME/.scripts}"
+
+
+while getopts ld:he:p: opt
+do case "$opt" in
+    h) usage;;
+    d) scripts_dir="$OPTARG";;
+    e) edit_script "$OPTARG" && quit;;
+    l) list_scripts && quit;;
+    p) print_script "$OPTARG" && quit;;
+    esac
+done
+shift $((OPTIND-1))
+
+if [ "$#" -eq 0 ]; then
+    [[ "$(command -v fzf)" ]] || { echo "fzf is not installed" 1>&2 ; usage; }
+    out=$(find "$scripts_dir" -type f -printf "%P\n" | fzf --expect=ctrl-e,ctrl-p)
+    key=$(head -1 <<< "$out")
+    file=$(head -2 <<< "$out" | tail -1)
+    case $key in
+        ctrl-e) 
+            edit_script $file;;
+        ctrl-p)
+            print_script $file;;
+        *) 
+            run_script "$file";;
+    esac
+    quit
+fi
+
+run_script "$1"
+

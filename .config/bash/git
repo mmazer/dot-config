@@ -9,7 +9,9 @@ alias ggh='git hist'
 alias ggm='git checkout master'
 alias ggpl='git pull origin'
 alias ggps='git push origin'
+alias ggsp='git stash pop'
 alias ggdir='cd `git rev-parse --git-dir`; cd ..'
+alias ggsh='git show'
 alias ggs='git status'
 
 [ -f $HOME/.local/share/bash_completion.d/git-completion.bash ]  && \

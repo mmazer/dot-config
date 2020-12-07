@@ -33,6 +33,7 @@ alias mkdir='mkdir -p'
 alias mkexe='chmod 755'
 alias mkrd='chmod 644'
 alias nv=nvim
+alias pip='python3 -m pip'
 alias pg='$PAGER'
 alias psgrep='ps auxw | grep'
 alias rebash='source ~/.bashrc'
