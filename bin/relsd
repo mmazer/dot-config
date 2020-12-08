@@ -1,8 +1,0 @@
-#!/bin/sh
-
-# Rebuild the Launch Services database:
-# removes duplicate entries in the `Open With` menu
-#
-# http://macs.about.com/od/usingyourmac/qt/remove-duplicate-applications-from-open-with.htm
-
-/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user
