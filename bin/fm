@@ -37,7 +37,7 @@ list_files () {
 print_file() {
     file=$(file_path "$1")
     assert_file "$file"
-    cat "$file" | ${PAGER:-less}
+    ${PAGER:-less} "$file"
 }
 
 edit_file() {
