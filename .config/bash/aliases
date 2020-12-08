@@ -5,21 +5,16 @@ alias cfg='git --git-dir=$HOME/.cfg --work-tree=$HOME'
 alias cls='clear'
 alias ch='history -cw'
 alias cpdir='cp -R'
-alias cplast='fc -ln -1 | awk '\''{$1=$1}1'\'' ORS='\'''\'' | pbcopy'
 alias curls='curl -s'
 alias del='rm -f'
 alias dused='df -kHal'
 alias grenv='env | grep'
 alias h='history'
-if [ -f ${HOME}/.i3/config ]; then
+if [ -f "${HOME}/.i3/config" ]; then
     alias i3cfg='$EDITOR ${HOME}/.i3/config'
 fi
 alias j=bookmarkjump
-alias ls='ls -F'
-alias la='ls -aF'
-alias ldir='ls -d */'
-alias lhd='ls -d .*/'
-alias links='ls -ahlF | grep ^l'
+alias ls='ls --color'
 alias ll='ls -la'
 alias lstat='echo $?'
 alias lsz='ls -laS'
