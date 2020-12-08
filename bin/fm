@@ -7,6 +7,7 @@ Simple file manager
 -d specify base directory
 -l list files
 -e edit file
+-o open file in default system application
 -p print file
 -h show help
 End
@@ -41,7 +42,14 @@ print_file() {
 
 edit_file() {
     file=$(file_path "$1")
+    assert_file "$file"
     ${EDITOR:-nvim} "$file"
+}
+
+open_file() {
+    file=$(file_path "$1")
+    assert_file "$file"
+    xdg-open "$file"
 }
 
 file_path() {
@@ -51,12 +59,13 @@ file_path() {
 FILEMAN_DIR="${FILEMAN_DIR:-$HOME/.local/share/filemanager}"
 export FILEMAN_DIR
 
-while getopts ld:he:p: opt
+while getopts ld:he:o:p: opt
 do case "$opt" in
     h) usage;;
     d) FILEMAN_DIR="$OPTARG";;
     e) edit_file "$OPTARG" && quit;;
     l) list_files && quit;;
+    o) open_file "$OPTARG" && quit;;
     p) print_file "$OPTARG" && quit;;
     esac
 done
@@ -68,12 +77,14 @@ fi
 
 if [ "$#" -eq 0 ]; then
     [[ "$(command -v fzf)" ]] || { echo "fzf is not installed" 1>&2 ; usage; }
-    out=$(find "$FILEMAN_DIR" -type f ! -path "${FILEMAN_DIR}/.git/*" -printf "%P\n" | fzf --expect=ctrl-e)
+    out=$(find "$FILEMAN_DIR" -type f ! -path "${FILEMAN_DIR}/.git/*" -printf "%P\n" | fzf --expect=ctrl-e,ctrl-o)
     key=$(head -1 <<< "$out")
     file=$(head -2 <<< "$out" | tail -1)
     case $key in
         ctrl-e) 
             edit_file "$file";;
+        ctrl-o)
+            open_file "$file";;
         *) 
             if [ -n "$file" ]; then print_file "$file"; fi
             ;;
