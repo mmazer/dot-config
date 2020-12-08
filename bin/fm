@@ -75,7 +75,8 @@ if [ "$#" -eq 0 ]; then
         ctrl-e) 
             edit_file "$file";;
         *) 
-            print_file "$file";;
+            if [ -n "$file" ]; then print_file "$file"; fi
+            ;;
     esac
     quit
 fi
