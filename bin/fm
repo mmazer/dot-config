@@ -67,6 +67,7 @@ do case "$opt" in
     l) list_files && quit;;
     o) open_file "$OPTARG" && quit;;
     p) print_file "$OPTARG" && quit;;
+    *) usage;;
     esac
 done
 shift $((OPTIND-1))
