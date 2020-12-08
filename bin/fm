@@ -1,0 +1,84 @@
+#!/bin/bash
+
+usage () {
+    sed -e 's/^//' <<End
+Usage: fm [-ld:e:h] [-p file]
+Simple file manager
+-d specify base directory
+-l list files
+-e edit file
+-p print file
+-h show help
+End
+    exit 1
+}
+
+abort() {
+    echo "$1"
+    exit 1
+}
+
+quit () {
+    exit 0
+}
+
+assert_file() {
+    file="$1"
+    if [ ! -f "$file" ]; then
+        abort "file not found $file"
+    fi
+}
+
+list_files () {
+    find "$FILEMAN_DIR" -type f ! -path "${FILEMAN_DIR}/.git/*" -printf "%P\n"| sort
+}
+
+print_file() {
+    file=$(file_path "$1")
+    assert_file "$file"
+    cat "$file" | ${PAGER:-less}
+}
+
+edit_file() {
+    file=$(file_path "$1")
+    ${EDITOR:-nvim} "$file"
+}
+
+file_path() {
+    echo "${FILEMAN_DIR}/$1"
+}
+
+FILEMAN_DIR="${FILEMAN_DIR:-$HOME/.local/share/filemanager}"
+export FILEMAN_DIR
+
+while getopts ld:he:p: opt
+do case "$opt" in
+    h) usage;;
+    d) FILEMAN_DIR="$OPTARG";;
+    e) edit_file "$OPTARG" && quit;;
+    l) list_files && quit;;
+    p) print_file "$OPTARG" && quit;;
+    esac
+done
+shift $((OPTIND-1))
+
+if [ ! -d "${FILEMAN_DIR}" ]; then
+    abort "file manager directory not found: $FILEMAN_DIR"
+fi
+
+if [ "$#" -eq 0 ]; then
+    [[ "$(command -v fzf)" ]] || { echo "fzf is not installed" 1>&2 ; usage; }
+    out=$(find "$FILEMAN_DIR" -type f ! -path "${FILEMAN_DIR}/.git/*" -printf "%P\n" | fzf --expect=ctrl-e)
+    key=$(head -1 <<< "$out")
+    file=$(head -2 <<< "$out" | tail -1)
+    case $key in
+        ctrl-e) 
+            edit_file "$file";;
+        *) 
+            print_file "$file";;
+    esac
+    quit
+fi
+
+print_file "$1"
+
