@@ -47,6 +47,7 @@ edit_script() {
 run_script() {
     file=$(script_path $1)
     assert_file "$file"
+    export SCL_ARGS="$*"
     . "$file"
 }
 
@@ -94,5 +95,7 @@ if [ "$#" -eq 0 ]; then
     quit
 fi
 
-run_script "$1"
+command=$1
+shift
+run_script "$command" "$*"
 
