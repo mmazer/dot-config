@@ -47,6 +47,7 @@ edit_script() {
 run_script() {
     file=$(script_path $1)
     assert_file "$file"
+    shift
     export SCL_ARGS="$*"
     . "$file"
 }
