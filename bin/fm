@@ -8,6 +8,7 @@ Simple file manager
 -l list files
 -e edit file
 -o open file in default system application
+-n create new note
 -p print file
 -h show help
 End
@@ -52,6 +53,10 @@ open_file() {
     xdg-open "$file"
 }
 
+create_file() {
+    ${EDITOR:-nvim} "$FILEMAN_DIR/$1"
+}
+
 file_path() {
     echo "${FILEMAN_DIR}/$1"
 }
@@ -59,13 +64,14 @@ file_path() {
 FILEMAN_DIR="${FILEMAN_DIR:-$HOME/.local/share/filemanager}"
 export FILEMAN_DIR
 
-while getopts ld:he:o:p: opt
+while getopts ld:he:n:o:p: opt
 do case "$opt" in
     h) usage;;
     d) FILEMAN_DIR="$OPTARG";;
     e) edit_file "$OPTARG" && quit;;
     l) list_files && quit;;
     o) open_file "$OPTARG" && quit;;
+    n) create_file "$OPTARG" && quit;;
     p) print_file "$OPTARG" && quit;;
     *) usage;;
     esac
@@ -90,7 +96,7 @@ if [ "$#" -eq 0 ]; then
             open_file "$file";;
         ctrl-n) 
             read -rp "Enter filename: " filename
-            ${EDITOR:-nvim} "$FILEMAN_DIR/$filename"
+            create_file "$filename"
             ;;
         *) 
             if [ -n "$file" ]; then print_file "$file"; fi
