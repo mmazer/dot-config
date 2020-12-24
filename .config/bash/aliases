@@ -42,7 +42,6 @@ alias rand='echo $RANDOM'
 alias rehash='hash -r'
 alias so=source
 alias th='history | tail -12'
-alias vdiff='$__VIM -d'
 alias utc='date -u'
 alias xdgenv='env | grep ^XDG'
 
