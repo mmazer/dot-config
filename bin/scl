@@ -85,7 +85,7 @@ if [ "$#" -eq 0 ]; then
     out=$(find "$SCL_SCRIPTS_LIB" -type f -printf "%P\n" | \
         fzf --preview "cat $SCL_SCRIPTS_LIB/{}" \
             --preview-window=right:70%:wrap \
-            --expect=ctrl-e,ctrl-p,ctrl-n)
+            --expect=ctrl-e,ctrl-p,ctrl-n,ctrl-y)
     key=$(head -1 <<< "$out")
     file=$(head -2 <<< "$out" | tail -1)
     case $key in
@@ -95,8 +95,11 @@ if [ "$#" -eq 0 ]; then
             print_script $file;;
         ctrl-n)
             read -rp "Enter filename: " filename
-            ${EDITOR:-nvim} "$SCL_SCRIPTS_LIB/$filename";;
-
+            ${EDITOR:-nvim} "$SCL_SCRIPTS_LIB/$filename"
+            ;;
+        ctrl-y)
+            echo -n "$file" | xsel -ib
+            ;;
         *)
             if [ -n "$file" ]; then run_script "$file";  fi;;
     esac
