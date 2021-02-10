@@ -1,0 +1,66 @@
+#!/bin/bash
+
+usage () {
+    sed -e 's/^//' <<End
+Usage: linux [-ehl] [-a text] [-f file] [-g pattern]
+-h show help
+-c list CPU info
+-m list loaded kernel modules
+-r show release information
+-s show system information
+-u show system uptime
+End
+    exit 1
+}
+
+release_info() {
+    if [ $(command -v lsb_release) ]; then
+        lsb_release -irdc
+    elif [ -f /etc/redhat-release ]; then
+        cat /etc/redhat-release
+    else
+        echo "can't determine release info"
+    fi
+}
+
+system_info() {
+    uname -a
+}
+
+list_mods() {
+    lsmod
+}
+
+list_cpu() {
+    if [ $(command -v lscpu) ]; then
+        lscpu
+    else
+        echo "can't determine cpu info"
+    fi
+}
+
+list_block_devices() {
+    if [ $(command -v lsblk) ]; then
+        lsblk
+    else
+        echo "can't list block devices"
+    fi
+}
+
+while getopts hbcmrsu opt
+do case "$opt" in
+    h) usage ;;
+    b) list_block_devices;;
+    c) list_cpu;;
+    m) list_mods && exit 1;;
+    r) release_info && exit 1;;
+    s) system_info && exit 1;;
+    u) uptime && exit 1;;
+    \?) usage ;;
+    esac
+done
+
+echo ""
+# show everything
+system_info
+release_info
