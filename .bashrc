@@ -10,7 +10,9 @@ source ~/.config/bash/bashmarks
 source ~/.config/bash/git
 source ~/.config/bash/prompt
 source ~/.config/bash/fzf
-source ~/.config/bash/ssh-agent
+if [ $(tty -s) ]; then
+    source ~/.config/bash/ssh-agent
+fi
 source ~/.config/bash/python
 
 [ -n $(command -v docker) ] && source ~/.config/bash/docker
