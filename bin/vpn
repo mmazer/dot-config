@@ -3,7 +3,7 @@
 
 # Define PATH - include .local/bin for installation of openconnect-sso
 PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-OPENCONNECT_SSO=/home/mmazer/.local/bin/openconnect-sso
+OPENCONNECT_SSO=$HOME/.local/bin/openconnect-sso
 
 # VPN Variables
 HOST="${VPN_HOST:-https://vpn.2ndsiteinc.com/TORVPN}"
