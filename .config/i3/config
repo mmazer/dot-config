@@ -183,5 +183,4 @@ exec --no-startup-id nm-applet
 exec --no-startup-id i3-battery-popup -n
 exec --no-startup-id pnmixer
 exec --no-startup-id blueman-applet
-exec --no-startup-id dropbox start
 exec --no-startup-id touchpad-indicator
