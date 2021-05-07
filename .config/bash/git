@@ -1,7 +1,7 @@
 alias ggcv='git commit --verbose'
 alias gga='git add'
-alias ggb='git checkout -b'
 alias ggc='git checkout'
+alias ggcb=git checkout -b
 alias ggci='git commit'
 alias ggcA='git commit --amend'
 alias ggd='git diff'
@@ -14,11 +14,11 @@ alias ggdir='cd `git rev-parse --git-dir`; cd ..'
 alias ggsh='git show'
 alias ggs='git status'
 
-[ -f $HOME/.local/share/bash_completion.d/git-completion.bash ]  && \
-    source $HOME/.local/share/bash_completion.d/git-completion.bash
+[ -f $HOME/.config/git/git-completion.bash ]  && \
+    source $HOME/.config/git/git-completion.bash
 
-[ -f $HOME/.local/share/bash_completion.d/git-prompt.sh ] && \
-    source $HOME/.local/share/bash_completion.d/git-prompt.sh
+[ -f $HOME/.config/git/git-prompt.sh ] && \
+    source $HOME/.config/git/git-prompt.sh
 
 ghb() {
     __open ${GITHUB_DOMAIN:-https://github.com}/$1
