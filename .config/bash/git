@@ -1,7 +1,7 @@
 alias ggcv='git commit --verbose'
 alias gga='git add'
 alias ggc='git checkout'
-alias ggcb=git checkout -b
+alias ggcb='git checkout -b'
 alias ggci='git commit'
 alias ggcA='git commit --amend'
 alias ggd='git diff'
