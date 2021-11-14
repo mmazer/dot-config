@@ -1,8 +1,9 @@
 #!/bin/bash
 
+_scriptname=$(basename $0)
 usage () {
     sed -e 's/^//' <<End
-Usage: log [-ehl] [-a text] [-f file] [-g pattern]
+Usage: $_scriptname [-ehl] [-a text] [-f file] [-g pattern]
 -a append text to file
 -e edit text file using $EDITOR 
 -f use file
@@ -24,7 +25,7 @@ datetime=$(date "+%Y-%m-%d %H:%M")
 action="list"
 textfile=""
 pattern=""
-while getopts aef:g:h opt
+while getopts :a:ef:g:h opt
 do case "$opt" in
     a) action="add";;
     e) action="edit";;
@@ -33,7 +34,12 @@ do case "$opt" in
         action="grep"
         pattern="$OPTARG" ;;
     h) action="help";;
-    \?) usage;;
+    \:) 
+        printf "argument required for option '%s'\n" $OPTARG
+        usage;;
+    \?) 
+        printf "unknown option '%s'\n" $OPTARG
+        usage;;
     esac
 done
 
@@ -49,10 +55,18 @@ case $action in
     edit) $EDITOR "$textfile";;
     add) 
         shift $((OPTIND-1))
+        if [ -z "$@" ]; then
+            echo "error: nothing to add"
+            usage
+        fi
         echo "$datetime $*" >> "$textfile"
         ;;
     grep)
         shift $((OPTIND-1))
+        if [ -z "$@" ]; then
+            echo "error: nothing to search for"
+            usage
+        fi
         grep -i "$pattern" "$textfile"
         ;;
     list)
