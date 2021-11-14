@@ -42,7 +42,7 @@ ktools() {
 
 kns(){
     if [ -z "$1" ]; then
-        kubectl config view | grep namespace
+        kubectl config view --minify| grep namespace
     else
        kubectl config set-context $(kubectl config current-context) --namespace=$1
     fi
@@ -83,14 +83,6 @@ redeploy() {
         echo "redeploy <deployment>"
     else
         kubectl patch deployment ${deployment} -p "{\"spec\": {\"template\": {\"metadata\": { \"labels\": {  \"redeployed-at\": \"$(date +%s)\"}}}}}"
-    fi
-}
-
-kns() {
-    if [ $# -eq 1 ]; then
-        kubectl config set-context --current --namespace=$1
-    else
-        kubectl config view --minify | grep namespace:
     fi
 }
 
