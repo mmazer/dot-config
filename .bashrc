@@ -10,7 +10,7 @@ source ~/.config/bash/bashmarks
 source ~/.config/bash/git
 source ~/.config/bash/prompt
 source ~/.config/bash/fzf
-if [ $(tty -s) ]; then
+if [[ $- == *i* ]]; then
     source ~/.config/bash/ssh-agent
 fi
 source ~/.config/bash/python
