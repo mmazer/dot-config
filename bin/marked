@@ -1,11 +1,11 @@
 #!/bin/bash
 
-markdown=$1
+mkdfile=$1
 
-if [ ! -f "$markdown" ]; then
-    echo "markdown file not found: $markdown"
+if [ ! -f "$mkdfile" ]; then
+    echo "markdown file not found: $mkdfile"
     exit 1
 fi
 
-pandoc -f markdown -t html "$markdown" | w3m -T text/html
+open -a "Marked 2" $mkdfile
  
