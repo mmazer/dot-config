@@ -25,7 +25,7 @@ datetime=$(date "+%Y-%m-%d %H:%M")
 action="list"
 textfile=""
 pattern=""
-while getopts :a:ef:g:h opt
+while getopts :aef:g:h opt
 do case "$opt" in
     a) action="add";;
     e) action="edit";;
@@ -55,11 +55,12 @@ case $action in
     edit) $EDITOR "$textfile";;
     add) 
         shift $((OPTIND-1))
-        if [ -z "$@" ]; then
-            echo "error: nothing to add"
+        text="$@"
+        if [ -z "$text" ]; then
+            echo "nothing to add"
             usage
         fi
-        echo "$datetime $*" >> "$textfile"
+        echo "$datetime $text" >> "$textfile"
         ;;
     grep)
         shift $((OPTIND-1))
