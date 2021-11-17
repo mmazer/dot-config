@@ -16,6 +16,7 @@ fi
 alias j=bookmarkjump
 alias ls='ls --color'
 alias ll='ls -la'
+alias lsdir='ls -la | grep "^d"'
 alias lstat='echo $?'
 alias lsz='ls -laS'
 alias lt='ls -ltr'
