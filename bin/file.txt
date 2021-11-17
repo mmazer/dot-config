@@ -5,7 +5,7 @@ usage () {
     sed -e 's/^//' <<End
 Usage: $_scriptname [-ehl] [-a text] [-f file] [-g pattern]
 -a append text to file
--e edit text file using $EDITOR 
+-e edit text file using $EDITOR
 -f use file
 -g grep for <pattern> in text
 -h show help
@@ -30,14 +30,14 @@ do case "$opt" in
     a) action="add";;
     e) action="edit";;
     f) textfile="$OPTARG" ;;
-    g) 
+    g)
         action="grep"
         pattern="$OPTARG" ;;
     h) action="help";;
-    \:) 
+    \:)
         printf "argument required for option '%s'\n" $OPTARG
         usage;;
-    \?) 
+    \?)
         printf "unknown option '%s'\n" $OPTARG
         usage;;
     esac
@@ -53,7 +53,7 @@ check_textfile "$textfile"
 case $action in
     help) usage;;
     edit) $EDITOR "$textfile";;
-    add) 
+    add)
         shift $((OPTIND-1))
         text="$@"
         if [ -z "$text" ]; then
@@ -63,11 +63,7 @@ case $action in
         echo "$datetime $text" >> "$textfile"
         ;;
     grep)
-        shift $((OPTIND-1))
-        if [ -z "$@" ]; then
-            echo "error: nothing to search for"
-            usage
-        fi
+        echo "searching for $pattern in $textfile"
         grep -i "$pattern" "$textfile"
         ;;
     list)
