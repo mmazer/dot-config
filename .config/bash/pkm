@@ -1,0 +1,5 @@
+export PKM=$XDG_DATA_HOME/pkm
+export ZK=$PKM/zk
+
+alias pkm='cd $PKM && nvim'
+alias zk='cd $ZK && nvim'
