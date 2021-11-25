@@ -21,7 +21,7 @@ bind -x '"\C-f": ctrlp;'
 # fdir - cd to selected directory
 fdir() {
   local dir
-  dir=$(ls -1F| grep /$ | fzf +m ) && 
+  dir=$(ls -1F| grep /$ | fzf +m ) &&
   cd "$dir"
 }
 
@@ -38,7 +38,7 @@ fh() {
 fhe() {
   local cmd
   cmd=$( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | awk '{print $1}')
-  fc $cmd 
+  fc $cmd
 }
 
 # browse shell functions (bash)
@@ -100,6 +100,19 @@ cdb() {
 }
 
 bind -x '"\C-g": cdb;'
+
+# go to workspace project directory
+gow() {
+    local workspace
+    workspace=$(find $HOME/workspace/ -maxdepth 1 -type d | fzf)
+    if [ -n "$workspace" ]; then
+        project="${workspace##*/}"
+        tmux new-window -n $project
+        tmux send-keys -t :$project "cd $workspace; clear" Enter
+    fi
+}
+bind -x '"\C-p": gow;'
+
 
 # fcmd - search and run saved cmds
 fcmd() {
