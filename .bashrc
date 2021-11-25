@@ -10,7 +10,7 @@ if [[ $- == *i* ]]; then
     source ~/.config/bash/ssh-agent
 fi
 
-commands="docker kubectl gcloud"
+commands="docker kubectl gcloud todo.sh"
 for cmd in $commands
 do
     [ -n $(command -v $cmd) ] && source ~/.config/bash/$cmd
