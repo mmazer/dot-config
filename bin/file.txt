@@ -21,19 +21,22 @@ if [ ! -f "$1" ]; then
 fi
 }
 
-datetime=$(date "+%Y-%m-%d %H:%M")
+datetime=""
 action="list"
 textfile=""
 pattern=""
-while getopts :aef:g:h opt
+while getopts :adef:g:hp opt
 do case "$opt" in
     a) action="add";;
+    d)
+        datetime=$(date "+%Y-%m-%d %H:%M") ;;
     e) action="edit";;
     f) textfile="$OPTARG" ;;
     g)
         action="grep"
         pattern="$OPTARG" ;;
     h) action="help";;
+    p) action="pager" ;;
     \:)
         printf "argument required for option '%s'\n" $OPTARG
         usage;;
@@ -68,6 +71,9 @@ case $action in
         ;;
     list)
         cat "$textfile"
+        ;;
+    pager)
+        $PAGER "$textfile"
         ;;
     *)
         ;;
