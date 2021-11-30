@@ -4,5 +4,5 @@
 [include]
     path = ~/.config/git/default
     path = ~/.config/git/aliases
-    path = ~/.local/share/etc/git
+    path = ~/.local/share/git/config
 
