@@ -21,7 +21,7 @@ bind -x '"\C-f": ctrlp;'
 # fdir - cd to selected directory
 fdir() {
   local dir
-  dir=$(ls -1F| grep /$ | fzf +m ) &&
+  dir=$(fd --max-depth 3 --type d . | fzf +m ) &&
   cd "$dir"
 }
 
@@ -111,7 +111,7 @@ gop() {
         tmux send-keys -t :$project "cd $workspace; clear" Enter
     fi
 }
-bind -x '"\C-p": gow;'
+bind -x '"\C-p": gop;'
 
 
 # fcmd - search and run saved cmds
