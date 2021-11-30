@@ -16,4 +16,4 @@ do
     [ -n $(command -v $cmd) ] && source ~/.config/bash/$cmd
 done
 
-[ -f $XDG_DATA_HOME/etc/bash ] &&  source $XDG_DATA_HOME/etc/bash
+[ -f $XDG_DATA_HOME/bash/bashrc ] &&  source $XDG_DATA_HOME/bash/bashrc
