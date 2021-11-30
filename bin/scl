@@ -82,7 +82,7 @@ fi
 
 if [ "$#" -eq 0 ]; then
     [[ "$(command -v fzf)" ]] || { echo "fzf is not installed" 1>&2 ; usage; }
-    out=$(find "$SCL_SCRIPTS_LIB" -type f -printf "%P\n" | \
+    out=$(fd --base-directory=$SCL_SCRIPTS_LIB --type f . | sed 's/^.\///' | \
         fzf --preview "cat $SCL_SCRIPTS_LIB/{}" \
             --preview-window=right:70%:wrap \
             --expect=ctrl-e,ctrl-p,ctrl-n,ctrl-y)
