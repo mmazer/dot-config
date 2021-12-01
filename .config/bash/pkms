@@ -1,6 +1,11 @@
 # vim: ft=sh
+export PKMS='$XDG_DATA_HOME/PKMS'
+export WIKI='$PKMS/wiki'
+export ZETTELKASTEN='$PKMS/zettelkasten'
+
 alias today='$HOME/bin/file.txt -f $HOME/.today'
 alias plan='$HOME/bin/file.txt -f $HOME/.plan'
 alias project='$HOME/bin/file.txt -f $HOME/.project'
+alias notepad='$HOME/bin/file.txt -f $HOME/.notepad'
 alias learning='$HOME/bin/file.txt -f $WIKI/logs/learning.txt'
 
