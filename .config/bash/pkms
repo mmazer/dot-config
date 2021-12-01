@@ -2,3 +2,5 @@
 alias today='$HOME/bin/file.txt -f $HOME/.today'
 alias plan='$HOME/bin/file.txt -f $HOME/.plan'
 alias project='$HOME/bin/file.txt -f $HOME/.project'
+alias learning='$HOME/bin/file.txt -f $WIKI/logs/learning.txt'
+
