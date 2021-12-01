@@ -1,0 +1,4 @@
+# vim: ft=sh
+alias today='$HOME/bin/file.txt -f $HOME/.today'
+alias plan='$HOME/bin/file.txt -f $HOME/.plan'
+alias project='$HOME/bin/file.txt -f $HOME/.project'

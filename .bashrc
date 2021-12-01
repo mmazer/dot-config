@@ -1,5 +1,5 @@
 configs="env direnv aliases profile editor functions colours theme \
-    bashmarks git prompt fzf python"
+    bashmarks git prompt fzf python pkms"
 for c in $configs
 do
     source ~/.config/bash/$c
