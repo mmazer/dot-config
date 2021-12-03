@@ -1,0 +1,8 @@
+font:
+  normal:
+    family: Hack
+    style: Regular
+  size: 14
+
+import:
+  - ~/.config/alacritty/themes/rose-pine.yml
