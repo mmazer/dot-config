@@ -3,9 +3,9 @@ export PKMS='$XDG_DATA_HOME/PKMS'
 export WIKI='$PKMS/wiki'
 export ZETTELKASTEN='$PKMS/zettelkasten'
 
-alias today='$HOME/bin/file.txt -f $HOME/.today'
-alias plan='$HOME/bin/file.txt -f $HOME/.plan'
-alias project='$HOME/bin/file.txt -f $HOME/.project'
-alias notepad='$HOME/bin/file.txt -f $HOME/.notepad'
+alias today='$HOME/bin/file.txt -f $WIKI/today.md'
+alias plan='$HOME/bin/file.txt -f $WIKI/plan.md'
+alias project='$HOME/bin/file.txt -f $WIKI/project.md'
+alias notepad='$HOME/bin/file.txt -f $WIKI/notepad.md'
 alias learning='$HOME/bin/file.txt -f $WIKI/logs/learning.txt'
 
