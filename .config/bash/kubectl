@@ -31,7 +31,7 @@ kshell() {
     fi
 }
 
-ktools() { 
+ktools() {
     local name image
     name=${USER}-toolbox
     image=${TOOLBOX_DOCKER_IMAGE:-gcr.io/google-containers/toolbox}
@@ -92,12 +92,21 @@ kdnslogs() {
         echo "usage: kdnslogs (kubedns|dnsmasq|sidecar)"
     else
         local container=$1
-        for p in $(kubectl get pods --namespace=kube-system -l k8s-app=kube-dns -o name); do 
-            kubectl logs --namespace=kube-system -c $container $p; 
+        for p in $(kubectl get pods --namespace=kube-system -l k8s-app=kube-dns -o name); do
+            kubectl logs --namespace=kube-system -c $container $p;
         done
     fi
 }
 
+ksuspend() {
+    if [ $# -ne 1 ]; then
+        echo "usage: ksuspend <job"
+    else
+        local job=$1
+        kubectl patch cronjobs $job -p '{"spec" : {"suspend" : true }}'
+    fi
+
+}
 alias kube='kubectl'
 alias kb='kubectl'
 alias kdel='kubectl delete'
