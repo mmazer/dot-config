@@ -1,3 +1,4 @@
+# vim: ft=sh :
 kp(){
     if [ -z "$1" ]; then
         kubectl get pods
