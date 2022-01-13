@@ -2,7 +2,7 @@
 alias dc='docker-compose'
 alias dm='docker-machine'
 alias docker-alias='alias | grep docker'
-alias dclean='docker rmi -f $(docker images -q)'
+alias drmi='docker rmi -f $(docker images -q)'
 alias dgrep='docker ps | grep'
 alias dprune='docker system prune --all --volumes'
 alias ddf='docker system df'
