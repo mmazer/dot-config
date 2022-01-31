@@ -34,8 +34,8 @@ bookmark (){
 
   if [[ -z $bookmark_name ]]; then
       bookmark_name="$(basename $(pwd))"
-  fi 
-  
+  fi
+
   if [[ -z $bookmark_name ]]; then
     echo 'Invalid name, please provide a name for your bookmark. For example:'
     echo '  bookmark foo'
@@ -104,6 +104,10 @@ bookmarkjump(){
     dir=`echo "$bookmark" | cut -d\| -f1`
     cd "$dir"
   fi
+}
+
+bookmarksedit () {
+    ${EDITOR:-vim} "$bookmarks_file"
 }
 
 _bookmarkjump_complete(){
