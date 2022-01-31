@@ -110,6 +110,7 @@ ksuspend() {
 alias kube='kubectl'
 alias kb='kubectl'
 alias kdel='kubectl delete'
+alias kubex='kubectl explain'
 alias kget='kubectl get'
 
 export TOOLBOX_DOCKER_IMAGE="gcr.io/google-containers/toolbox"
