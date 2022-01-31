@@ -33,7 +33,8 @@ activate_profile() {
             ;;
         *)
             if [ -f "$profiles_dir/$1" ]; then
-                settings=$(cat "$profiles_dir/$1")
+                settings=$(echo $(eval "echo \"$(<$profiles_dir/$1)\""))
+                echo "using settings: $settings"
                 xrandr $settings
             else
                 echo "display profile not found: $profiles_dir/$1"
@@ -72,10 +73,10 @@ do case "$opt" in
         activate_profile $profile
         ;;
     r) activate_profile $profile ;;
-    *) usage;; 
+    *) usage;;
     \?) usage;;
     esac
-done 
+done
 
 if [ $OPTIND -eq 1 ]; then
     profile=$1
