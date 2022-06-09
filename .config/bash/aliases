@@ -2,6 +2,7 @@
 alias bye=exit
 alias cd..='cd ..'
 alias dot='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
+alias dots='dot status'
 alias cls='clear'
 alias ch='history -cw'
 alias cpdir='cp -R'
