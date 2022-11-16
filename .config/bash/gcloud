@@ -20,21 +20,21 @@ alias gsl='gsutil ls'
 alias gsched='gcloud scheduler'
 alias clouds='__open https://status.cloud.google.com/'
 
-kdb -p gcp/project $(gcloud config get-value project)
+ks -p gcp/project $(gcloud config get-value project)
 
 __gcp_prompt() {
-    echo $(kdb -g gcp/project)
+    echo $(ks -g gcp/project)
 }
 
 gp() {
     local project=$1
     if [ -z "$project" ]; then
-        kdb -p gcp/project $(gcloud config get-value project)
-        kdb -g gcp/project
+        ks -p gcp/project $(gcloud config get-value project)
+        ks -g gcp/project
     else
         echo "setting active GCP project to $project"
         gcloud config set project "$project"
-        kdb -p gcp/project $(gcloud config get-value project)
+        ks -p gcp/project $(gcloud config get-value project)
         gcloud container clusters get-credentials ${GKE_CLUSTER:-application-cluster} --zone=${GCE_ZONE}
     fi
     export GCE_PROJECT=$(gcloud config get-value project)
