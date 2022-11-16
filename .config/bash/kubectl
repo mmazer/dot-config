@@ -78,12 +78,13 @@ pi() {
         sort
 }
 
-redeploy() {
-    local deployment=$1
-    if [ -z "$deployment" ]; then
-        echo "redeploy <deployment>"
+# restart pods for deployments, statefulsets and daemonsets
+restart() {
+    local resource=$1
+    if [ -z "$resource" ]; then
+        echo "restart <resource>"
     else
-        kubectl patch deployment ${deployment} -p "{\"spec\": {\"template\": {\"metadata\": { \"labels\": {  \"redeployed-at\": \"$(date +%s)\"}}}}}"
+        kubectl patch $resource -p "{\"spec\": {\"template\": {\"metadata\": { \"labels\": {  \"restarted-at\": \"$(date +%s)\"}}}}}"
     fi
 }
 
