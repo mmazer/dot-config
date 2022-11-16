@@ -4,8 +4,9 @@ __db_dir=${KDB_DIR:-$XDG_CACHE_HOME/kdb}
 
 usage () {
     sed -e 's/^//' <<End
-Usage: kdb [-Dhl] [-p key value] [-P key] [-d key]
+Usage: kdb [-Dehl] [-p key value] [-P key] [-d key]
 -d delete key value pair
+-e edit key value
 -D show data directory
 -g get key value
 -p add key value pair
@@ -51,6 +52,17 @@ getkv() {
     fi
 }
 
+editval() {
+  local key=$1
+  if [ ! -f "$__db_dir/$1/__value" ]; then
+      echo "key not found: $__db_dir/$1"
+      return 1
+  else
+      ${EDITOR:-vim} "$__db_dir/$1/__value"
+      return $?
+  fi
+}
+
 delkv() {
     if [ $# -eq 1 ]; then
         rm -rf "$__db_dir/$1"
@@ -75,12 +87,15 @@ if [ $# -eq 0 ]; then
     exit 1
 fi
 
-while getopts d:Dlg:p:P:h opt
+while getopts d:De:lg:p:P:h opt
 do case "$opt" in
     d) 
         key="$OPTARG"
         delkv $key;;
     D) echo $__db_dir;;
+    e) 
+      key="$OPTARG"
+      editval $key;;
     g) 
         key="$OPTARG"
         getkv $key;; 
