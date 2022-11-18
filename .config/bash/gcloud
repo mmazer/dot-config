@@ -35,7 +35,7 @@ gp() {
         echo "setting active GCP project to $project"
         gcloud config set project "$project"
         ks -p gcp/project $(gcloud config get-value project)
-        gcloud container clusters get-credentials ${GKE_CLUSTER:-application-cluster} --zone=${GCE_ZONE}
+        gcloud container clusters get-credentials ${GKE_CLUSTER:-application-cluster} --zone=${GKE_ZONE}
     fi
     export GCE_PROJECT=$(gcloud config get-value project)
 }
@@ -58,7 +58,7 @@ gcr-tags() {
 
 
 klusters() {
-    local zone=${1:-${GCE_ZONE}}
+    local zone=${1:-${GKE_ZONE}}
     if [ -z "$zone" ]; then
         echo "error: no zone specified"
     else
@@ -68,7 +68,7 @@ klusters() {
 
 kpool() {
     local cluster=$1
-    local zone=${2:-${GCE_ZONE}}
+    local zone=${2:-${GKE_ZONE}}
     if [ $# -lt 1 ]; then
         echo "error: cluster name not specified"
     else
