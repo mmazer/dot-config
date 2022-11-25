@@ -58,23 +58,21 @@ ke() {
 
 }
 
-# Get container image versions for a deployment
-# Accepts and applies any provided kubectl options
-ki() {
+depcon() {
     local deployment=$1
     if [ -z "$deployment" ]; then
-        echo "ki <deployment>"
+        echo "depcon <deployment>"
     else
         kubectl get deployment $deployment \
-            -o jsonpath='{.spec.template.spec.containers[*].image}' | awk -v OFS="\n" '{$1=$1}1'
+          -o=jsonpath='{range .spec.template.spec.containers[*]}{.name}{" "}{.image}{"\n"}{end}'
     fi
 }
 
-# get pod container images
-pi() {
+# get pod container names and images
+podcon() {
     local opts="$@"
     kubectl get pods ${opts} \
-        -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.containers[*]}{.image}{", "}{end}{end}' | \
+        -o=jsonpath='{range .items[*]}{.metadata.name}{"\t"}{range .spec.containers[*]}{.name}{"="}{.image}{" "}{end}{"\n"}{end}' | \
         sort
 }
 
