@@ -17,7 +17,7 @@ End
     exit 1
 }
 
-check_dbdir() {
+ensure_dbdir() {
     if [ ! -d $1 ]; then
         mkdir -p $1 || { return $?; }
     fi 
@@ -25,11 +25,21 @@ check_dbdir() {
     return 0
 }
 
+keypath() {
+  local key=$1
+  echo "$__db_dir/$1"
+}
+
+valpath() {
+  local keypath=$(keypath $1)
+  echo "$keypath/__value"
+}
+
 putkv() {
     if [ $# -eq 2 ]; then
-        path="$__db_dir/$1"
+        path="$(keypath $1)"
         key=${path##*/}
-        check_dbdir $path || { echo "error creating db $path: $?"; return 1; }
+        ensure_dbdir $path || { echo "error creating db $path: $?"; return 1; }
         echo "$2" > "$path/__value"
         return 0
     else
@@ -37,6 +47,7 @@ putkv() {
         return 1
     fi
 }
+
 getkv() {
     if [ $# -eq 1 ]; then
         if [ ! -f "$__db_dir/$1/__value" ]; then
@@ -54,11 +65,12 @@ getkv() {
 
 editval() {
   local key=$1
-  if [ ! -f "$__db_dir/$1/__value" ]; then
-      echo "key not found: $__db_dir/$1"
+  local vpath=$(valpath $key) 
+  if [ ! -f "$vpath" ]; then
+      echo "key not found: $key"
       return 1
   else
-      ${EDITOR:-vim} "$__db_dir/$1/__value"
+      ${EDITOR:-vim} "$vpath"
       return $?
   fi
 }
