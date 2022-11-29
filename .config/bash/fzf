@@ -113,6 +113,14 @@ gop() {
 }
 bind -x '"\C-p": gop;'
 
+# list subdirectories in current directory and change to selected directory
+fcd() {
+  local dir
+  dir=$(fd --max-depth 1 --type d . | fzf)
+  [[ -n "dir" ]] && cd "$dir"
+}
+
+bind -x '"\C-p": gop;'
 
 # fcmd - search and run saved cmds
 fcmd() {
