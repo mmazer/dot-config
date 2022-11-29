@@ -1,0 +1,6 @@
+alias hh=helm
+alias hhl='helm list'
+alias hhpl='helm pull'
+alias hhr='helm repo list'
+alias hhs='helm status'
+alias hhv='helm get values'
