@@ -1,0 +1,100 @@
+#!/bin/bash
+
+usage () {
+    sed -e 's/^//' <<End
+Usage: gist [-ld:e:h] [-p script-file] script-file
+Gist manager
+-d specify gist directory
+-D show gist directory
+-l list gists
+-e edit gist
+-p print gist
+-h show help
+End
+    exit 1
+}
+
+abort() {
+    echo "$1"
+    exit 1
+}
+
+quit () {
+    exit 0
+}
+
+assert_file() {
+    file=$1
+    if [ ! -f "$file" ]; then
+        abort "script file not found $file"
+    fi
+}
+
+list_gists () {
+    find "$GIST_HOME" -type f -printf "%P\n"| sort
+}
+
+print_gist() {
+    file=$(gist_path $1)
+    assert_file $file
+    cat "$file"
+}
+
+edit_gist() {
+    file=$(gist_path $1)
+    ${EDITOR:-nvim} "$file"
+}
+
+gist_path() {
+    echo "${GIST_HOME}/$1"
+}
+
+GIST_HOME="${GIST_HOME:-$HOME/.local/share/gists}"
+export GIST_HOME
+
+while getopts ld:Dhe:p: opt
+do case "$opt" in
+    h) usage;;
+    d) GIST_HOME="$OPTARG";;
+    D) echo $GIST_HOME && quit;;
+    e) edit_gist "$OPTARG" && quit;;
+    l) list_gists && quit;;
+    p) print_gist "$OPTARG" && quit;;
+    esac
+done
+shift $((OPTIND-1))
+
+if [ ! -d "${GIST_HOME}" ]; then
+    abort "gists directory not found: $GIST_HOME"
+fi
+
+if [ "$#" -eq 0 ]; then
+    [[ "$(command -v fzf)" ]] || { echo "fzf is not installed" 1>&2 ; usage; }
+    out=$(find "$GIST_HOME" -type f -printf "%P\n" | \
+        fzf --preview "cat $GIST_HOME/{}" \
+            --preview-window=right:70%:wrap \
+            --expect=ctrl-e,ctrl-p,ctrl-n,ctrl-y)
+    key=$(head -1 <<< "$out")
+    file=$(head -2 <<< "$out" | tail -1)
+    case $key in
+        ctrl-e)
+            edit_gist $file;;
+        ctrl-p)
+            print_gist $file;;
+        ctrl-n)
+            read -rp "Enter filename: " filename
+            ${EDITOR:-nvim} "$GIST_HOME/$filename"
+            ;;
+        ctrl-y)
+            echo -n "$file" | xsel -ib
+            ;;
+        *)
+            if [ -n "$file" ]; then print_gist "$file";  fi;;
+    esac
+    quit
+fi
+
+command=$1
+shift
+run_script "$command" "$*"
+
