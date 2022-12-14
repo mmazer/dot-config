@@ -1,0 +1,25 @@
+#!/bin/bash
+# usage: time <interval>(s|m)
+icon='dialog-warning-symbolic'
+
+time=${1:-60s}
+units=${time:(-1)}
+interval=${time%${units}}
+
+case $units in
+    s)
+        secs=$interval
+        ;;
+    m)
+        secs=$((60*$interval))
+        ;;
+    *)
+        echo "units must be one of (s|m): $units"
+        exit 1
+        ;;
+esac
+summary="~*~ TIME IS UP ~*~"
+msg=${2:-"What now?"}
+echo "Running timer for ${secs}s: $msg"
+
+{ sleep $secs && notify-send -u critical -i $icon "$summary" "<span font='26px'>$msg</span>"; } &
