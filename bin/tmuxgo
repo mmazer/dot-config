@@ -13,7 +13,6 @@ fi
 
 echo "creating new session $SESSION"
 tmux -2 new -s $SESSION -n home -d
-tmux new-window -n project -t $SESSION
 tmux new-window -n shell -t $SESSION
 
 tmux select-window -t $SESSION:1
