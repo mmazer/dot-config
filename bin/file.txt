@@ -3,8 +3,9 @@
 _scriptname=$(basename $0)
 usage () {
     sed -e 's/^//' <<End
-Usage: $_scriptname [-ehl] [-a text] [-f file] [-g pattern]
+Usage: $_scriptname [-dehl] [-a text] [-f file] [-g pattern]
 -a append text to file
+-d prepend date timestamp to new log entries
 -e edit text file using $EDITOR
 -f use file
 -g grep for <pattern> in text
