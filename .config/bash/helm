@@ -1,6 +1,8 @@
 alias hh=helm
+alias hhd='helm dependencies'
 alias hhl='helm list'
 alias hhpl='helm pull'
 alias hhr='helm repo list'
 alias hhs='helm status'
 alias hhv='helm get values'
+alias hhy='helm install --debug --dry-run'
