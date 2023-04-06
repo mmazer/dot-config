@@ -1,5 +1,6 @@
 alias ggcv='git commit --verbose'
 alias gga='git add'
+alias ggbr='git branches'
 alias ggc='git checkout'
 alias ggcb='git checkout -b'
 alias ggci='git commit'
