@@ -11,6 +11,7 @@ alias glcoud=gcloud
 alias gc='gcloud'
 alias gce='gcloud compute'
 alias gce-machines='gcloud compute machine-types'
+alias gcurl='curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json"'
 alias gke='gcloud container'
 alias gke_creds='gcloud container clusters get-credentials'
 alias gpi='gcloud compute project-info describe --project'
