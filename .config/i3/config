@@ -175,5 +175,4 @@ new_window 1pixel
 
 exec --no-startup-id nm-applet
 exec --no-startup-id i3-battery-popup -n
-exec --no-startup-id pnmixer
 exec --no-startup-id i3-msg 'workspace 1; exec $HOME/.local/bin/kitty'
