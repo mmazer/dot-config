@@ -42,7 +42,7 @@ bookmark (){
   else
     bookmark="`pwd`|$bookmark_name" # Store the bookmark as folder|name
 
-    if [[ -z `grep "|$bookmark_name" $bookmarks_file` ]]; then
+    if [[ -z `grep -e "|$bookmark_name$" $bookmarks_file` ]]; then
       echo $bookmark >> $bookmarks_file
       echo "Bookmark '$bookmark_name' saved"
     else
