@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Archive Garmin fit files
+
+DATA_DIR=/Volumes/GARMIN/Garmin/Activities
+ARCHIVE_DIR=$HOME/GoogleDrive/cycling/data/$(date +%Y)
+
+if [ "$(ls -A $DATA_DIR)" ]; then
+  echo "Archiving .fit files from $DATA_DIR to $ARCHIVE_DIR"
+  mv -v "${DATA_DIR}"/*.fit "${ARCHIVE_DIR}"
+else
+  echo "No .fit files found in ${DATA_DIR}"
+fi
