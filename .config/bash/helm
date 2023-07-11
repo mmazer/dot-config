@@ -1,6 +1,7 @@
 alias hh=helm
 alias hhd='helm dependencies'
 alias hhl='helm list'
+alias hhm='helm get manifest'
 alias hhpl='helm pull'
 alias hhr='helm repo list'
 alias hhs='helm status'
