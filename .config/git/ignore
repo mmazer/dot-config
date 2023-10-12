@@ -22,5 +22,6 @@ tags
 NOTES.txt
 TODO.txt
 todo.txt
+TODO.*
 .envrc
 vendor/bundle/*
