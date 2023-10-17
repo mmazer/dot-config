@@ -19,6 +19,7 @@ alias gssh='gcloud compute ssh'
 alias gsu=gsutil
 alias gsl='gsutil ls'
 alias gsched='gcloud scheduler'
+alias gsql='gcloud sql'
 alias clouds='__open https://status.cloud.google.com/'
 
 ks -p gcp/project $(gcloud config get-value project)
