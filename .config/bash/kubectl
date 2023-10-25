@@ -1,4 +1,9 @@
 # vim: ft=sh :
+
+usage() {
+  echo "usage: $1"
+}
+
 kp(){
     if [ -z "$1" ]; then
         kubectl get pods
@@ -41,41 +46,6 @@ ktools() {
 }
 
 
-kns(){
-    if [ -z "$1" ]; then
-        kubectl config view --minify| grep namespace
-    else
-       kubectl config set-context $(kubectl config current-context) --namespace=$1
-    fi
-}
-
-ke() {
-    if [ -z "$1" ]; then
-        kubectl get events
-    else
-       kubectl get events --namespace="$1"
-    fi
-
-}
-
-depcon() {
-    local deployment=$1
-    if [ -z "$deployment" ]; then
-        echo "depcon <deployment>"
-    else
-        kubectl get deployment $deployment \
-          -o=jsonpath='{range .spec.template.spec.containers[*]}{.name}{" "}{.image}{"\n"}{end}'
-    fi
-}
-
-# get pod container names and images
-podcon() {
-    local opts="$@"
-    kubectl get pods ${opts} \
-        -o=jsonpath='{range .items[*]}{.metadata.name}{"\t"}{range .spec.containers[*]}{.name}{"="}{.image}{" "}{end}{"\n"}{end}' | \
-        sort
-}
-
 # restart pods for deployments, statefulsets and daemonsets
 restart() {
     local resource=$1
@@ -86,16 +56,6 @@ restart() {
     fi
 }
 
-kdnslogs() {
-    if [ $# -ne 1 ]; then
-        echo "usage: kdnslogs (kubedns|dnsmasq|sidecar)"
-    else
-        local container=$1
-        for p in $(kubectl get pods --namespace=kube-system -l k8s-app=kube-dns -o name); do
-            kubectl logs --namespace=kube-system -c $container $p;
-        done
-    fi
-}
 
 ksuspend() {
     if [ $# -ne 1 ]; then
@@ -116,6 +76,5 @@ alias kpf="kubectl port-forward"
 alias kdel='kubectl delete'
 alias kexpl='kubectl explain'
 alias kubeapi='kubectl api-resources'
-alias kver='kubectl version -o yaml'
 
 export TOOLBOX_DOCKER_IMAGE="gcr.io/google-containers/toolbox"
