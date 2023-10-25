@@ -28,54 +28,9 @@ __gcp_prompt() {
     echo $(ks -g gcp/project)
 }
 
-gp() {
-    local project=$1
-    if [ -z "$project" ]; then
-        ks -p gcp/project $(gcloud config get-value project)
-        ks -g gcp/project
-    else
-        echo "setting active GCP project to $project"
-        gcloud config set project "$project"
-        ks -p gcp/project $(gcloud config get-value project)
-        gcloud container clusters get-credentials ${GKE_CLUSTER:-application-cluster} --zone=${GKE_ZONE}
-    fi
-    export GCE_PROJECT=$(gcloud config get-value project)
-}
-
-gcr() {
-    if [ -n "$1" ]; then
-        gcloud container images list --repository gcr.io/$1
-    else
-        echo "repository not specified"
-    fi
-}
-
-gcr-tags() {
-    if [ -n "$1" ]; then
-        gcloud container images list-tags gcr.io/$1
-    else
-        echo "project image not specified"
-    fi
-}
-
-
-klusters() {
-    local zone=${1:-${GKE_ZONE}}
-    if [ -z "$zone" ]; then
-        echo "error: no zone specified"
-    else
-        gcloud container clusters list --zone=$zone
-    fi
-}
-
-kpool() {
-    local cluster=$1
-    local zone=${2:-${GKE_ZONE}}
-    if [ $# -lt 1 ]; then
-        echo "error: cluster name not specified"
-    else
-        gcloud container node-pools list --zone $zone --cluster $cluster
-    fi
+usage() {
+  local msg=$1
+  echo "usage: $msg"
 }
 
 fi # gcloud command is available
