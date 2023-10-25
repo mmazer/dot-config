@@ -1,8 +1,11 @@
 font:
   normal:
-    family: Monaco
+    family: Hack Nerd Font
     style: Regular
   size: 14
+
+window:
+  decorations: none
 
 import:
   - ~/.config/alacritty/themes/rose-pine.yml
