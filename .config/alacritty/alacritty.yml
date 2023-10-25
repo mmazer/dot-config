@@ -2,10 +2,10 @@ font:
   normal:
     family: Hack Nerd Font
     style: Regular
-  size: 14
 
 window:
   decorations: none
 
 import:
+  - ~/.local/share/alacritty/site.yml
   - ~/.config/alacritty/themes/rose-pine.yml
