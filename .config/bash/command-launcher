@@ -1,0 +1,13 @@
+# vim: ft=sh :
+cmdp() { 
+  cmd -p 
+}
+
+bind -x '"\C-p": cmdp;'
+
+cmd_completions() {
+  if [[ -d $HOME/.local/share/shell-commands ]]; then
+      complete -W "$(ls -1 $HOME/.local/share/shell-commands | tr '\n' ' ')" cmd
+  fi
+}
+
