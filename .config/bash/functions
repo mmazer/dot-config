@@ -120,11 +120,4 @@ function rc {
     fi
 } 
 
-function vcert {
-    if [ $# -ne 1 ] ; then
-        echo "vcert certificate.txt"
-    else
-        openssl x509 -in "$1" -text -noout
-    fi
-}
 # vim ft=sh :
