@@ -2,97 +2,111 @@
 
 name=$(basename $0)
 usage () {
-    sed -e 's/^//' <<End
-Usage: $name [-ld:Dhp] command <args>
+  sed -e 's/^//' <<End
+Usage: $name [-ld:DhpP] command <args>
 shell command runner
 -d specify command directory
 -D print command directory
 -p preview commands
+-P print command to stdout
 -l list scripts
 -h show help
 End
-    exit 1
+exit 1
 }
 
 CMD_LIB="${HOME}/.local/share/command-launcher"
 
 abort() {
-    echo "$1"
-    exit 1
+  echo "$1"
+  exit 1
 }
 
 _exit() {
-    exit 0
+  exit 0
 }
 
 assert_file() {
-    file=$1
-    if [ ! -f "$file" ]; then
-        abort "script file not found $file"
-    fi
+  local file=$1
+  if [ ! -f "$file" ]; then
+    abort "script file not found $file"
+  fi
 }
 
 list_cmds() {
-    find "$CMD_LIB" -maxdepth 1 -type f -printf "%P\n"| sort
+  find "$CMD_LIB" -maxdepth 1 -type f -printf "%P\n"| sort
 }
 
-print_script() {
-    file=$(script_path $1)
-    assert_file $file
-    cat "$file"
+print_cmd() {
+  file=$(cmd_path $1)
+  assert_file $file
+  cat "$file"
 }
 
+fn_exists() {
+  [[ $(type -t $1) == function ]]
+}
 
 run_cmd() {
-    file=$(cmd_path $1)
-    assert_file "$file"
-    shift
-    . "$file" $*
+  local fn=$1
+  local file=$(cmd_path $1)
+  assert_file "$file"
+  . "$file"
+  if ! fn_exists $fn; then
+    echo "missing function $fn in $file"
+    return
+  fi
+  shift
+  $fn $@
 }
 
 cmd_path() {
-    echo "${CMD_LIB}/$1"
+  echo "${CMD_LIB}/$1"
 }
 
 preview_cmds() {
-    [[ "$(command -v fzf)" ]] || { echo "fzf is not installed" 1>&2 ; usage; }
-    out=$(fd --base-directory=$CMD_LIB --type f --exact-depth 1 . | sed 's/^.\///' | \
-        fzf --preview "cat $CMD_LIB/{}" \
-            --preview-window=right:70%:wrap \
-            --expect=ctrl-e)
-    key=$(head -1 <<< "$out")
-    file=$(head -2 <<< "$out" | tail -1)
-    case $key in
+  [[ "$(command -v fzf)" ]] || { echo "fzf is not installed" 1>&2 ; usage; }
+  out=$(fd --base-directory=$CMD_LIB --type f --exact-depth 1 . | sed 's/^.\///' | \
+    fzf --preview "cat $CMD_LIB/{}" \
+    --preview-window=right:70%:wrap \
+    --expect=ctrl-e,alt-p) # use alt-p to avoid conflict with ctrl-p
+      key=$(head -1 <<< "$out")
+      file=$(head -2 <<< "$out" | tail -1)
+      case $key in
         ctrl-e)
-            edit_cmd $file;;
+          edit_cmd $file;;
+        alt-p)
+          print_cmd $file;;
         *)
-            if [ -n "$file" ]; then run_cmd "$file";  fi;;
-    esac
+          if [ -n "$file" ]; then run_cmd "$file";  fi;;
+        esac
 }
 
 edit_cmd() {
-    file=$(cmd_path $1)
-    ${EDITOR:-nvim} "$file"
+  file=$(cmd_path $1)
+  ${EDITOR:-nvim} "$file"
 }
 
-while getopts ld:Dhp opt
+while getopts ld:DhpP: opt
 do case "$opt" in
-    h) usage;;
-    d) CMD_LIB="$OPTARG";;
-    D) 
-      echo  $CMD_LIB
-      _exit;;
-    p) 
-      preview_cmds
-      _exit;;
-    l) list_cmds && _exit;;
-    esac
+  h) usage;;
+  d) CMD_LIB="$OPTARG";;
+  D) 
+    echo  $CMD_LIB
+    _exit;;
+  p) 
+    preview_cmds
+    _exit;;
+  P)
+    print_cmd "$OPTARG" && _exit;;
+  l) list_cmds && _exit;;
+esac
 done
 shift $((OPTIND-1))
 
 export CMD_LIB
 if [[ ! -d "${CMD_LIB}" ]]; then
-    abort "command library not found: $CMD_LIB"
+  abort "command library not found: $CMD_LIB"
 fi
 
 if [ "$#" -eq 0 ]; then
@@ -102,5 +116,5 @@ fi
 
 command=$1
 shift
-run_cmd "$command" "$*"
+run_cmd "$command" "$@"
 
