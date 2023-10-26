@@ -1,5 +1,5 @@
 hs.application.enableSpotlightForNameSearches(true)
-local term_app = "kitty"
+local term_app = "alacritty"
 local browser = "chrome"
 local obsidian = "obsidian"
 
@@ -21,4 +21,4 @@ end
 
 toggle_app(term_app, {"ctrl"}, "\\")
 toggle_app(browser, {"ctrl"}, "`")
-toggle_app(obsidian, {"ctrl"}, "o")
+toggle_app(obsidian, {"ctrl"}, "/")
