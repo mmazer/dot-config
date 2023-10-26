@@ -33,7 +33,7 @@ assert_file() {
 }
 
 list_cmds() {
-    find "$CMD_LIB" -type f -printf "%P\n"| sort
+    find "$CMD_LIB" -maxdepth 1 -type f -printf "%P\n"| sort
 }
 
 print_script() {
@@ -56,7 +56,7 @@ cmd_path() {
 
 preview_cmds() {
     [[ "$(command -v fzf)" ]] || { echo "fzf is not installed" 1>&2 ; usage; }
-    out=$(fd --base-directory=$CMD_LIB --type f . | sed 's/^.\///' | \
+    out=$(fd --base-directory=$CMD_LIB --type f --exact-depth 1 . | sed 's/^.\///' | \
         fzf --preview "cat $CMD_LIB/{}" \
             --preview-window=right:70%:wrap \
             --expect=ctrl-e)
