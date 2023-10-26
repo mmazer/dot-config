@@ -123,9 +123,9 @@ fcd() {
 bind -x '"\C-p": gop;'
 
 # fcmd - search and run saved cmds
-fcmd() {
+shcmd() {
     args=$@
-    cmds="${args:-$XDG_DATA_HOME/commands}"
+    cmds="${args:-$XDG_DATA_HOME/shellcommands}"
     out=$(cat ${cmds} | fzf --expect=ctrl-y| sed -e "s/;;.*//" -e "s/[ ]*$//")
     key=$(head -1 <<< "$out")
     cmd=$(head -2 <<< "$out" | tail -1)
