@@ -14,8 +14,7 @@ End
     exit 1
 }
 
-CMD_LIB="${HOME}/.local/share/shell-commands"
-export CMD_LIB
+CMD_LIB="${HOME}/.local/share/command-launcher"
 
 abort() {
     echo "$1"
@@ -91,6 +90,7 @@ do case "$opt" in
 done
 shift $((OPTIND-1))
 
+export CMD_LIB
 if [[ ! -d "${CMD_LIB}" ]]; then
     abort "command library not found: $CMD_LIB"
 fi
