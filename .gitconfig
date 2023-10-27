@@ -6,3 +6,5 @@
     path = ~/.config/git/aliases
     path = ~/.local/share/git/config
 
+[init]
+	defaultBranch = main
