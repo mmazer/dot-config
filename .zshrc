@@ -18,7 +18,8 @@ plugins=(dirmark
     docker
     apt
     brew
-    github)
+    github
+    ssh-agent)
 
 site=(site)
 
