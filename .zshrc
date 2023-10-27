@@ -17,7 +17,8 @@ plugins=(dirmark
     kubectl
     docker
     apt
-    brew)
+    brew
+    github)
 
 site=(site)
 
