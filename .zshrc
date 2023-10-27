@@ -1,13 +1,15 @@
 # set base env
 source $HOME/.config/shell/env
 
-settings=(base
+settings=(
+    base
     aliases
     keybindings
-    colours
     vcs-prompt)
 
-plugins=(dirmark
+plugins=(
+    colors
+    dirmark
     command-launcher
     git
     fzf
