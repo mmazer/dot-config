@@ -1,9 +1,7 @@
 # set base env
 source $HOME/.config/shell/env
 
-configs=(completion
-    prompt
-    history
+settings=(base
     aliases
     keybindings
     vcs-prompt)
