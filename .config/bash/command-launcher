@@ -6,8 +6,8 @@ cmdp() {
 bind -x '"\C-p": cmdp;'
 
 cmd_completions() {
-  if [[ -d $HOME/.local/share/shell-commands ]]; then
-      complete -W "$(ls -1 $HOME/.local/share/shell-commands | tr '\n' ' ')" cmd
+  if [[ -d $HOME/.local/share/command-launcher ]]; then
+      complete -W "$(ls -1 $HOME/.local/share/command-launcher | tr '\n' ' ')" cmd
   fi
 }
 
