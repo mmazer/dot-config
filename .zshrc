@@ -27,4 +27,4 @@ site=(site)
 
 source $HOME/.config/zsh/init.zsh
 
-PROMPT='%B${_gcp_project_ps1} [%T] %n %~ ${vcs_info_msg_0_}%b${prompt_newline}λ '
+PROMPT='%B[%T] ${_gcp_project_ps1} %n %~ ${vcs_info_msg_0_}%b${prompt_newline}λ '
