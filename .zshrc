@@ -4,17 +4,20 @@ source $HOME/.config/shell/env
 settings=(base
     aliases
     keybindings
+    colours
     vcs-prompt)
 
 plugins=(dirmark
-    fzf-dirmark
     command-launcher
     git
+    fzf
+    fzf-dirmark
     fzf-functions
     fzf-subdir
     fzf-git
     google-cloud
     kubectl
+    fzf-kubectl
     docker
     apt
     brew
