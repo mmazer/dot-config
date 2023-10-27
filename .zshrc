@@ -12,8 +12,6 @@ plugins=(dirmark
     git
     fzf
     fzf-dirmark
-    fzf-functions
-    fzf-subdir
     fzf-git
     google-cloud
     kubectl
