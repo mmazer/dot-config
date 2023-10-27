@@ -22,7 +22,8 @@ plugins=(dirmark
     apt
     brew
     github
-    ssh-agent)
+    ssh-agent
+    helm)
 
 site=(site)
 
