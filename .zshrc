@@ -11,6 +11,7 @@ plugins=(
     colors
     dirmark
     command-launcher
+    kv
     git
     fzf
     fzf-dirmark
@@ -23,7 +24,9 @@ plugins=(
     brew
     github
     ssh-agent
-    helm)
+    helm
+    calc
+    agenda)
 
 site=(site)
 
