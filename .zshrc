@@ -25,7 +25,9 @@ plugins=(
     ssh-agent
     helm
     calc
-    agenda)
+    agenda
+    openssl
+)
 
 source $HOME/.config/zsh/init.zsh
 
