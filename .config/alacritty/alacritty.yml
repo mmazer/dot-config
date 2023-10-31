@@ -2,9 +2,10 @@ font:
   normal:
     family: Hack Nerd Font
     style: Regular
-
 window:
   decorations: none
+selection:
+  save_to_clipboard: true
 
 import:
   - ~/.local/share/alacritty/site.yml
