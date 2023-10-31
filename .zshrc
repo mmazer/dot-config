@@ -1,5 +1,7 @@
 settings=(
-    base
+    completion
+    history
+    prompt
     colors
     aliases
     keybindings
@@ -7,7 +9,7 @@ settings=(
 
 plugins=(
     dirmark
-    command-launcher
+    cmd
     kv
     git
     fzf
