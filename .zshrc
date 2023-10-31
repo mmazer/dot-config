@@ -1,11 +1,11 @@
 settings=(
     base
+    colors
     aliases
     keybindings
     vcs-prompt)
 
 plugins=(
-    colors
     dirmark
     command-launcher
     kv
