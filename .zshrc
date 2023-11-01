@@ -27,6 +27,7 @@ plugins=(
     calc
     agenda
     openssl
+    gh-todo
 )
 
 source $HOME/.config/zsh/init.zsh
