@@ -1,15 +1,15 @@
 settings=(
+    colors
     completion
     history
     prompt
-    colors
     aliases
     keybindings
     vcs-prompt)
 
 plugins=(
+    agenda
     dirmark
-    cmd
     kv
     git
     fzf
@@ -28,6 +28,7 @@ plugins=(
     agenda
     openssl
     gh-todo
+    autoload
 )
 
 source $HOME/.config/zsh/init.zsh
