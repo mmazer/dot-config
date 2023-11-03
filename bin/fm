@@ -2,7 +2,7 @@
 
 usage () {
     sed -e 's/^//' <<End
-Usage: fm [-ld:e:h] [-p file]
+Usage: fm [-ld:e:h] [-p file] [-P preview_cmd]
 Simple file manager
 -d specify base directory
 -l list files
@@ -10,6 +10,7 @@ Simple file manager
 -o open file in default system application
 -n create new note
 -p print file
+-P specify preview cmd
 -h show help
 End
     exit 1
@@ -64,7 +65,7 @@ file_path() {
 FILEMAN_DIR="${FILEMAN_DIR:-$HOME/.local/share/filemanager}"
 export FILEMAN_DIR
 
-while getopts ld:he:n:o:p: opt
+while getopts ld:he:n:o:p:P: opt
 do case "$opt" in
     h) usage;;
     d) FILEMAN_DIR="$OPTARG";;
@@ -73,6 +74,7 @@ do case "$opt" in
     o) open_file "$OPTARG" && quit;;
     n) create_file "$OPTARG" && quit;;
     p) print_file "$OPTARG" && quit;;
+    P) preview_cmd="$OPTARG";;
     *) usage;;
     esac
 done
@@ -85,7 +87,7 @@ fi
 if [ "$#" -eq 0 ]; then
     [[ "$(command -v fzf)" ]] || { echo "fzf is not installed" 1>&2 ; usage; }
     out=$(find "$FILEMAN_DIR" -type f ! -path "${FILEMAN_DIR}/.git/*" -printf "%P\n" | \
-        fzf --preview "cat $FILEMAN_DIR/{}" \
+        fzf --preview "${preview_cmd:-cat} $FILEMAN_DIR/{}" \
         --preview-window=right:70%:wrap --expect=ctrl-e,ctrl-o,ctrl-n)
     key=$(head -1 <<< "$out")
     file=$(head -2 <<< "$out" | tail -1)
