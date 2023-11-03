@@ -16,6 +16,7 @@ plugins=(
     fzf-dirmark
     fzf-git
     google-cloud
+    google-secrets
     kubectl
     fzf-kubectl
     docker
