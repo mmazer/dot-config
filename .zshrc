@@ -29,6 +29,7 @@ plugins=(
     agenda
     openssl
     gh-todo
+    fileman
 )
 
 source $HOME/.config/zsh/init.zsh
