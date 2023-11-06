@@ -1,12 +1,14 @@
 alacritty
-bsf
+bfs
 coreutils
 fd
 findutils
 fzf
 glow
 hammerspoon
+node
 nvim
 ripgrep
 tig
 tmux
+zsh-syntax-highlighting
