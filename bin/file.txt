@@ -1,6 +1,8 @@
 #!/bin/bash
+# vim: ft=sh :
 
-_scriptname=$(basename $0)
+
+_scriptname=$(basename "$0")
 usage () {
     sed -e 's/^//' <<End
 Usage: $_scriptname [-dehl] [-a text] [-f file] [-g pattern]
@@ -38,11 +40,11 @@ do case "$opt" in
         pattern="$OPTARG" ;;
     h) action="help";;
     p) action="pager" ;;
-    \:)
-        printf "argument required for option '%s'\n" $OPTARG
+    ":")
+        printf "argument required for option '%s'\n" "$OPTARG"
         usage;;
-    \?)
-        printf "unknown option '%s'\n" $OPTARG
+    "?")
+        printf "unknown option '%s'\n" "$OPTARG"
         usage;;
     esac
 done
@@ -59,7 +61,7 @@ case $action in
     edit) $EDITOR "$textfile";;
     add)
         shift $((OPTIND-1))
-        text="$@"
+        text="$*"
         if [ -z "$text" ]; then
             echo "nothing to add"
             usage
@@ -74,7 +76,7 @@ case $action in
         cat "$textfile"
         ;;
     pager)
-        $PAGER "$textfile"
+        ${PAGER:-less} "$textfile"
         ;;
     *)
         ;;
