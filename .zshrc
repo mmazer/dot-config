@@ -1,4 +1,4 @@
-settings=(
+zsettings=(
     colors
     completion
     history
@@ -7,7 +7,7 @@ settings=(
     keybindings
     vcs-prompt)
 
-plugins=(
+zplugins=(
     agenda
     dirmark
     kv
