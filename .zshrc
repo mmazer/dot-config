@@ -1,13 +1,14 @@
-zsettings=(
+settings=(
     colors
     completion
     history
     prompt
     aliases
     keybindings
-    vcs-prompt)
+    vcs-prompt
+)
 
-zplugins=(
+plugins=(
     agenda
     dirmark
     kv
