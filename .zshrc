@@ -33,6 +33,6 @@ plugins=(
     fileman
 )
 
-source $HOME/.config/zsh/init.zsh
+source $HOME/.config/zsh/zinc.zsh
 
 PROMPT='%F{green}%D{%H:%M:%S}%f %F{red}[${_gcp_project_ps1}::${_kube_ctx_ps1}]%f %F{grey}%n %~%f %F{red}${vcs_info_msg_0_}%f${prompt_newline}%F{yellow}λ%f '
