@@ -34,6 +34,4 @@ zplugins=(
 
 source $HOME/.config/zsh/init.zsh
 
-[[ -d $ZSH_DATA_HOME/autoload ]] && zn-autoload $ZSH_DATA_HOME/autoload
-
 PROMPT='%F{green}%D{%H:%M:%S}%f %F{red}[${_gcp_project_ps1}::${_kube_ctx_ps1}]%f %F{grey}%n %~%f %F{red}${vcs_info_msg_0_}%f${prompt_newline}%F{yellow}λ%f '
