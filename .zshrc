@@ -31,6 +31,7 @@ plugins=(
     openssl
     gh-todo
     fileman
+    ubuntu
 )
 
 source $HOME/.config/zsh/zinc.zsh
