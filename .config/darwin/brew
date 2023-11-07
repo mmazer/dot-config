@@ -6,6 +6,7 @@ findutils
 fzf
 glow
 hammerspoon
+marp-cli
 node
 nvim
 ripgrep
