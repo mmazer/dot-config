@@ -6,6 +6,7 @@ findutils
 fzf
 glow
 hammerspoon
+jq
 marp-cli
 node
 nvim
