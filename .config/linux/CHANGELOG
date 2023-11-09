@@ -1,0 +1,2 @@
+# Package Change Log
+2023-11-09 add `gettext` for `envsubst` command used in zinc backup plugin

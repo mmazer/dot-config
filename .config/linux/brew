@@ -2,6 +2,7 @@ alacritty
 asdf
 bfs
 fzf
+gettext # provides envsubst
 glow
 jq
 marp-cli
