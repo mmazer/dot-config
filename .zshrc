@@ -1,6 +1,6 @@
 # automatically remove duplicates from these arrays
 # to take affect use path+=()
-typeset -U path cdpath fpath manpath
+declare -U path cdpath fpath manpath
 
 settings=(
     colors
