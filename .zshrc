@@ -37,6 +37,7 @@ plugins=(
     fileman
     www-bookmarks
     ubuntu
+    backup
 )
 
 source $HOME/.config/zsh/zinc.zsh
