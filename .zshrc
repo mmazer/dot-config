@@ -13,6 +13,7 @@ settings=(
 )
 
 plugins=(
+    zinc
     agenda
     dirmark
     kv
