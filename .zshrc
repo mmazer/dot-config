@@ -1,6 +1,6 @@
 # automatically remove duplicates from these arrays
 # to take affect use path+=()
-declare -U path cdpath fpath manpath
+typeset -U path cdpath fpath manpath
 
 settings=(
     colors
@@ -18,12 +18,9 @@ plugins=(
     kv
     git
     fzf
-    fzf-dirmark
-    fzf-git
     google-cloud
     google-secrets
     kubectl
-    fzf-kubectl
     docker
     apt
     brew
