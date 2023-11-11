@@ -2,7 +2,7 @@
 # to take affect use path+=()
 typeset -U path cdpath fpath manpath
 
-settings=(
+configs=(
     colors
     completion
     history
