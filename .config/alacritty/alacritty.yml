@@ -9,4 +9,4 @@ selection:
 
 import:
   - ~/.local/share/alacritty/site.yml
-  - ~/.config/alacritty/themes/rose-pine.yml
+  - ~/.config/alacritty/themes/themes/rose-pine.yaml
