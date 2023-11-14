@@ -2,6 +2,28 @@ font:
   normal:
     family: Hack Nerd Font
     style: Regular
+
+cursor:
+  # Cursor style
+  style:
+    # Cursor shape
+    #
+    # Values for `shape`:
+    #   - ▇ Block
+    #   - _ Underline
+    #   - | Beam
+    shape: Beam
+
+    # Cursor blinking state
+    #
+    # Values for `blinking`:
+    #   - Never: Prevent the cursor from ever blinking
+    #   - Off: Disable blinking by default
+    #   - On: Enable blinking by default
+    #   - Always: Force the cursor to always blink
+    blinking: Always
+  blink_timeout: 0
+  vi_mode_style: Beam
 window:
   decorations: none
 selection:
@@ -9,4 +31,4 @@ selection:
 
 import:
   - ~/.local/share/alacritty/site.yml
-  - ~/.config/alacritty/themes/themes/rose-pine.yaml
+  - ~/.config/alacritty/themes/themes/catppuccin_latte.yaml
