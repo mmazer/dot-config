@@ -4,8 +4,11 @@ coreutils
 fd
 findutils
 fzf
-glow
-gettext # provides envsubst
+glow 
+# provides envsubst
+gettext
+# provides `sed` using alternate path
+gnu-sed
 hammerspoon
 jq
 marp-cli

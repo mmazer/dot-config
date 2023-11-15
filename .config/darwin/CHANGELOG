@@ -1,3 +1,4 @@
 # Package Change Log
 
 2023-11-09 add `gettext` for `envsubst` command used in zinc backup plugin
+2023-11-14 installed brew:gnu-sed and added path to make it available as sed (see `brew info gnu-sed`)
