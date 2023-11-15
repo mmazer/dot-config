@@ -15,7 +15,6 @@ cursor:
     #   - _ Underline
     #   - | Beam
     shape: Beam
-
     # Cursor blinking state
     #
     # Values for `blinking`:
@@ -32,5 +31,9 @@ selection:
   save_to_clipboard: true
 
 import:
+  # Theme reference stored here to allow modifications by `alth`.
+  # The alacritty-theme.yml is effectively ignored as an untracked file
+  # import:
+  #   -  ~/.config/alacritty/themes/themes/catppuccin_latte.yaml
+  - ~/.config/alacritty/alacritty-theme.yml
   - ~/.local/share/alacritty/site.yml
-  - ~/.config/alacritty/themes/themes/catppuccin_latte.yaml
