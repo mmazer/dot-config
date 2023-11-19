@@ -1,6 +1,7 @@
 #!/bin/bash
 # usage: time <interval>(s|m)
 icon='dialog-warning-symbolic'
+notification_sound=/usr/share/sounds/gnome/default/alerts/glass.ogg
 
 time=${1:-60s}
 units=${time:(-1)}
@@ -18,8 +19,8 @@ case $units in
         exit 1
         ;;
 esac
-summary="~*~ TIME IS UP ~*~"
+summary="***TIME IS UP***"
 msg=${2:-"What now?"}
 echo "Running timer for ${secs}s: $msg"
 
-{ sleep $secs && notify-send -u critical -i $icon "$summary" "<span font='26px'>$msg</span>"; } &
+{ sleep $secs && notify-send -u critical -i $icon "$summary" "<span font='26px'>$msg</span>" && paplay $notification_sound;  } &
