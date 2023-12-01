@@ -4,6 +4,7 @@ bfs
 fzf
 gettext # provides envsubst
 glow
+golang
 jq
 marp-cli
 nvim
