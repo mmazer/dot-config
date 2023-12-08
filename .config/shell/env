@@ -6,6 +6,7 @@
 [[ -z "$XDG_STATE_HOME" ]] && export XDG_STATE_HOME=$HOME/.local/state
 
 export EDITOR=nvim
+export MANPAGER='nvim +Man!'
 export VISUAL=nvim
 export ZDOTDIR=$HOME/.config/zsh
 export ZSH_TODO_REPO="mmazer/todo"
