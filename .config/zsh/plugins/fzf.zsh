@@ -37,7 +37,7 @@ fzf-history() {
         local hc=$(head -2 <<< "$out" | tail -1)
         local num="${hc%%' '*}"
         local cmd="${hc#*' '}"
-        if [ "$key" = ctrl-e ]; then fc "$num"; else eval "$cmd"; fi
+        if [ "$key" = ctrl-e ]; then fc "$num"; else eval "$cmd" && print -s "$cmd"; fi
     fi
 }
 
