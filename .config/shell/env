@@ -8,5 +8,3 @@
 export EDITOR=nvim
 export ZDOTDIR=$HOME/.config/zsh
 export ZSH_TODO_REPO="mmazer/todo"
-
-[[ -f "$HOME/.local/share/shell/env" ]] && source "$HOME/.local/share/shell/env"
