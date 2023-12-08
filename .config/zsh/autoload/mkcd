@@ -1,0 +1,2 @@
+[[ $# -eq 1 ]] || (printf 'Usage: %s <directory>\n' "$0" && return 1)
+mkdir -p "$1" && builtin cd "$1"
