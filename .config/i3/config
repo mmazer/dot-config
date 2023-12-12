@@ -177,6 +177,7 @@ new_window 1pixel
 exec --no-startup-id setxkbmap -option 'caps:ctrl_modifier'
 exec --no-startup-id xcape -e 'Control_L=Escape'
 exec --no-startup-id nm-applet
-exec --no-startup-id i3-battery-popup -n
 exec --no-startup-id i3-msg 'workspace 1; exec /usr/bin/alacritty'
 exec --no-startup-id touchpad-indicator
+
+include $HOME/.local/share/i3/config
