@@ -1,0 +1,23 @@
+#!/bin/bash
+BATTERY=BAT0
+CHECK_INTERVAL=$((5*60))
+BATTERY_THRESHOLD=10
+NOTIFICATION_SOUND=/usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga
+
+while :
+do
+    BATTERY_PS=$(cat /sys/class/power_supply/$BATTERY/uevent)
+    CURRENT_CHARGE=$(echo "$BATTERY_PS" | grep POWER_SUPPLY_CHARGE_NOW | awk -F '=' '{ print $2 }')
+    CHARGE_FULL=$(echo "$BATTERY_PS" | grep POWER_SUPPLY_CHARGE_FULL_DESIGN | awk -F '=' '{ print $2 }')
+    CHARGE_NOW=$(( 100 * CURRENT_CHARGE / CHARGE_FULL ))
+    PS_STATUS=$(echo "$BATTERY_PS" | grep POWER_SUPPLY_STATUS | awk -F '=' '{ print $2 }')
+
+    if [[ "$CHARGE_NOW" -lt "$BATTERY_THRESHOLD" && "${PS_STATUS,,}" != "charging" ]]; then
+
+        notify-send --urgency=critical "WARNING: Battery is low: ${CHARGE_NOW}%"
+        paplay ${NOTIFICATION_SOUND} &> /dev/null
+    fi
+
+    sleep $CHECK_INTERVAL
+
+done
