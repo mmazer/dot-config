@@ -15,7 +15,7 @@ zfm() {
         printf "not a directory: %s\n" "$DIR"
         return 1
     fi
-    local FINDFILES="bfs $DIR -type f -not -path '*/.git/*' -printf '%P\n'"
+    local FINDFILES="bfs $DIR -type f -not -path '*/.git/*' -printf '%P\n'|sort"
     FZF_DEFAULT_COMMAND="$FINDFILES" \
         fzf -e --preview "$PREVIEW_CMD $DIR/{}" \
         --prompt "Files> " \
