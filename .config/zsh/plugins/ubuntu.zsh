@@ -24,7 +24,17 @@ slib() {
     ldconfig -p | grep "$1"
 }
 
+dulog() {
+    sudo journalctl --disk-usage
+}
+
+vacuum-log() {
+    sudo journalctl --vacuum-time=3d
+}
+
 ubuntu_aliases=(
+    dul dulog
+    vcl vacuum-log
     routes 'ip route list'
 )
 zn-aliases $ubuntu_aliases
