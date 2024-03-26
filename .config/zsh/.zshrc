@@ -37,6 +37,7 @@ plugins=(
     www-bookmarks
     ubuntu
     backup
+    snap
 )
 
 source $HOME/.config/zsh/init.zsh
