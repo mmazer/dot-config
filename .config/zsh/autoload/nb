@@ -1,8 +1,0 @@
-# vim: ft=zsh :
-local notebook=${1:?"notebook name required"}
-local notebook_dir="$ZNOTEBOOK_DIR/$notebook.notebook"
-if [[ ! -d "$notebook_dir" ]]; then
-    print "notebook not found: $notebook"
-    return
-fi
-ZFM_PREVIEW_CMD="glow -s dark" zfm "$notebook_dir"

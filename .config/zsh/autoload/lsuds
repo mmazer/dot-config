@@ -1,4 +1,0 @@
-# vim: ft=zsh :
-# list open unix domain sockets
-# useful when troubleshooting, for example, X "maximum number of clients reached" errors
-lsof -U +c 15 | cut -f1 -d' ' | sort | uniq -c | sort -rn | head -5
