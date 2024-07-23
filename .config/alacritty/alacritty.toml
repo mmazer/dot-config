@@ -1,4 +1,4 @@
-import = ["/home/marcmazer/.config/alacritty/alacritty-theme.toml", "/home/marcmazer/.local/share/alacritty/site.toml"]
+import = ["~/.config/alacritty/alacritty-theme.toml", "~/.local/share/alacritty/site.toml"]
 
 [cursor]
 blink_timeout = 0
@@ -20,3 +20,4 @@ save_to_clipboard = true
 
 [window]
 decorations = "none"
+startup_mode = "Maximized"
