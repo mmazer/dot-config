@@ -1,1 +1,1 @@
-import = ["/home/marcmazer/.config/alacritty/themes/themes/catppuccin_mocha.toml"]
+import = ["~/.config/alacritty/themes/themes/catppuccin_mocha.toml"]
