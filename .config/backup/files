@@ -1,0 +1,16 @@
+$HOME/.config/marp/
+$HOME/.config/newsboat/
+$HOME/.config/backup/files
+$HOME/.local/share/bash
+$HOME/.local/share/bookmarks
+$HOME/.local/share/display-profiles
+$HOME/.local/share/freshbooks
+$HOME/.local/share/gists
+$HOME/.local/share/git
+$HOME/.local/share/i3
+$HOME/.local/share/notes
+$HOME/.local/share/nvim/site/lua/site.lua
+$HOME/.local/share/slides
+$HOME/.local/share/nvim/nvim_commands
+$HOME/.local/share/nvim/favourite_files
+$HOME/.local/share/nvim/bookmarks
