@@ -1,8 +1,7 @@
 hs.application.enableSpotlightForNameSearches(true)
 local term_app = "alacritty"
 local browser = "chrome"
-local obsidian = "obsidian"
-local todo = "To Do"
+local slack = "slack"
 
 local toggle_app = function(app_name, modifier, keys)
     hs.hotkey.bind(modifier, keys, function()
@@ -22,5 +21,20 @@ end
 
 toggle_app(term_app, {"ctrl"}, "\\")
 toggle_app(browser, {"ctrl"}, "`")
-toggle_app(obsidian, {"ctrl"}, "/")
-toggle_app(todo, {"ctrl"}, "=")
+toggle_app(slack, {"ctrl"}, "/")
+
+hs.hotkey.bind({"ctrl", "alt"}, "Right", function()
+  local app = hs.application.frontmostApplication()
+  local win = app:focusedWindow()
+  win:moveOneScreenEast()
+end)
+
+hs.hotkey.bind({"ctrl", "alt"}, "Left", function()
+  local app = hs.application.frontmostApplication()
+  local win = app:focusedWindow()
+  win:moveOneScreenWest()
+end)
+
+hs.hotkey.bind({"ctrl", "alt"}, "Return", function()
+  hs.window.focusedWindow():maximize()
+end)
