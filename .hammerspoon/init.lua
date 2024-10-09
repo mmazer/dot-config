@@ -2,6 +2,7 @@ hs.application.enableSpotlightForNameSearches(true)
 local term_app = "alacritty"
 local browser = "chrome"
 local slack = "slack"
+local music = "music"
 
 local toggle_app = function(app_name, modifier, keys)
     hs.hotkey.bind(modifier, keys, function()
@@ -22,6 +23,7 @@ end
 toggle_app(term_app, {"ctrl"}, "\\")
 toggle_app(browser, {"ctrl"}, "`")
 toggle_app(slack, {"ctrl"}, "/")
+toggle_app(music, {"ctrl"}, ".")
 
 hs.hotkey.bind({"ctrl", "alt"}, "Right", function()
   local app = hs.application.frontmostApplication()
