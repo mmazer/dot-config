@@ -18,6 +18,7 @@ tags
 .gitmessage
 ISSUES
 NOTES
+_NOTES.md
 TODO
 .envrc
 vendor/bundle/*
