@@ -23,3 +23,5 @@ TODO
 .envrc
 vendor/bundle/*
 .zshrc.project
+mise.local.toml
+*.zip
