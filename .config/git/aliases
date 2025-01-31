@@ -23,7 +23,7 @@
     in = log --pretty=oneline --abbrev-commit --graph ..@{u}
     unignore = !git update-index --no-assume-unchanged
     ignored = !git ls-files -v | grep ^[a-z]
-    last = log --pretty=format:'%ci %h %s (%an)' -8 
+    last = log --pretty=format:'%ci %h %s (%an)' -8
     ls = !git ls-files
     ltag = !git log `git describe --tags --abbrev=0`..HEAD --oneline
     master = checkout master
@@ -37,6 +37,7 @@
     staged = diff --name-only --cached
     stat = status -sb
     stashes= stash list
+    sts = status
     sub = submodule
     subs=submodule status --recursive
     subup = !git pull --recurse-submodules && git submodule update --recursive
