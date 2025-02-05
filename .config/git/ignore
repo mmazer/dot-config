@@ -25,3 +25,6 @@ vendor/bundle/*
 .zshrc.project
 mise.local.toml
 *.zip
+.env.local
+justfile
+app/stacks/local_*
