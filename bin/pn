@@ -1,0 +1,83 @@
+#!/usr/bin/env zsh
+# vim ft=sh
+# private note editor
+
+_pn=$(basename $0)
+pn_usage() {
+    sed -e 's/^//' <<End
+Usage: $0 [DeE] <filename>
+Simple private note editor
+-D decrypt note
+-E encrypt note
+-e edit encrypted note
+-h show help
+-v view note content
+End
+    exit 1
+}
+
+pn_encrypt() {
+    file=$1
+    outfile=${2:-"$file.asc"}
+    gpg --encrypt --sign --armor --default-recipient-self --output $outfile $file
+    if [ $? -eq 0 ]; then
+        rm -i $file
+    fi
+}
+
+pn_decrypt() {
+    file=$1
+    gpg --decrypt --quiet $file
+}
+
+pn_view() {
+    file=$1
+    gpg --decrypt --quiet $file 2>/dev/null
+}
+
+pn_edit() {
+    file=$1
+    tempfile=$(mktemp /tmp/pnote-out.XXXXXX)
+    gpg --decrypt $file > $tempfile
+    reset
+    ${EDITOR} $tempfile
+    pn_encrypt $tempfile $file
+}
+
+action="edit"
+
+while getopts DEev opt
+do case "$opt" in
+    D) action="decrypt";;
+    E) action="encrypt";;
+    e) action="edit";;
+    v) action="view";;
+    h) pn_usage;;
+    *) pn_usage;;
+    esac
+done
+
+shift $((OPTIND-1))
+
+filename="$1"
+
+if [ -z "$filename" ]; then
+    echo "no filename specified"
+    pn_usage
+fi
+
+if [ ! -f "$filename" ]; then
+    echo "filename not found: $filename"
+    pn_usage
+fi
+
+case "$action" in
+    decrypt)
+        pn_decrypt $filename;;
+    encrypt)
+        pn_encrypt $filename;;
+    edit)
+        pn_edit $filename;;
+    view)
+        pn_view $filename;;
+esac
