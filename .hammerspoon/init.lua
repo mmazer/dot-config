@@ -1,9 +1,8 @@
+print("lua version:" .. _VERSION)
+
 hs.application.enableSpotlightForNameSearches(true)
-local term_app = "alacritty"
 local browser = "chrome"
 local slack = "slack"
-local music = "music"
-local code = "code"
 local zed = "zed"
 local wezterm = "wezterm"
 
@@ -25,8 +24,8 @@ end
 
 toggle_app(wezterm, { "ctrl" }, "\\")
 toggle_app(browser, { "ctrl" }, ",")
-toggle_app(music, { "ctrl" }, ".")
-toggle_app(zed, { "ctrl" }, ";")
+toggle_app(slack, { "ctrl" }, "'")
+toggle_app(zed, { "ctrl" }, ".")
 
 hs.hotkey.bind({ "ctrl", "alt" }, "Right", function()
     local app = hs.application.frontmostApplication()
