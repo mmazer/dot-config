@@ -19,6 +19,11 @@ config.keys = {
     key = 'r',
     mods = 'CMD|SHIFT',
     action = wezterm.action.ReloadConfiguration,
+  },
+  {
+    key = 'n',
+    mods = 'SHIFT|CTRL',
+    action = wezterm.action.ToggleFullScreen,
   }
 }
 
