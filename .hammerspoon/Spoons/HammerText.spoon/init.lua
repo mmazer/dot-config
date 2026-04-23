@@ -51,6 +51,26 @@ obj.keywords = {
     ["..addr"] = "My address",
 }
 
+function obj:splitMultiline(str)
+    local lines = {}
+    for s in string.gmatch(str, "[^\r\n]+") do
+        table.insert(lines, s)
+    end
+    return lines
+end
+
+function obj:pasteMultiLine(str)
+    local lines = obj:splitMultiline(str)
+    local is_first_line = true
+    for _, line in ipairs(lines) do
+        if is_first_line then
+            is_first_line = false
+        else
+            hs.eventtap.keyStroke({}, "return")
+        end
+        hs.eventtap.keyStrokes(line)
+    end
+end
 
 function expander(keywords)
     local word = ""
@@ -105,10 +125,10 @@ function expander(keywords)
             output = o
         end
         if output then
-            print("outputting: " .. output)
             for i = 1, utf8.len(word), 1 do hs.eventtap.keyStroke({}, "delete", 0) end -- delete the abbreviation
-            hs.eventtap.keyStrokes(output)                                             -- expand the word
-            word = ""                                                                  -- clear the buffer
+            --hs.eventtap.keyStrokes(output)                                             -- expand the word
+            obj:pasteMultiLine(output)
+            word = "" -- clear the buffer
         end
 
         return false -- pass the event on to the application
